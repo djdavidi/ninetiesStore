@@ -1,3 +1,3 @@
-app.controller('ProductCtrl', function ($scope, ProductFactory) {
-	$scope.ProductsList = ProductFactory.getAllProducts;
+app.controller('ProductCtrl', function ($scope, ProductFactory, productsList) {
+	$scope.ProductsList = productsList;
 });
