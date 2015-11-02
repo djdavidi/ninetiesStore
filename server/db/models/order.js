@@ -49,7 +49,7 @@ orderSchema.methods.addItem=function(itemId,quantity){
     }
 }
 
-orderSchema.methods.removeItem=function(itemId,quantity){
+orderSchema.methods.removeItem=function(itemId){
     var self = this;
 
     this.storedItems.forEach(function(elem, index){
@@ -61,6 +61,13 @@ orderSchema.methods.removeItem=function(itemId,quantity){
 }
 
 orderSchema.methods.updateQuantity=function(itemId, quantity, index){
+    var self=this;
+    if(!index){
+        this.storedItems.forEach(function(elem, foundIndex){
+        if (elem.itemId == itemId) {
+           index=foundIndex;
+        }
+    }
     this.storedItems[index].quantity += quantity; 
     return this.save();
 }
