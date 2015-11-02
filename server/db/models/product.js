@@ -1,3 +1,8 @@
+var mongoose = require("mongoose");
+var schema = mongoose.Schema;
+// var productSchema = mongoose.model("Product");
+
+
 var productSchema = new mongoose.Schema({
     title: {
         type: String,
@@ -35,14 +40,26 @@ var productSchema = new mongoose.Schema({
     reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }]
 })
 
-productSchema.methods.addProduct = function () {
-    return Product.create(req.body)
+
+productSchema.methods.addReview = function (reviewData) {
+    var self = this;
+    return Review.create(reviewData)
+    .then(function (review) {
+        self.reviews.addToSet(review._id);
+        return self.save();
+    });
 }
 
-productSchema.methods.removeProduct = function () {}
-
-productSchema.methods.addReview = function () {
-
+productSchema.methods.removeReview = function (review) {
+    var self = this;
+    return review.remove()
+    .then(function () {
+        self.reviews.pull(review);
+        return self.save();
+    });
 }
 
-productSchema.methods.removeReview = function () {}
+
+
+
+mongoose.model("Product", productSchema)
