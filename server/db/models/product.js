@@ -1,0 +1,48 @@
+var productSchema = new mongoose.Schema({
+    title: {
+        type: String,
+        required: true
+    },
+    price: {
+        type: Number,
+        required: true
+    },
+    date: {
+        type: Date
+    },
+    description: {
+        type: String,
+        required: true
+    },
+    quantity: {
+        type: String,
+        required: true
+    }
+    rating: {
+        type: Number
+    },
+    category: [{
+        type: String,
+        required: true
+    }],
+    picture: {
+        type: String,
+        default: "http://www.fillmurray.com/140/100"
+    },
+    seller: { 
+        type: mongoose.Schema.Types.ObjectId, ref: 'User'
+    },
+    reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }]
+})
+
+productSchema.methods.addProduct = function () {
+    return Product.create(req.body)
+}
+
+productSchema.methods.removeProduct = function () {}
+
+productSchema.methods.addReview = function () {
+
+}
+
+productSchema.methods.removeReview = function () {}
