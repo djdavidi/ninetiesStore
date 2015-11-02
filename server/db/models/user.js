@@ -2,7 +2,11 @@
 var crypto = require('crypto');
 var mongoose = require('mongoose');
 
-var schema = new mongoose.Schema({
+var userSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
     email: {
         type: String
     },
@@ -23,8 +27,49 @@ var schema = new mongoose.Schema({
     },
     google: {
         id: String
-    }
+    },
+    vendorProducts: [{
+        type: mongoose.Schema.Types.ObjectId, ref: 'Product'
+    }],
+    isAdmin: {
+        type: Boolean,
+        default: false
+    },
+    address: {
+        type: String
+    },
+    picture: {
+        type: String,
+        default: "http://www.fillmurray.com/140/100"
+    },
+    rating: {
+        type: Number
+    },
+    cart: [{
+        quantity: Number,
+        type: mongoose.Schema.Types.ObjectId, ref: 'Product'
+    }],
+    orderHistory: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Order' }]
 });
+
+userSchema.methods.addProduct = function (productData) {
+    var self = this;
+    return Product.create(productData)
+    .then(function (product) {
+        self.vendorProducts.addToSet(product._id);
+        return self.save();
+    });
+}
+
+userSchema.methods.removeProduct = function (product) {
+    var self = this;
+    return product.remove()
+    .then(function () {
+        self.vendorProducts.pull(product);
+        return self.save();
+    });
+}
+
 
 // generateSalt, encryptPassword and the pre 'save' and 'correctPassword' operations
 // are all used for local authentication security.
