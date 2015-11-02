@@ -2,13 +2,27 @@ var mongoose = require("mongoose");
 var schema = mongoose.Schema;
 var Item = mongoose.model("Item");
 
-
+//Shopping Cart is front-end representation of the order.
 var orderSchema = new schema({
     owner: {type: schema.Types.ObjectId, ref:"User"},
-    storedItems= [{price:Number,
+    storedItems : [{price:Number,
                    quantity:Number,
-                   itemId:{type:schema.Types.ObjectId,ref:"Item"}}]
+                   itemId:{type:schema.Types.ObjectId,ref:"Item"}}],
+    address : String,
+    email : String,
+    status: {
+                type: String,
+                default: 'Created'
+            }
+})
 
+orderSchema.pre('save', function(){
+    var self = this;
+    User.findById(this.owner)
+    .then(function(foundUser){
+        self.address = foundUser.address;
+        self.email = foundUser.email;
+    }
 })
 
 orderSchema.methods.addItem=function(itemId,quantity){
@@ -16,7 +30,7 @@ orderSchema.methods.addItem=function(itemId,quantity){
 
     this.storedItems.forEach(function(elem, index){
         if (elem.itemId == itemId) {
-            this.updateQuantity(itemId, quantity, index); 
+            self.updateQuantity(itemId, quantity, index); 
             var done = true;
         }
     })
@@ -29,15 +43,25 @@ orderSchema.methods.addItem=function(itemId,quantity){
         return Item.findById(itemId)
         .then(function(foundItem){
             temp.price=foundItem.price;
-            this.storedItems.push(temp);
+            self.storedItems.push(temp);
             return self.save()
         })
     }
+}
+
+orderSchema.methods.removeItem=function(itemId,quantity){
+    var self = this;
+
+    this.storedItems.forEach(function(elem, index){
+        if (elem.itemId == itemId) {
+            self.storedItems.splice(index,1);
+        }
+    })
 
 }
 
 orderSchema.methods.updateQuantity=function(itemId, quantity, index){
-    this.storedItems[index].quantity += quantity;
+    this.storedItems[index].quantity += quantity; 
     return this.save();
 }
 
