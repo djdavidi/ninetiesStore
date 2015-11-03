@@ -1,3 +1,5 @@
+var mongoose = require("mongoose");
+
 var reviewSchema = new mongoose.Schema({
     title: {
         type: String,
@@ -23,3 +25,5 @@ var reviewSchema = new mongoose.Schema({
         type: Date
     }
 })
+
+mongoose.model("Review", reviewSchema)
