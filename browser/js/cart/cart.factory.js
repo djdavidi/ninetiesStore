@@ -6,8 +6,8 @@ app.factory("CartFactory",function($http){
 					return response.data;
 				})
 			},
-			addItem:function(itemId,quantity, currentUser){
-				return $http.put("/api/orders/addItem/" + itemId + '/' currentUser, {quantity:quantity})
+			addItem:function(itemId, currentUser){
+				return $http.put("/api/orders/addItem/" + itemId + '/' currentUser)
 				.then(function(response){
 					return response.data;
 				})

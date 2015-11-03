@@ -55,6 +55,7 @@ orderSchema.methods.removeItem=function(itemId){
     this.storedItems.forEach(function(elem, index){
         if (elem.itemId == itemId) {
             self.storedItems.splice(index,1);
+            return self.save()
         }
     })
 
