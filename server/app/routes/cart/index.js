@@ -3,12 +3,7 @@ var Order = mongoose.model('Order')
 var Products = mongoose.model('Products')
 
 router.params('currentUser', function(currentUser){
-	Users.findById(currentUser)
-	.then(function(user){
-		req.body.currentUser = user;
-	})
-
-	Order.find({ owner: req.body.currentUser })
+	Order.find({ owner: req.body.currentUser , status: 'Created'})
 	.then(function(order){
 		req.body.order = order;
 	})
@@ -22,26 +17,34 @@ router.params('itemId', function(itemId){
 });
 
 
-
+//Get current order
 router.get('/:user', function(req,res,next){
-	// Order.find({ status : 'Created', owner: req.params.user})
-	// .then(function(order){
-	// 	if (!order){
-	// 		res.send([])
-	// 	} else {
-	// 		res.send(order);
-	// 	}
-	// })
-	// .then(null,next)
+	res.send(req.body.order)
 })
 
-router.put('/addItem', function(req,res,next){
-	// Order.find({ owner : req.body.currentUser})
+//Add a new item to cart
+router.put('/addItem/:itemId/:currentUser', function(req,res,next){
+	req.body.order.addItem(req.params.itemId) //model method
+	.then(function(updatedItem){
+		res.status(200).send(updatedItem)
+	})
 })
 
-router.delete('/:itemId')
+//Remove an item from cart
+router.delete('/:itemId/:currenUser', function(req,res,next){
+	req.body.order.removeItem(req.params.itemId) //model method
+	.then(function(response){
+		res.send(204)
+	})
+}
 
-router.put('/updateQuantity')
+//Updating Quantity
+router.put('/updateQuantity/:itemId', function(req,res,next){
+	req.body.order.updateQuantity(req.params.itemId, req.body.quantity)
+	.then(function(updatedItem){
+		res.send(200).send(updatedItem)
+	})
+})
 
 
 
