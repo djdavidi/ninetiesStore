@@ -30,7 +30,7 @@ beforeEach(function(){
       }();
 })
 
-    var revData = {
+    var reviewData = {
             title:"badddasss",
             user:createdUser._id,
             product:createdProduct._id,
@@ -51,28 +51,25 @@ beforeEach(function(){
 
     describe("addReview should add a review",function(){
         it("should be present in reviews array",function(done){
-            createdProduct.addReview(revData)
+            createdProduct.addReview(reviewData)
             .then(function(newReview){
                 expect(createdProduct.contains(newReview)).to.be.equal(true);
+                done();
             })
         })
-
-
-
     })
 
-
-
-
-    describe("removeReview should remove a review")
-
-
-
-
-
-
-
-
-
-
+    describe("removeReview should remove a review", function () {
+        it("created review should be removed properly", function (done {
+            createdProduct.addReview(reviewData)
+            .then(function (review) {
+                var passedReview = review
+                createdProduct.removeReview(review);
+            })
+            .then(function (passedReview) {
+                expect(createdProduct.contains(passedReview)).to.be.equal(false);
+                done();
+            })
+        }))
+    })
 })

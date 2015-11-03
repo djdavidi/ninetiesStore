@@ -15,13 +15,31 @@ describe("Order model",function(){
 	 var createUser = function () {
           return User.create({ email: 'obama@gmail.com', password: 'potus', address: "Wash the DC"});
       };
-      var createOrder = function () {
-          return Order.create(owner: createUser());
+      var createOrder = function (id) {
+          return Order.create({owner: id});
       };
+
 
 	beforeEach("Establish DB connection",function(done){
 		if (mongoose.connection.db) return done();
         mongoose.connect(dbURI, done);
+        
+        var newUser = createUser();
+        var newOrder = createOrder(newUser._id);
+
+        var createdProduct=function () {
+            return Product.create({
+                title:"delorean",
+                price:5,
+                date:Date.now(),
+                description:"badass",
+                quantity:"ninety",
+                rating:5,
+                category:["car","time-machine"]
+            });
+        }();
+
+
 	})
 	  afterEach('Clear test database', function (done) {
         clearDB(done);
@@ -35,43 +53,29 @@ describe("Order model",function(){
     	function(){
 
     		it("should have the User's valid email",function(done){
-    			createOrder()
-    			.then(function(newOrder){
-    				expect(newOrder.email).to.be.equal("obama@gmail.com");
-    				expect(newOrder.address).to.be.equal("Wash the DC");
-    				done();
-    			})
+				expect(newOrder.email).to.be.equal("obama@gmail.com");
+				expect(newOrder.address).to.be.equal("Wash the DC");
     		})
     	})
 
     describe("addItem method on the Order instance",function(){
-    	it("should find the correct item")
-
-
-    	it("should call update quantity with correct amount")
-
-    	it("should add the item properly")
-    })
-
-
-    describe("should properly remove Item",function(){
-        it("should not have item once deleted",function(done){
-            createOrder()
-            .then(function(newOrder){
-                newOrder.remove
+    	it("should find the correct item", function (done) {
+            newOrder.addItem(createdProduct._id, 1)
+            .then(function (product) {
+                expect(newOrder.storedItems.contains(product)).to.be.equal(true);
+                done();
             })
         })
     })
-  
 
 
-
-
-
-
-
-
-
-
-
+    describe("removeItem should properly remove Item",function(){
+        it("should not have item once deleted",function (done){
+            newOrder.removeItem(createdProduct._id)
+            .then(function () {
+                expect(newOrder.storedItems.contains(createdProduct)).to.be.equal(false);
+                done();
+            })
+        })
+    })
 })
