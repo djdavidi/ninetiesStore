@@ -1,7 +1,6 @@
 'use strict';
 var crypto = require('crypto');
 var mongoose = require('mongoose');
-var Product = mongoose.model('Product');
 
 var userSchema = new mongoose.Schema({
     name: {
@@ -55,7 +54,7 @@ var userSchema = new mongoose.Schema({
 
 userSchema.methods.addProduct = function (productData) {
     var self = this;
-    return Product.create(productData)
+    return mongoose.model('Product').create(productData)
     .then(function (product) {
         self.vendorProducts.addToSet(product._id);
         return self.save();
