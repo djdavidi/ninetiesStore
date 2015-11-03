@@ -1,4 +1,5 @@
 var mongoose = require("mongoose");
+var Product = mongoose.model('Product');
 
 var reviewSchema = new mongoose.Schema({
     title: {
@@ -13,7 +14,7 @@ var reviewSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId, ref: 'Product',
         required: true
     },
-    rating: {
+    reviewRating: {
         type: Number,
         required: true
     },
@@ -25,6 +26,14 @@ var reviewSchema = new mongoose.Schema({
         type: Date,
         default: Date.now()
     }
+})
+
+reviewSchema.post('save', function () {
+    Product.findById(this.product)
+    .then(function (currentProduct) {
+        var sum = (currentProduct.productRating*(currentProduct.reviews.length-1));
+        currentProduct.productRating = ((sum + this.reviewRating)/currentProduct.reviews.length).toFixed(1);
+    })
 })
 
 mongoose.model("Review", reviewSchema)
