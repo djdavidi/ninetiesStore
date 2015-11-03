@@ -1,6 +1,5 @@
 var mongoose = require("mongoose");
-var schema = mongoose.Schema;
-// var productSchema = mongoose.model("Product");
+var Review = mongoose.model("Review");
 
 
 var productSchema = new mongoose.Schema({
@@ -22,7 +21,7 @@ var productSchema = new mongoose.Schema({
     quantity: {
         type: String,
         required: true
-    }
+    },
     rating: {
         type: Number
     },

@@ -1,5 +1,6 @@
-var router = require('express').Router()
-var Product = mongoose.model('Product')
+var router = require('express').Router();
+var mongoose = require('mongoose');
+var Product = mongoose.model('Product');
 
 router.get('/', function(req, res, next) {
 	Product.find().exec()
