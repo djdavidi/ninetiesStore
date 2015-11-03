@@ -1,5 +1,14 @@
 var router = require('express').Router()
 var Review = mongoose.model('Review')
+var Product = mongoose.model('Product')
+
+router.param('productId', function(req, res, next, productId) {
+	Product.findById(productId)
+	.then(function(product) {
+		req.body.product = product;
+	})
+	.then(null, next)
+})
 
 router.get('/', function(req, res, next) {
 	Review.find().exec()
