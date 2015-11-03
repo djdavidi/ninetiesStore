@@ -28,7 +28,7 @@ describe("Order model",function(){
     });
 
     it('should exist', function () {
-        expect(Product).to.be.a('function');
+        expect(Order).to.be.a('function');
     });
 
     describe("pre save hook for User's email and address fills in correctly",
@@ -51,14 +51,17 @@ describe("Order model",function(){
     	it("should call update quantity with correct amount")
 
     	it("should add the item properly")
-
-
-
-
-
-
     })
 
+
+    describe("should properly remove Item",function(){
+        it("should not have item once deleted",function(done){
+            createOrder()
+            .then(function(newOrder){
+                newOrder.remove
+            })
+        })
+    })
   
 
 

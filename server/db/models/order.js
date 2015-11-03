@@ -25,7 +25,7 @@ orderSchema.pre('save', function(){
         self.email = foundUser.email;
     })
 })
-
+//addtoSet will not add if it is already present, can use this instead
 orderSchema.methods.addItem=function(itemId,quantity){
     var self = this;
     var done;
