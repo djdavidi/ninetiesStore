@@ -5,7 +5,7 @@ app.config(function($stateProvider, CartFactory){
 		controller:"cartCtrl",
 		resolve: {
 			retrievedOrder : function(AuthService){
-				return AuthService.getLoggedInUser())
+				return AuthService.getLoggedInUser()
 				.then(function(user){
 					return user
 				})
@@ -14,7 +14,7 @@ app.config(function($stateProvider, CartFactory){
 				})
 			},
 			loggedInUser: function(AuthService){
-				return AuthService.getLoggedInUser())
+				return AuthService.getLoggedInUser()
 				.then(function(user){
 					return user
 				})

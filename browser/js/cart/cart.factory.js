@@ -6,16 +6,16 @@ app.factory("CartFactory",function($http){
 					return response.data;
 				})
 			},
-			addItem:function(itemId,quantity, currentUser){
-				return $http.put("/api/orders/addItem/" + itemId + '/' currentUser, {quantity:quantity})
+			addItem:function(itemId, currentUser){
+				return $http.put("/api/orders/addItem/" + itemId + '/' + currentUser)
 				.then(function(response){
 					return response.data;
 				})
 			},
-			removeItem:function(itemId){
+			removeItem:function(itemId, currentUser){
 				return $http.delete("/api/orders/"+itemId + '/' + currentUser)
 			},
-			updateQuantity:function(itemId,quantity, currentUser){
+			updateQuantity:function(itemId, quantity, currentUser){
 				return $http.put("/api/orders/updateQuantity/" + itemId + '/' + currentUser, {quantity:quantity})
 				.then(function(response){
 					return response.data;
