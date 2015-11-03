@@ -22,7 +22,7 @@ var productSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    rating: {
+    productRating: {
         type: Number
     },
     category: [{
