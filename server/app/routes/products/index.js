@@ -10,6 +10,16 @@ router.get('/', function(req, res, next) {
 	.then(null, next)
 })
 
+// router.param('productId', function(req, res, next, productId) {
+// 	Product.findById(productId)
+// 	.then(function(product) {
+// 		req.body.product = product
+// 	})
+// 	.then(null, next)
+// })
+router.use('/:id/reviews', require('../reviews'))
+
+
 router.get('/:id', function(req, res, next) {
 	Product.findById(req.params.id)
 	.then(function(product) {
@@ -18,13 +28,14 @@ router.get('/:id', function(req, res, next) {
 	.then(null, next)
 })
 
-router.post('/', function(req, res, next) {
-	Product.create(req.body)
-	.then(function(product) {
-		res.status(201).send(product)
-	})
-	.then(null, next)
-})
+// router.post('/:id', function(req, res, next) {
+// 	Product.findById(req.params.id)
+// 	.then(function(product) {
+// 		product.addReview(req.body)
+// 		res.status(201).send(req.body)
+// 	})
+// 	.then(null, next)
+// })
 
 router.put('/:id', function(req, res, next) {
 	Product.findById(req.params.id)
@@ -40,13 +51,14 @@ router.put('/:id', function(req, res, next) {
 	.then(null, next)
 })
 
-router.delete('/:id', function(req, res, next) {
-	Product.findById(req.params.id)
-	.then(function(product) {
-		product.remove()
-		res.status(204)
-	})
-	.then(null, next)
-})
+// router.delete('/:id', function(req, res, next) {
+// 	Product.findById(req.params.id)
+// 	.then(function(product) {
+// 		product.removeReview(req.body)
+// 		res.status(204).end()
+// 	})
+// 	.then(null, next)
+// })
+
 
 module.exports = router;

@@ -23,7 +23,7 @@ router.param('itemId', function(req, res, next, itemId){
 
 
 //Get current order
-router.get('/:user', function(req,res){
+router.get('/:currentUser', function(req,res){
 	res.send(req.body.order)
 })
 
@@ -37,7 +37,7 @@ router.put('/addItem/:itemId/:currentUser', function(req,res,next){
 })
 
 //Remove an item from cart
-router.delete('/:itemId/:currenUser', function(req,res,next){
+router.delete('/:itemId/:currentUser', function(req,res,next){
 	req.body.order.removeItem(req.params.itemId) //model method
 	.then(function(){
 		res.send(204)
