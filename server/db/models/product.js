@@ -39,7 +39,8 @@ var productSchema = new mongoose.Schema({
     reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }]
 })
 
-
+// use reviews.length and rating to help calculate rating
+// with a proper weighting
 productSchema.methods.addReview = function (reviewData) {
     var self = this;
     return Review.create(reviewData)
