@@ -5,7 +5,7 @@ app.config(function($stateProvider){
 		controller:"UserCtrl",
 		resolve: {
 			user: function (User, $stateParams) {
-				var user = new User(_id: $stateParams.id)
+				var user = new User({_id: $stateParams.id})
 				return user.fetch()
 			}
 		}

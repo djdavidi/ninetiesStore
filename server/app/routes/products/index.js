@@ -2,6 +2,14 @@ var router = require('express').Router();
 var mongoose = require('mongoose');
 var Product = mongoose.model('Product');
 
+router.param('id', function(req, res, next, id) {
+	Product.findById(id)
+	.then(function(product) {
+		req.requestedProduct = product
+		next()
+	})
+})
+
 router.get('/', function(req, res, next) {
 	Product.find().exec()
 	.then(function(products) {
@@ -10,21 +18,11 @@ router.get('/', function(req, res, next) {
 	.then(null, next)
 })
 
-// router.param('productId', function(req, res, next, productId) {
-// 	Product.findById(productId)
-// 	.then(function(product) {
-// 		req.body.product = product
-// 	})
-// 	.then(null, next)
-// })
-router.use('/:id/reviews', require('../reviews'))
+
 
 
 router.get('/:id', function(req, res, next) {
-	Product.findById(req.params.id)
-	.then(function(product) {
-		res.send(product)
-	})
+	res.send(req.requestedProduct)
 	.then(null, next)
 })
 
@@ -38,19 +36,19 @@ router.get('/:id', function(req, res, next) {
 // })
 
 router.put('/:id', function(req, res, next) {
-	Product.findById(req.params.id)
-	.then(function(product) {
-		for (var key in req.body) {
-			product[key] = req.body[key]
-		}
-		return product.save()
-	})
+	// Product.findById(req.params.id)
+	// .then(function(product) {
+	for (var key in req.body) {
+		req.requestedProduct[key] = req.body[key]
+	}
+	req.requestedProduct.save()
 	.then(function(savedProduct) {
 		res.send(savedProduct)
 	})
 	.then(null, next)
 })
 
+router.use('/:id/reviews', require('../reviews'))
 // router.delete('/:id', function(req, res, next) {
 // 	Product.findById(req.params.id)
 // 	.then(function(product) {

@@ -26,13 +26,11 @@ var User = Promise.promisifyAll(mongoose.model('User'));
 var seedUsers = function () {
 
     var users = [
-        {
-            email: 'testing@fsa.com',
-            password: 'password'
-        },
-        {
-            email: 'obama@gmail.com',
-            password: 'potus'
+        {   
+            name: 'Admin',
+            email: 'admin@ninetiesstore.com',
+            password: '123',
+            isAdmin: true
         }
     ];
 
