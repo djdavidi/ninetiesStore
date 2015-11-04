@@ -1,0 +1,36 @@
+[
+    {
+    	"name": "testName",
+        "email": "testing@fsa.com",
+        "password": "password"
+    },
+    {
+    	"name": "obama",
+        "email": "obama@gmail.com",
+        "password": "potus"
+    },
+    {
+        "name": "luis",
+        "email": "luis@luis.com",
+        "password": "password",
+        "isAdmin": true
+    },
+    {
+        "name": "dave",
+        "email": "dave@dave.com",
+        "password": "password",
+        "isAdmin": true
+    },
+    {
+        "name": "will",
+        "email": "will@will.com",
+        "password": "password",
+        "isAdmin": true
+    },
+    {
+        "name": "josh",
+        "email": "josh@josh.com",
+        "password": "password",
+        "isAdmin": true
+    }
+]
