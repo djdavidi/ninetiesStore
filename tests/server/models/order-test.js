@@ -65,6 +65,7 @@ describe("Order model",function(){
                 expect(newOrder.storedItems.contains(product)).to.be.equal(true);
                 done();
             })
+            .then(null, done)
         })
     })
 
@@ -76,6 +77,7 @@ describe("Order model",function(){
                 expect(newOrder.storedItems.contains(createdProduct)).to.be.equal(false);
                 done();
             })
+            .then(null, done)
         })
     })
 })

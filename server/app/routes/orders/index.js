@@ -30,6 +30,7 @@ router.post('/', function (req, res, next) {
 })
 
 // Updates an order
+// Find then update, don't findByIdAndUpdate because it's worse than cigarettes.
 router.put('/:id', function (req, res, next) {
 	Order.findByIdAndUpdate(req.params.id, req.body, {new: true})
 	.then(function (order) {

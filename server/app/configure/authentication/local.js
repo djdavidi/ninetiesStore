@@ -48,7 +48,7 @@ module.exports = function (app) {
                 Order.find({owner:req.user._id,status:"Created"})
                 .then(function(currentOrder){
                     if(!currentOrder){
-                        Order.create({owner:req.user._id})
+                        return Order.create({owner:req.user._id})
                         .then(function(newOrder){
                             req.session.cart.forEach(function(elem){
                             newOrder.addItem(elem)

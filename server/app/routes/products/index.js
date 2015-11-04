@@ -40,9 +40,7 @@ router.post('/', function (req, res, next) {
 router.put('/:id', function(req, res, next) {
 	// Product.findById(req.params.id)
 	// .then(function(product) {
-	for (var key in req.body) {
-		req.requestedProduct[key] = req.body[key]
-	}
+	req.requestedProduct.set(req.body)
 	req.requestedProduct.save()
 	.then(function(savedProduct) {
 		res.send(savedProduct)
