@@ -2,6 +2,7 @@ var router = require('express').Router()
 var mongoose = require('mongoose')
 var Review = mongoose.model('Review')
 var Product = mongoose.model('Product')
+var _ = require('lodash')
 
 router.param('productId', function(req, res, next, productId) {
 	Product.findById(productId)
@@ -28,11 +29,11 @@ router.get('/:id', function(req, res, next) {
 })
 
 router.post('/', function(req, res, next) {
-	Review.create(req.body)
-	.then(function(review) {
-		res.status(201).send(review)
+	Product.findById(req.requestedProduct)
+	.then(function(product) {
+		product.addReview(req.body)
+		res.send(req.body)
 	})
-	.then(null, next)
 })
 
 router.put('/:id', function(req, res, next) {
@@ -50,10 +51,11 @@ router.put('/:id', function(req, res, next) {
 })
 
 router.delete('/:id', function(req, res, next) {
-	Review.findById(req.params.id)
-	.then(function(review) {
-		review.remove()
-		res.status(204)
+	Product.findById(req.requestedProduct)
+	.then(function(product) {
+		console.log(product)
+		product.removeReview(req.params.id)
+		res.status(204).end()
 	})
 	.then(null, next)
 })

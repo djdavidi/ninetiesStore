@@ -52,7 +52,7 @@ productSchema.methods.addReview = function (reviewData) {
 
 productSchema.methods.removeReview = function (review) {
     var self = this;
-    return review.remove()
+    return Review.remove(review)
     .then(function () {
         self.reviews.pull(review);
         return self.save();
