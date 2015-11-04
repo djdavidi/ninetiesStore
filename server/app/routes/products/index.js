@@ -2,6 +2,7 @@ var router = require('express').Router();
 var mongoose = require('mongoose');
 var Product = mongoose.model('Product');
 
+// Get all products
 router.get('/', function(req, res, next) {
 	Product.find().exec()
 	.then(function(products) {
@@ -19,7 +20,7 @@ router.get('/', function(req, res, next) {
 // })
 router.use('/:id/reviews', require('../reviews'))
 
-
+// Get a specific product
 router.get('/:id', function(req, res, next) {
 	Product.findById(req.params.id)
 	.then(function(product) {
@@ -28,15 +29,16 @@ router.get('/:id', function(req, res, next) {
 	.then(null, next)
 })
 
-// router.post('/:id', function(req, res, next) {
-// 	Product.findById(req.params.id)
-// 	.then(function(product) {
-// 		product.addReview(req.body)
-// 		res.status(201).send(req.body)
-// 	})
-// 	.then(null, next)
-// })
+// Creates a product
+router.post('/', function (req, res, next) {
+	Product.create(req.body)
+	.then(function (product) {
+		res.status(201).json(product);
+	})
+	.then(null, next);
+})
 
+// Updates a product
 router.put('/:id', function(req, res, next) {
 	Product.findById(req.params.id)
 	.then(function(product) {
@@ -51,14 +53,14 @@ router.put('/:id', function(req, res, next) {
 	.then(null, next)
 })
 
-// router.delete('/:id', function(req, res, next) {
-// 	Product.findById(req.params.id)
-// 	.then(function(product) {
-// 		product.removeReview(req.body)
-// 		res.status(204).end()
-// 	})
-// 	.then(null, next)
-// })
+// Deletes a product
+router.delete('/:id', function (req, res, next) {
+	Product.remove({_id: req.params.id})
+	.then(function () {
+		res.status(202).end();
+	})
+	.then(null, next);
+})
 
 
 module.exports = router;
