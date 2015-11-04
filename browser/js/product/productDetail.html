@@ -1,2 +1,5 @@
 <h5> {{ ProductDetail.title }} </h5>
 <p> {{ ProductDetail.description }} </p>
+<p ng-repeat="review in ProductReviews">
+	{{review.content}}
+</p>

@@ -6,6 +6,10 @@ app.config(function($stateProvider){
 		resolve:{
 			productDetail: function(ProductFactory, $stateParams){
 				return ProductFactory.getOneProduct($stateParams.productId)
+			},
+			productReviews: function(ReviewFactory, $stateParams){
+				console.log("resolve")
+				return ReviewFactory.getReviews($stateParams.productId)
 			}
 		}
 	})
