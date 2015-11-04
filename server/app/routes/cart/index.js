@@ -3,6 +3,21 @@ var router = require('express').Router();
 var Order = mongoose.model('Order')
 var Product = mongoose.model('Product')
 
+router.use('/', function (req, res, next) {
+	Order.find({ owner: req.body.currentUser , status: 'Created'})
+	.then(function(order){
+		req.body.order = order;
+	})
+	.then(function () {
+		Product.findById(req.body.itemId)
+	})
+	.then(function(item){
+		req.body.item = item;
+		next();
+	})
+	.then(null, next);
+})
+
 router.param('currentUser', function(req, res, next, currentUser){
 	Order.find({ owner: currentUser , status: 'Created'})
 	.then(function(order){
