@@ -12,7 +12,8 @@ var ensureAuthenticated = function (req, res, next) {
 };
 
 router.get('/secret-stash', ensureAuthenticated, function (req, res) {
-
+    console.log("Req.User", req.user);
+    console.log("req.session",req.session);
     var theStash = [
         'http://ep.yimg.com/ay/candy-crate/bulk-candy-store-2.gif',
         'http://www.dailybunny.com/.a/6a00d8341bfd0953ef0148c793026c970c-pi',

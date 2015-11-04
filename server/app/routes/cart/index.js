@@ -29,6 +29,13 @@ router.get('/:currentUser', function(req,res){
 
 //Add a new item to cart
 router.put('/addItem/:itemId/:currentUser', function(req,res,next){
+	if(!req.user){
+		if(!req.session.cart){
+			req.session.cart=[];
+		}
+		req.session.cart.push(req.params.itemId);
+		res.send(req.session.cart);
+	}
 	req.body.order.addItem(req.params.itemId) //model method
 	.then(function(updatedItem){
 		res.status(200).send(updatedItem)

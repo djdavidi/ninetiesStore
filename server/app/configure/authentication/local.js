@@ -4,6 +4,7 @@ var _ = require('lodash');
 var LocalStrategy = require('passport-local').Strategy;
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
+var Order = mongoose.model("Order");
 
 module.exports = function (app) {
 
@@ -41,11 +42,43 @@ module.exports = function (app) {
 
             // req.logIn will establish our session.
             req.logIn(user, function (loginErr) {
+                req.session.cart = req.session.cart || [];
                 if (loginErr) return next(loginErr);
                 // We respond with a response object that has user with _id and email.
-                res.status(200).send({
-                    user: _.omit(user.toJSON(), ['password', 'salt'])
-                });
+                Order.find({owner:req.user._id,status:"Created"})
+                .then(function(currentOrder){
+                    if(!currentOrder){
+                        Order.create({owner:req.user._id})
+                        .then(function(newOrder){
+                            req.session.cart.forEach(function(elem){
+                            newOrder.addItem(elem)
+                            })
+                        })
+                    }
+                     if(currentOrder){
+                        console.log("TTTTTTTTTTTTTTT",currentOrder);
+                        req.session.cart.forEach(function(elem){
+                        currentOrder.addItem(elem)
+                        })
+                        req.session.cart=[];
+                    }
+                
+
+                // },function(err){
+                //     Order.create({owner:req.user._id})
+                //     .then(function(newOrder){
+                //         req.session.cart.forEach(function(elem){
+                //         newOrder.addItem(elem)
+                //         })
+                //     })
+                //     req.session.cart=[];
+                //      console.log("TTTTTTTTTTTTTTT",newOrder);
+                })
+                .then(function(){
+                    res.status(200).send({
+                        user: _.omit(user.toJSON(), ['password', 'salt'])
+                    });  
+                })
             });
 
         };
