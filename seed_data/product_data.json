@@ -1,0 +1,17 @@
+[
+	{
+		"title": "a 90s relic",
+		"price": "3.5",
+		"description": "very non-timeless",
+		"quantity": "1",
+		"category": ["Miscellaneous"]
+	},
+	{
+		"title": "Bart Simpson Action Figure",
+		"price": "42",
+		"description": "Yellow",
+		"quantity": "1",
+		"category": ["Miscellaneous", "Yellow", "Spikey"],
+		"picture": "http://bartsimpsonpictures.squarelogic.net/bart-simpson-11.gif"
+	}
+]
