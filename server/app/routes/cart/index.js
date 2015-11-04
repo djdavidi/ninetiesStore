@@ -4,12 +4,12 @@ var Order = mongoose.model('Order')
 var Product = mongoose.model('Product')
 
 router.use('/', function (req, res, next) {
-	Order.find({ owner: req.body.currentUser , status: 'Created'})
+	Order.find({ owner: req.user , status: 'Created'})
 	.then(function(order){
 		req.order = order;
 	})
 	.then(function () {
-		Product.findById(req.body.itemId)
+	Product.findById(req.body.itemId)
 	})
 	.then(function(item){
 		req.item = item;

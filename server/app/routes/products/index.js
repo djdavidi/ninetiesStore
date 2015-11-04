@@ -1,7 +1,7 @@
 var router = require('express').Router();
 var mongoose = require('mongoose');
 var Product = mongoose.model('Product');
-
+var AdminCheck = require("../adminPrivilege");
 // Get all products
 router.get('/', function(req, res, next) {
 	Product.find().exec()
@@ -31,30 +31,32 @@ router.get('/:id', function(req, res, next) {
 router.post('/', function (req, res, next) {
 	Product.create(req.body)
 	.then(function (product) {
-		res.status(201).json(product);
+		if(req.user.isAdmin){res.status(201).json(product)}
+		else{next(err)}
 	})
 	.then(null, next);
 })
-
 // Updates a product
-router.put('/:id', function(req, res, next) {
+router.put('/:id',AdminCheck, function(req, res, next) {
 	// Product.findById(req.params.id)
 	// .then(function(product) {
-	req.requestedProduct.set(req.body)
-	req.requestedProduct.save()
-	.then(function(savedProduct) {
-		res.send(savedProduct)
-	})
-	.then(null, next)
+		req.requestedProduct.set(req.body)
+		req.requestedProduct.save()
+		.then(function(savedProduct) {
+			res.send(savedProduct)
+		})
+		.then(null, next)
+	
 })
 
 // Deletes a product
-router.delete('/:id', function (req, res, next) {
-	Product.remove({_id: req.params.id})
-	.then(function () {
-		res.status(202).end();
-	})
-	.then(null, next);
+router.delete('/:id',AdminCheck, function (req, res, next) {
+		Product.remove({_id: req.params.id})
+		.then(function () {
+			res.status(202).end();
+		})
+		.then(null, next);
+	
 })
 
 
