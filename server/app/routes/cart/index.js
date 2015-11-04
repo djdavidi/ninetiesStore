@@ -22,21 +22,25 @@ router.param('itemId', function(req, res, next, itemId){
 });
 
 
+router.get('/', function (req, res, next) {
+	res.send(req.session.cart)
+})
+
 //Get current order
 router.get('/:currentUser', function(req,res){
 	res.send(req.body.order)
 })
 
 //Add a new item to cart
-router.put('/addItem/:itemId/:currentUser', function(req,res,next){
+router.put('/addItem', function(req,res,next){
 	if(!req.user){
 		if(!req.session.cart){
 			req.session.cart=[];
 		}
-		req.session.cart.push(req.params.itemId);
+		req.session.cart.push(req.body.itemId);
 		res.send(req.session.cart);
 	}
-	req.body.order.addItem(req.params.itemId) //model method
+	req.body.order.addItem(req.body.itemId) //model method
 	.then(function(updatedItem){
 		res.status(200).send(updatedItem)
 	})
@@ -44,8 +48,8 @@ router.put('/addItem/:itemId/:currentUser', function(req,res,next){
 })
 
 //Remove an item from cart
-router.delete('/:itemId/:currentUser', function(req,res,next){
-	req.body.order.removeItem(req.params.itemId) //model method
+router.delete('/', function(req,res,next){
+	req.body.order.removeItem(req.body.itemId) //model method
 	.then(function(){
 		res.send(204)
 	})
@@ -53,8 +57,8 @@ router.delete('/:itemId/:currentUser', function(req,res,next){
 })
 
 //Updating Quantity
-router.put('/updateQuantity/:itemId', function(req,res,next){
-	req.body.order.updateQuantity(req.params.itemId, req.body.quantity)
+router.put('/updateQuantity', function(req,res,next){
+	req.body.order.updateQuantity(req.body.itemId, req.body.quantity)
 	.then(function(updatedItem){
 		res.send(200).send(updatedItem)
 	})

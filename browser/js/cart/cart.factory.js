@@ -1,22 +1,24 @@
 app.factory("CartFactory",function($http){
 	return {
 			getCurrentOrder:function(currentUser){
-				return $http.get("/api/orders/" + currentUser)
+				if(!currentUser) currentUser = "";
+				console.log("currentUser", currentUser)
+				return $http.get("/api/cart/" + currentUser._id)
 				.then(function(response){
 					return response.data;
 				})
 			},
 			addItem:function(itemId, currentUser){
-				return $http.put("/api/orders/addItem/" + itemId + '/' + currentUser)
+				return $http.put("/api/cart/addItem/",{itemId:itemId,currentUser:currentUser})
 				.then(function(response){
 					return response.data;
 				})
 			},
 			removeItem:function(itemId, currentUser){
-				return $http.delete("/api/orders/"+itemId + '/' + currentUser)
+				return $http.delete("/api/cart/",{itemId:itemId,currentUser:currentUser})
 			},
 			updateQuantity:function(itemId, quantity, currentUser){
-				return $http.put("/api/orders/updateQuantity/" + itemId + '/' + currentUser, {quantity:quantity})
+				return $http.put("/api/cart/updateQuantity/",{itemId:itemId,currentUser:currentUser,quantity:quantity})
 				.then(function(response){
 					return response.data;
 				})
