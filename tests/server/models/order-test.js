@@ -23,7 +23,7 @@ describe("Order model",function(){
 	beforeEach("Establish DB connection",function(done){
 		if (mongoose.connection.db) return done();
         mongoose.connect(dbURI, done);
-        
+
         var newUser = createUser();
         var newOrder = createOrder(newUser._id);
 
@@ -64,7 +64,7 @@ describe("Order model",function(){
             .then(function (product) {
                 expect(newOrder.storedItems.contains(product)).to.be.equal(true);
                 done();
-            })
+            })// GTNE: add done as error handler (everywhere)
         })
     })
 

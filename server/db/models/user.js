@@ -10,6 +10,7 @@ var userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    // GTNE: select false
     password: {
         type: String,
         required: true
@@ -29,6 +30,7 @@ var userSchema = new mongoose.Schema({
     google: {
         id: String
     },
+    // GTNE: what's this for?
     vendorProducts: [{
         type: mongoose.Schema.Types.ObjectId, ref: 'Product'
     }],

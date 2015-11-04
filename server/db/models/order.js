@@ -6,18 +6,20 @@ var Product = mongoose.model("Product");
 //Shopping Cart is front-end representation of the order.
 var orderSchema = new schema({
     owner: {type: schema.Types.ObjectId, ref:"User"},
+    // GTNE: this could be its own schema
     storedItems : [{price:Number,
                    quantity:Number,
-                   itemId:{type:schema.Types.ObjectId,ref:"Product"}}],
-    address : String,
+                   itemId:{type:schema.Types.ObjectId,ref:"Product"}}],// GTNE: call this item
+    address : String, // GTNE: maybe you want an address schema
     email : String,
-    status: {
+    status: {// GTNE: enum these statuses
                 type: String,
                 default: 'Created'
             }
 })
 
 orderSchema.pre('save', function(){
+    // GTNE: you only want to do this if it's a new order
     var self = this;
     User.findById(this.owner)
     .then(function(foundUser){
@@ -32,7 +34,8 @@ orderSchema.methods.addItem=function(itemId,quantity){
 
     this.storedItems.forEach(function(elem, index){
         if (elem.itemId === itemId) {
-            self.updateQuantity(itemId, quantity, index); 
+            self.updateQuantity(itemId, quantity, index);
+            // GTNE: update quantity seems not to be a thing
             done = true;
         }
     })
@@ -58,6 +61,8 @@ orderSchema.methods.removeItem=function(itemId){
         if (elem.itemId === itemId) {
             self.storedItems.splice(index,1);
             return self.save()
+            // GTNE: this won't quite work right
+            // maybe use _.pull()
         }
     })
 
@@ -71,7 +76,7 @@ orderSchema.methods.removeItem=function(itemId){
 //            index=foundIndex;
 //         }
 //     }
-//     this.storedItems[index].quantity += quantity; 
+//     this.storedItems[index].quantity += quantity;
 //     return this.save();
 // }
 

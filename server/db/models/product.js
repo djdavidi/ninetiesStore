@@ -17,13 +17,16 @@ var productSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    // GTNE: how about default to 0?
     quantity: {
         type: String,
         required: true
     },
+    // GTNE: what dis
     productRating: {
         type: Number
     },
+    // GTNE: so this can be anything? not a specific set of tags?
     category: [{
         type: String,
         required: true
@@ -32,9 +35,10 @@ var productSchema = new mongoose.Schema({
         type: String,
         default: "http://www.fillmurray.com/140/100"
     },
-    seller: { 
+    seller: {
         type: mongoose.Schema.Types.ObjectId, ref: 'User'
     },
+    // GTNE: ref the other way with a method
     reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }]
 })
 
