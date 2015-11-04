@@ -11,21 +11,19 @@ router.get('/', function(req, res, next) {
 	.then(null, next)
 })
 
-// router.param('productId', function(req, res, next, productId) {
-// 	Product.findById(productId)
-// 	.then(function(product) {
-// 		req.body.product = product
-// 	})
-// 	.then(null, next)
-// })
+router.param('id', function(req, res, next, id) {
+	Product.findById(id)
+	.then(function(product) {
+		req.requestedProduct = product
+		next()
+	})
+})
+
 router.use('/:id/reviews', require('../reviews'))
 
 // Get a specific product
 router.get('/:id', function(req, res, next) {
-	Product.findById(req.params.id)
-	.then(function(product) {
-		res.send(product)
-	})
+	res.send(req.requestedProduct)
 	.then(null, next)
 })
 
@@ -40,13 +38,12 @@ router.post('/', function (req, res, next) {
 
 // Updates a product
 router.put('/:id', function(req, res, next) {
-	Product.findById(req.params.id)
-	.then(function(product) {
-		for (var key in req.body) {
-			product[key] = req.body[key]
-		}
-		return product.save()
-	})
+	// Product.findById(req.params.id)
+	// .then(function(product) {
+	for (var key in req.body) {
+		req.requestedProduct[key] = req.body[key]
+	}
+	req.requestedProduct.save()
 	.then(function(savedProduct) {
 		res.send(savedProduct)
 	})
