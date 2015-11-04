@@ -1,5 +1,4 @@
 var mongoose = require("mongoose");
-var Review = mongoose.model("Review");
 
 
 var productSchema = new mongoose.Schema({
@@ -43,7 +42,7 @@ var productSchema = new mongoose.Schema({
 // with a proper weighting
 productSchema.methods.addReview = function (reviewData) {
     var self = this;
-    return Review.create(reviewData)
+    return mongoose.model("Review").create(reviewData)
     .then(function (review) {
         self.reviews.addToSet(review._id);
         return self.save();
