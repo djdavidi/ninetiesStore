@@ -4,14 +4,6 @@ var Review = mongoose.model('Review')
 var Product = mongoose.model('Product')
 var _ = require('lodash')
 
-router.param('productId', function(req, res, next, productId) {
-	Product.findById(productId)
-	.then(function(product) {
-		req.body.product = product;
-	})
-	.then(null, next)
-})
-
 router.get('/', function(req, res, next) {
 	Review.find().exec()
 	.then(function(reviews) {
@@ -39,9 +31,7 @@ router.post('/', function(req, res, next) {
 router.put('/:id', function(req, res, next) {
 	Review.findById(req.params.id)
 	.then(function(review) {
-		for (var key in req.body) {
-			review[key] = req.body[key]
-		}
+		review.set(req.body)
 		return review.save()
 	})
 	.then(function(savedProduct) {
