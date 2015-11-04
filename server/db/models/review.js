@@ -1,5 +1,4 @@
 var mongoose = require("mongoose");
-var Product = mongoose.model('Product');
 
 var reviewSchema = new mongoose.Schema({
     title: {
@@ -29,10 +28,11 @@ var reviewSchema = new mongoose.Schema({
 })
 
 reviewSchema.post('save', function () {
-    Product.findById(this.product)
+    var self = this
+    mongoose.model('Product').findById(this.product)
     .then(function (currentProduct) {
         var sum = (currentProduct.productRating*(currentProduct.reviews.length-1));
-        currentProduct.productRating = ((sum + this.reviewRating)/currentProduct.reviews.length).toFixed(1);
+        currentProduct.productRating = ((sum + self.reviewRating)/currentProduct.reviews.length).toFixed(1);
     })
 })
 
