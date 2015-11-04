@@ -48,7 +48,7 @@ module.exports = function (app) {
                 Order.find({owner:req.user._id,status:"Created"})
                 .then(function(currentOrder){
                     if(!currentOrder){
-                        Order.create({owner:req.user._id})
+                        Order.create({owner:req.user._id}) // GTNE: gotta return
                         .then(function(newOrder){
                             req.session.cart.forEach(function(elem){
                             newOrder.addItem(elem)
@@ -62,7 +62,7 @@ module.exports = function (app) {
                         })
                         req.session.cart=[];
                     }
-                
+
 
                 // },function(err){
                 //     Order.create({owner:req.user._id})
@@ -77,7 +77,7 @@ module.exports = function (app) {
                 .then(function(){
                     res.status(200).send({
                         user: _.omit(user.toJSON(), ['password', 'salt'])
-                    });  
+                    });
                 })
             });
 

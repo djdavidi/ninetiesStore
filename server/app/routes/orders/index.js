@@ -11,6 +11,7 @@ router.get('/', function (req, res, next) {
 	.then(null, next);
 })
 
+// GTNE: how about a router.param('id', blah)
 // Get a specific order
 router.get('/:id', function (req, res, next) {
 	Order.findById(req.params.id)
@@ -31,6 +32,7 @@ router.post('/', function (req, res, next) {
 
 // Updates an order
 router.put('/:id', function (req, res, next) {
+  // GTNE: eeek don't do dis
 	Order.findByIdAndUpdate(req.params.id, req.body, {new: true})
 	.then(function (order) {
 		res.status(202).json(order);

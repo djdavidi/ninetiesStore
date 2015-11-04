@@ -10,9 +10,12 @@ var userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    // GTNE: select false
     password: {
         type: String,
-        required: true
+        required: true,
+        // GTNE: select: false
+        // GTNE: query.select('+password')
     },
     salt: {
         type: String
@@ -29,6 +32,8 @@ var userSchema = new mongoose.Schema({
     google: {
         id: String
     },
+    // GTNE: what's this for?
+    // GTNE: method on user (user.getSoldProduct())
     vendorProducts: [{
         type: mongoose.Schema.Types.ObjectId, ref: 'Product'
     }],

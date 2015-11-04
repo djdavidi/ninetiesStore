@@ -3,6 +3,8 @@ var mongoose = require('mongoose');
 var User = mongoose.model('User');
 var Review = mongoose.model('Product');
 
+// GTNE: all very RESTful
+
 // Get all users
 router.get('/', function(req, res, next) {
 	User.find().exec()
@@ -65,6 +67,7 @@ router.get('/:userId/reviews', function (req, res, next) {
 
 
 // THE FOLLOWING CAN USE 'userId' INSTEAD OF ':id'
+// GTNE: yup, be consistent since the router param will do your work for you
 
 // Get specific user's orders
 router.get('/:id/orders', function(req, res, next) {
