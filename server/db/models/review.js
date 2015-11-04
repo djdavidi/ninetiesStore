@@ -23,13 +23,15 @@ var reviewSchema = new mongoose.Schema({
     },
     date: {
         type: Date,
-        default: Date.now()
+        default: Date.now()// GTNE: this!
     }
 })
 
-reviewSchema.post('save', function () {
-    var self = this
-    mongoose.model('Product').findById(this.product)
+// GTNE: doc
+reviewSchema.post('save', function (doc) {
+    // GTNE: if !is new
+    var self = doc
+    mongoose.model('Product').findById(doc.product)
     .then(function (currentProduct) {
         var sum = (currentProduct.productRating*(currentProduct.reviews.length-1));
         currentProduct.productRating = ((sum + self.reviewRating)/currentProduct.reviews.length).toFixed(1);

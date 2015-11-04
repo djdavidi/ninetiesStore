@@ -3,23 +3,27 @@ var schema = mongoose.Schema;
 var User = mongoose.model("User");
 var Product = mongoose.model("Product");
 
+var LineItemSchema = new schema({price:Number,
+                   quantity:Number,
+                   itemId:{type:schema.Types.ObjectId,ref:"Product"}})
+
 //Shopping Cart is front-end representation of the order.
 var orderSchema = new schema({
     owner: {type: schema.Types.ObjectId, ref:"User"},
     // GTNE: this could be its own schema
-    storedItems : [{price:Number,
-                   quantity:Number,
-                   itemId:{type:schema.Types.ObjectId,ref:"Product"}}],// GTNE: call this item
+    storedItems : [LineItemSchema],// GTNE: call this item
     address : String, // GTNE: maybe you want an address schema
     email : String,
     status: {// GTNE: enum these statuses
                 type: String,
-                default: 'Created'
+                default: 'Created',
+                enum: [blah blah blah]
             }
 })
 
 orderSchema.pre('save', function(){
     // GTNE: you only want to do this if it's a new order
+    // GTNE: if (!this.isNew()) return;
     var self = this;
     User.findById(this.owner)
     .then(function(foundUser){
@@ -56,15 +60,16 @@ orderSchema.methods.addItem=function(itemId,quantity){
 
 orderSchema.methods.removeItem=function(itemId){
     var self = this;
-
+            // maybe use _.pull(this.storedItems, item => blahblah)
+var i;
     this.storedItems.forEach(function(elem, index){
         if (elem.itemId === itemId) {
+            i = index
             self.storedItems.splice(index,1);
-            return self.save()
             // GTNE: this won't quite work right
-            // maybe use _.pull()
         }
     })
+            return self.save()
 
 }
 

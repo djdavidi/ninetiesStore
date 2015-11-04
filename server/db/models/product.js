@@ -8,7 +8,7 @@ var productSchema = new mongoose.Schema({
     },
     price: {
         type: Number,
-        required: true
+        required: true// GTNE: in cents
     },
     date: {
         type: Date
@@ -42,6 +42,12 @@ var productSchema = new mongoose.Schema({
     reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }]
 })
 
+// GTNE: product.getReviews()
+
+// GTNE: product.calculateRating()
+
+
+
 // use reviews.length and rating to help calculate rating
 // with a proper weighting
 productSchema.methods.addReview = function (reviewData) {
@@ -63,6 +69,11 @@ productSchema.methods.removeReview = function (review) {
 }
 
 
-
+// GTNE: presave
+pre.save(function() {
+    if (!this.isModified('price')) return;
+    Order.find({items: this._id, status: 'created'})
+    // update prices
+})
 
 mongoose.model("Product", productSchema)

@@ -64,7 +64,8 @@ describe("Order model",function(){
             .then(function (product) {
                 expect(newOrder.storedItems.contains(product)).to.be.equal(true);
                 done();
-            })// GTNE: add done as error handler (everywhere)
+            })
+            .then(null, done)// GTNE: add done as error handler (everywhere)
         })
     })
 

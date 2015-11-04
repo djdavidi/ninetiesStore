@@ -5,12 +5,12 @@ var Product = mongoose.model('Product')
 
 router.use('/', function (req, res, next) {
   Order.find({ owner: req.body.currentUser , status: 'Created'})
-  .then(function(order){
-    // GTNE: is there guaranteed to be one?
-    req.body.order = order;// GTNE: this can be in the next .then
-  })
+  // .then(function(order){
+  //   // GTNE: is there guaranteed to be one?
+  // })
   .then(function () {
     // GTNE: you need to return this?
+    req.order = order;// GTNE: this can be in the next .then
     Product.findById(req.body.itemId)
   })
   .then(function(item){
@@ -48,6 +48,7 @@ router.get('/:currentUser', function(req,res){
 //Add a new item to cart
 // GTNE: this doesn't need to be in the url since it's a put
 // GTNE: also it could be a post
+// POST '/cart/items'
 router.put('/addItem/:itemId/:currentUser', function(req,res,next){
   if(!req.user){
     if(!req.session.cart){
@@ -64,6 +65,7 @@ router.put('/addItem/:itemId/:currentUser', function(req,res,next){
 })
 
 //Remove an item from cart
+// DELETE '/cart/items/:itemId'
 router.delete('/:itemId/:currentUser', function(req,res,next){
   req.body.order.removeItem(req.params.itemId) //model method
   .then(function(){
