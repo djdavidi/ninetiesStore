@@ -66,25 +66,11 @@ orderSchema.methods.removeItem=function(itemId){
     var self = this;
 
     this.storedItems.forEach(function(elem, index){
-        if (elem.itemId === itemId) {
+        if (elem.product == itemId) {
             self.storedItems.splice(index,1);
         }
     })
     return self.save()
-
 }
-
-// orderSchema.methods.updateQuantity=function(itemId, quantity, index){
-//     var self=this;
-//     if(!index){
-//         this.storedItems.forEach(function(elem, foundIndex){
-//             if (elem.itemId == itemId) {
-//                index=foundIndex;
-//             }
-//         })
-//     }
-//     this.storedItems[index].quantity += quantity; 
-// }
-
 
 mongoose.model("Order", orderSchema)
