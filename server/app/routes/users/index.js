@@ -1,7 +1,6 @@
 var router = require('express').Router();
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
-var Review = mongoose.model('Product');
 
 // Get all users
 router.get('/', function(req, res, next) {
@@ -20,38 +19,42 @@ router.post('/', function (req, res, next) {
 	.then(null, next);
 })
 
-// Finds user by id and saves to req.user
-router.param('userId', function (req, res, next, userId) {
-	User.findById(userId)
-	.then(function (user) {
-		req.user = user;
-		next();
-	})
-	.then(null, next);
-})
-
 // Get specific user
 router.get('/:userId', function (req, res, next) {
-	res.json(req.user);
+	User.findById(req.params.userId)
+	.then(function(user) {
+		res.send(user)
+	})
+	.then(null, next)
 })
 
 // Update a specific user
 router.put('/:userId', function (req, res, next) {
-	req.user.set(req.body);
-	req.user.save()
-	.then(function (user) {
-		res.json(user);
-	})
-	.then(null, next);
+	if (req.user._id === req.params.userId) {
+		req.user.set(req.body);
+		req.user.save()
+		.then(function (user) {
+			res.json(user);
+		})
+		.then(null, next);
+	}
+	else {
+		res.status(401)
+	}
 })
 
 // Delete a specific user
 router.delete('/:userId', function (req, res, next) {
-	User.findByIdAndRemove(req.user._id)
-	.then(function (user) {
-		res.json(user);
-	})
-	.then(null, next);
+	if (req.user._id === req.params.userId) {
+		User.findByIdAndRemove(req.user._id)
+		.then(function (user) {
+			res.json(user);
+		})
+		.then(null, next);
+	}
+	else {
+		res.status(401)
+	}
 })
 
 // Get a specific user's reviews
