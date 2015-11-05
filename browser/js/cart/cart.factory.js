@@ -1,13 +1,14 @@
 app.factory("CartFactory",function($http){
 	return {
 			getCurrentOrder:function(){
+				// if(!currentUser) currentUser = "";
 				return $http.get("/api/cart/")
 				.then(function(response){
 					return response.data;
 				})
 			},
-			add:function(itemId,quantity){
-				return $http.put("/api/cart/:itemId",{quantity:quantity})
+			add:function(itemId, quantity){
+				return $http.put("/api/cart/" + itemId,{quantity:quantity})
 				.then(function(response){
 					console.log("response is:", response)
 					return response.data;

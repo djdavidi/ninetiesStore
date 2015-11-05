@@ -4,42 +4,49 @@ var Order = mongoose.model('Order')
 var Product = mongoose.model('Product')
 
 router.use('/', function (req, res, next) {
-	Order.find({ owner: req.user , status: 'Created'})
+	Order.findOne({ owner: req.user._id , status: 'Created'})
 	.then(function(order){
-		req.order = order;
+		if(order===null){
+			Order.create({owner:req.user._id})
+			.then(function(newOrder){
+				req.order=newOrder;
+				next()
+			})
+		} else {
+			req.order = order;
+			next()
+		}
 	})
-	// .then(function () {
-	// Product.findById(req.body.itemId)
-	// })
-	// .then(function(item){
-	// 	req.item = item;
-	// 	next();
-	// })
 	.then(null, next);
 })
 
 //Get current order
-router.get('/', function(req,res){
+router.get('/', function(req, res, next){
 	res.send(req.order)
 })
 
 //Add a new item to cart
 
 router.put('/:itemId', function(req,res,next){
-
 	if(!req.user){
 		if(!req.session.cart){
 			req.session.cart=[];
 		}
-		req.session.cart.push(req.params.itemId);
-
-		res.send(req.session.cart);
+	} else {
+		if(!req.session.cart) {
+			req.session.cart = [];
+		}
 	}
-	req.order.add(req.params.itemId,req.body.quantity) //model method
+	req.session.cart.push(req.params.itemId);
+	req.order.add(req.params.itemId,req.body.quantity)
 	.then(function(updatedItem){
+		console.log("updatedItem", updatedItem)
 		res.status(200).send(updatedItem)
 	})
-	.then(null, next);
+	.then(null, function(err) {
+		// console.error(err.stack)
+		next(err);
+	});
 })
 
 //Remove an item from cart

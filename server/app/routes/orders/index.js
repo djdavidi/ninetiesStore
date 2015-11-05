@@ -30,11 +30,14 @@ router.post('/', function (req, res, next) {
 })
 
 // Updates an order
-// Find then update, don't findByIdAndUpdate because it's worse than cigarettes.
 router.put('/:id', function (req, res, next) {
-	Order.findByIdAndUpdate(req.params.id, req.body, {new: true})
+	Order.findById(req.params.id)
 	.then(function (order) {
-		res.status(202).json(order);
+		order.set(req.body)
+		return order.save()
+	})
+	.then(function(savedOrder) {
+		res.status(202).send(savedOrder)
 	})
 	.then(null, next);
 })

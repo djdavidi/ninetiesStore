@@ -30,6 +30,7 @@ module.exports = function (app) {
     // A POST /login route is created to handle login.
     app.post('/login', function (req, res, next) {
 
+        // CODE BELOW IS FSG ORIGINAL AND WORKS
         var authCb = function (err, user) {
 
             if (err) return next(err);
@@ -42,46 +43,70 @@ module.exports = function (app) {
 
             // req.logIn will establish our session.
             req.logIn(user, function (loginErr) {
-                req.session.cart = req.session.cart || [];
                 if (loginErr) return next(loginErr);
                 // We respond with a response object that has user with _id and email.
-                Order.find({owner:req.user._id,status:"Created"})
-                .then(function(currentOrder){
-                    if(!currentOrder){
-                        return Order.create({owner:req.user._id})
-                        .then(function(newOrder){
-                            req.session.cart.forEach(function(elem){
-                            newOrder.addItem(elem)
-                            })
-                        })
-                    }
-                     if(currentOrder){
-                        console.log("TTTTTTTTTTTTTTT",currentOrder);
-                        req.session.cart.forEach(function(elem){
-                        currentOrder.addItem(elem)
-                        })
-                        req.session.cart=[];
-                    }
-                
-
-                // },function(err){
-                //     Order.create({owner:req.user._id})
-                //     .then(function(newOrder){
-                //         req.session.cart.forEach(function(elem){
-                //         newOrder.addItem(elem)
-                //         })
-                //     })
-                //     req.session.cart=[];
-                //      console.log("TTTTTTTTTTTTTTT",newOrder);
-                })
-                .then(function(){
-                    res.status(200).send({
-                        user: _.omit(user.toJSON(), ['password', 'salt'])
-                    });  
-                })
+                res.status(200).send({
+                    user: _.omit(user.toJSON(), ['password', 'salt'])
+                });
             });
 
         };
+        // CODE ABOVE IS FSG ORIGINAL AND WORKS
+
+
+        // CODE BELOW IS OURS AND BROKEN
+        // var authCb = function (err, user) {
+
+        //     if (err) return next(err);
+
+        //     if (!user) {
+        //         var error = new Error('Invalid login credentials.');
+        //         error.status = 401;
+        //         return next(error);
+        //     }
+
+        //     // req.logIn will establish our session.
+        //     req.logIn(user, function (loginErr) {
+        //         req.session.cart = req.session.cart || [];
+        //         if (loginErr) return next(loginErr);
+        //         // We respond with a response object that has user with _id and email.
+        //         Order.find({owner:req.user._id,status:"Created"})
+        //         .then(function(currentOrder){
+        //             if(!currentOrder){
+        //                 return Order.create({owner:req.user._id})
+        //                 .then(function(newOrder){
+        //                     req.session.cart.forEach(function(elem){
+        //                     newOrder.addItem(elem)
+        //                     })
+        //                 })
+        //             }
+        //              if(currentOrder){
+        //                 console.log("TTTTTTTTTTTTTTT",currentOrder);
+        //                 req.session.cart.forEach(function(elem){
+        //                 currentOrder.addItem(elem)
+        //                 })
+        //                 req.session.cart=[];
+        //             }
+                
+
+        //         // },function(err){
+        //         //     Order.create({owner:req.user._id})
+        //         //     .then(function(newOrder){
+        //         //         req.session.cart.forEach(function(elem){
+        //         //         newOrder.addItem(elem)
+        //         //         })
+        //         //     })
+        //         //     req.session.cart=[];
+        //         //      console.log("TTTTTTTTTTTTTTT",newOrder);
+        //         })
+        //         .then(function(){
+        //             res.status(200).send({
+        //                 user: _.omit(user.toJSON(), ['password', 'salt'])
+        //             });  
+        //         })
+        //     });
+
+        // };
 
         passport.authenticate('local', authCb)(req, res, next);
 
