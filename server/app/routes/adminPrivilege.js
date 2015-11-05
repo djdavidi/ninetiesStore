@@ -1,4 +1,7 @@
-module.exports=function(req,res,next){
-	if(req.user.isAdmin) next();
-	next(err);
+module.exports={
+	adminCheck:function(req,res,next){
+		if(req.user.isAdmin) next();
+		next(err);
+	}
+
 }

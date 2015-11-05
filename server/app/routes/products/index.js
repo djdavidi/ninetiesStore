@@ -1,7 +1,7 @@
 var router = require('express').Router();
 var mongoose = require('mongoose');
 var Product = mongoose.model('Product');
-var AdminCheck = require("../adminPrivilege");
+var AdminCheck = require("../adminPrivilege").adminCheck;
 // Get all products
 router.get('/', function(req, res, next) {
 	Product.find().exec()
@@ -28,7 +28,7 @@ router.get('/:id', function(req, res, next) {
 })
 
 // Creates a product
-router.post('/',adminCheck,function (req, res, next) {
+router.post('/',AdminCheck,function (req, res, next) {
 	Product.create(req.body)
 	.then(function (product) {
 		{res.status(201).json(product)}
