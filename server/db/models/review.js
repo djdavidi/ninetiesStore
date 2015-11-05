@@ -29,7 +29,6 @@ var reviewSchema = new mongoose.Schema({
 })
 
 reviewSchema.post('save', function (doc) {
-    var self = doc
     mongoose.model('Product').findById(doc.product)
     .then(function (currentProduct) {
         currentProduct.numReviews ++;

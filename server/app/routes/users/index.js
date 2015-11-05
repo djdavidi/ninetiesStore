@@ -1,6 +1,7 @@
 var router = require('express').Router();
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
+var Review = mongoose.model('Review')
 
 // Get all users
 router.get('/', function(req, res, next) {
