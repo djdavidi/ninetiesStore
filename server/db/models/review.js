@@ -6,12 +6,11 @@ var reviewSchema = new mongoose.Schema({
         required: true
     },
     user: {
-        type: mongoose.Schema.Types.ObjectId, ref: 'User',
-        required: true
+        type: mongoose.Schema.Types.ObjectId, ref: 'User'
+        // required: true
     },
     product: {
-        type: mongoose.Schema.Types.ObjectId, ref: 'Product',
-        required: true
+        type: mongoose.Schema.Types.ObjectId, ref: 'Product'
     },
     reviewRating: {
         type: Number,
@@ -29,12 +28,15 @@ var reviewSchema = new mongoose.Schema({
     }
 })
 
-reviewSchema.post('save', function () {
-    var self = this
-    mongoose.model('Product').findById(this.product)
+reviewSchema.post('save', function (doc) {
+    var self = doc
+    mongoose.model('Product').findById(doc.product)
     .then(function (currentProduct) {
-        var sum = (currentProduct.productRating*(currentProduct.reviews.length-1));
-        currentProduct.productRating = ((sum + self.reviewRating)/currentProduct.reviews.length).toFixed(1);
+        currentProduct.numReviews ++;
+        var numer = currentProduct.productRating * (currentProduct.numReviews - 1) + doc.reviewRating
+        var denom = currentProduct.numReviews
+        currentProduct.productRating = numer/denom
+        return currentProduct.save()
     })
 })
 

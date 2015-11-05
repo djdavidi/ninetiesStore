@@ -25,7 +25,8 @@ var productSchema = new mongoose.Schema({
     productRating: {
         type: Number,
         min: 0,
-        max: 5
+        max: 5,
+        default: 0
     },
     category: [{
         type: String,
@@ -37,8 +38,11 @@ var productSchema = new mongoose.Schema({
     },
     seller: { 
         type: mongoose.Schema.Types.ObjectId, ref: 'User'
+    },
+    numReviews: {
+        type: Number,
+        default: 0
     }
-    // reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }]
 })
 
 //DO THIS SHIT!!!!!! :)

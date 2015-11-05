@@ -34,29 +34,28 @@ orderSchema.pre('save', function(){
     }
 })
 //addtoSet will not add if it is already present, can use this instead
-orderSchema.methods.addItem=function(itemId,quantity){
+orderSchema.methods.add=function(itemId,quantity){
     var self = this;
     var done;
-
     this.storedItems.forEach(function(elem, index){
         if (elem.itemId === itemId) {
             self.updateQuantity(itemId, quantity, index); 
             done = true;
         }
     })
+    return self.save();
 
     if (!done){
         var temp = {
             quantity: quantity
         }
-
         return Product.findById(itemId)
         .then(function(foundItem){
             temp.price=foundItem.price;
             self.storedItems.push(temp);
-            return self.save()
         })
     }
+            return self.save()
 }
 
 orderSchema.methods.removeItem=function(itemId){
