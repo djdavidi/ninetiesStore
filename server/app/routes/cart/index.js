@@ -4,17 +4,17 @@ var Order = mongoose.model('Order')
 var Product = mongoose.model('Product')
 
 router.use('/', function (req, res, next) {
-	Order.find({ owner: req.body.currentUser , status: 'Created'})
+	Order.find({ owner: req.user , status: 'Created'})
 	.then(function(order){
 		req.order = order;
 	})
-	.then(function () {
-		Product.findById(req.body.itemId)
-	})
-	.then(function(item){
-		req.item = item;
-		next();
-	})
+	// .then(function () {
+	// Product.findById(req.body.itemId)
+	// })
+	// .then(function(item){
+	// 	req.item = item;
+	// 	next();
+	// })
 	.then(null, next);
 })
 
@@ -24,15 +24,16 @@ router.get('/', function(req,res){
 })
 
 //Add a new item to cart
-router.put('/addItem', function(req,res,next){
+router.put('/:itemId', function(req,res,next){
 	if(!req.user){
 		if(!req.session.cart){
 			req.session.cart=[];
 		}
-		req.session.cart.push(req.item);
+		req.session.cart.push(req.params.itemId);
+
 		res.send(req.session.cart);
 	}
-	req.order.addItem(req.item) //model method
+	req.order.add(req.params.itemId,req.body.quantity) //model method
 	.then(function(updatedItem){
 		res.status(200).send(updatedItem)
 	})
@@ -40,8 +41,8 @@ router.put('/addItem', function(req,res,next){
 })
 
 //Remove an item from cart
-router.delete('/', function(req,res,next){
-	req.body.order.removeItem(req.item) //model method
+router.delete('/:itemId', function(req,res,next){
+	req.body.order.removeItem(req.params.itemId) //model method
 	.then(function(){
 		res.send(204)
 	})
@@ -49,13 +50,13 @@ router.delete('/', function(req,res,next){
 })
 
 //Updating Quantity
-router.put('/updateQuantity', function(req,res,next){
-	req.body.order.updateQuantity(req.item, req.body.quantity)
-	.then(function(updatedItem){
-		res.send(200).send(updatedItem)
-	})
-	.then(null, next);
-})
+// router.put('/add', function(req,res,next){
+// 	req.body.order.updateQuantity(req.params.itemId, req.body.quantity)
+// 	.then(function(updatedItem){
+// 		res.send(200).send(updatedItem)
+// 	})
+// 	.then(null, next);
+// })
 
 
 
