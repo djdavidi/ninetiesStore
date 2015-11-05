@@ -7,13 +7,7 @@ router.use('/', function (req, res, next) {
 	Order.find({ owner: req.user , status: 'Created'})
 	.then(function(order){
 		req.order = order;
-	})
-	.then(function () {
-	Product.findById(req.body.itemId)
-	})
-	.then(function(item){
-		req.item = item;
-		next();
+		req.itemId= req.body.itemId
 	})
 	.then(null, next);
 })
