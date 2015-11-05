@@ -1,10 +1,12 @@
 var router = require('express').Router()
 var mongoose = require('mongoose')
-var Review = mongoose.model('Review')
 var Product = mongoose.model('Product')
+var Review = mongoose.model('Review')
 var _ = require('lodash')
 
 router.get('/', function(req, res, next) {
+
+	console.log("reached")
 	Review.find().exec()
 	.then(function(reviews) {
 		res.send(reviews)
