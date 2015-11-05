@@ -28,14 +28,16 @@ var reviewSchema = new mongoose.Schema({
     }
 })
 
-// reviewSchema.post('save', function (doc) {
-//     var self = doc
-//     console.log(doc)
-//     mongoose.model('Product').findById(doc.product)
-//     .then(function (currentProduct) {
-//         var sum = (currentProduct.productRating*(currentProduct.reviews.length-1));
-//         currentProduct.productRating = ((sum + doc.reviewRating)/currentProduct.reviews.length).toFixed(1);
-//     })
-// })
+reviewSchema.post('save', function (doc) {
+    var self = doc
+    mongoose.model('Product').findById(doc.product)
+    .then(function (currentProduct) {
+        currentProduct.numReviews ++;
+        var numer = currentProduct.productRating * (currentProduct.numReviews - 1) + doc.reviewRating
+        var denom = currentProduct.numReviews
+        currentProduct.productRating = numer/denom
+        return currentProduct.save()
+    })
+})
 
 mongoose.model("Review", reviewSchema)
