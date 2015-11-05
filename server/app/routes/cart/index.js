@@ -7,6 +7,7 @@ router.use('/', function (req, res, next) {
 	Order.find({ owner: req.user , status: 'Created'})
 	.then(function(order){
 		req.order = order;
+		next();
 	})
 	// .then(function () {
 	// Product.findById(req.body.itemId)
@@ -20,7 +21,8 @@ router.use('/', function (req, res, next) {
 
 //Get current order
 router.get('/', function(req,res){
-	res.send(req.order)
+	console.log("req.order", req.order)
+	res.send(req.order || [])
 })
 
 //Add a new item to cart
