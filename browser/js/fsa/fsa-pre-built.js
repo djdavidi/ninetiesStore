@@ -48,7 +48,7 @@
         ]);
     });
 
-    app.service('AuthService', function ($http, Session, $rootScope, AUTH_EVENTS, $q) {
+    app.service('AuthService', function ($http, Session, $rootScope, AUTH_EVENTS, $q, $window) {
 
         function onSuccessfulLogin(response) {
             var data = response.data;
@@ -101,6 +101,13 @@
             });
         };
 
+        this.googleLogin = function() {
+          $window.location = $window.location.protocol +"//" + '127.0.0.1:1337/auth/google';
+          //return $http.get("/auth/google")
+        //   .then(function(response){
+        //     console.log("response",response.data);
+        //   })
+       }
     });
 
     app.service('Session', function ($rootScope, AUTH_EVENTS) {

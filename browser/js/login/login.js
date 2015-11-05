@@ -25,4 +25,8 @@ app.controller('LoginCtrl', function ($scope, AuthService, $state) {
 
     };
 
+    $scope.googleLogin= function(){
+        AuthService.googleLogin();
+    }
+
 });
