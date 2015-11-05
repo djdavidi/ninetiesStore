@@ -31,9 +31,8 @@ router.get('/:id', function(req, res, next) {
 router.post('/', function (req, res, next) {
 	Product.create(req.body)
 	.then(function (product) {
-		res.status(201).json(product);
+		res.status(201).send(product);
 	})
-	.then(null, next);
 })
 
 // Updates a product

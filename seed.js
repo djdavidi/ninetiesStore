@@ -25,7 +25,7 @@ var connectToDb = require('./server/db');
 var User = Promise.promisifyAll(mongoose.model('User'));
 // var Order = Promise.promisifyAll(mongoose.model('Order'));
 var Product = Promise.promisifyAll(mongoose.model('Product'));
-// var Review = Promise.promisifyAll(mongoose.model('Review'));
+var Review = Promise.promisifyAll(mongoose.model('Review'));
 
 var usersData = JSON.parse(fs.readFileSync('./seed_data/user_data.json'));
 // var ordersData = JSON.parse(fs.readFileSync('./seed_data/order_data.json'));
@@ -51,8 +51,8 @@ connectToDb.then(function () {
     //     return Order.remove({})
     }).then(function () {
         return Product.remove({})
-    // }).then(function () {
-    //     return Review.remove({})
+    }).then(function () {
+        return Review.remove({})
     }).then(function () {
         console.log("Database cleared. Initiating seed of database.")
     }).then(function () {
