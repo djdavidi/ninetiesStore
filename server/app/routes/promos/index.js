@@ -1,6 +1,8 @@
 var router = require('express').Router();
 var mongoose = require('mongoose')
 var Promo = mongoose.model('Promo')
+var adminCheck = require('../adminPrivilege').adminCheck
+
 
 router.get('/', function(req, res, next) {
 	Promo.find().exec()
@@ -9,7 +11,7 @@ router.get('/', function(req, res, next) {
 	})
 })
 
-router.post('/', function(req, res, next) {
+router.post('/', adminCheck, function(req, res, next) {
 	Promo.create(req.body)
 	.then(function(promo) {
 		res.status(201).send(promo)
@@ -25,7 +27,7 @@ router.get('/:id', function(req, res, next) {
 	.then(null, next)
 })
 
-router.put('/:id', function(req, res, next) {
+router.put('/:id', adminCheck, function(req, res, next) {
 	Promo.findById(req.params.id)
 	.then(function(promo) {
 		promo.set(req.body)
@@ -37,7 +39,7 @@ router.put('/:id', function(req, res, next) {
 	.then(null, next)
 })
 
-router.delete('/:id', function(req, res, next) {
+router.delete('/:id', adminCheck, function(req, res, next) {
 	Promo.findById(req.params.id)
 	.then(function(promo) {
 		promo.remove()
