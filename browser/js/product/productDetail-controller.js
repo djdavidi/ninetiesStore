@@ -2,6 +2,6 @@ app.controller('ProductDetailCtrl', function($scope, productDetail, productRevie
 	$scope.ProductDetail = productDetail;
 	$scope.ProductReviews = productReviews
 	$scope.add = function(id, currentUser){
-		return CartFactory.addItem(id)
+		return CartFactory.add(id)
 	}
 })
