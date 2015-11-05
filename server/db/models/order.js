@@ -23,8 +23,8 @@ var orderSchema = new schema({
             }
 })
 
-orderSchema.pre('save', function(){
-    if (!this.isNew()) {
+orderSchema.pre('save', function(next){
+    if (!this.isNew) {
         var self = this;
         User.findById(this.owner)
         .then(function(foundUser){
@@ -32,30 +32,32 @@ orderSchema.pre('save', function(){
             self.email = foundUser.email;
         })
     }
+    next()
 })
 //addtoSet will not add if it is already present, can use this instead
 orderSchema.methods.add=function(itemId,quantity){
     var self = this;
     var done;
     this.storedItems.forEach(function(elem, index){
-        if (elem.itemId === itemId) {
-            self.updateQuantity(itemId, quantity, index); 
+        if (elem.product === itemId) {
+            self.storedItems[index].quantity += quantity; 
             done = true;
         }
     })
-    return self.save();
 
     if (!done){
         var temp = {
             quantity: quantity
         }
+            // console.log("I AM HERE")
         return Product.findById(itemId)
         .then(function(foundItem){
             temp.price=foundItem.price;
             self.storedItems.push(temp);
+            return self.save()
         })
     }
-            return self.save()
+    return self.save()
 }
 
 orderSchema.methods.removeItem=function(itemId){
@@ -70,18 +72,17 @@ orderSchema.methods.removeItem=function(itemId){
 
 }
 
-orderSchema.methods.updateQuantity=function(itemId, quantity, index){
-    var self=this;
-    if(!index){
-        this.storedItems.forEach(function(elem, foundIndex){
-            if (elem.itemId == itemId) {
-               index=foundIndex;
-            }
-        })
-    }
-    this.storedItems[index].quantity += quantity; 
-    return this.save();
-}
+// orderSchema.methods.updateQuantity=function(itemId, quantity, index){
+//     var self=this;
+//     if(!index){
+//         this.storedItems.forEach(function(elem, foundIndex){
+//             if (elem.itemId == itemId) {
+//                index=foundIndex;
+//             }
+//         })
+//     }
+//     this.storedItems[index].quantity += quantity; 
+// }
 
 
 mongoose.model("Order", orderSchema)
