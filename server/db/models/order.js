@@ -77,9 +77,9 @@ orderSchema.methods.removeItem=function(itemId){
     return self.save()
 }
 
-orderSchema.methods.addPromo = function(promoId) {
+orderSchema.methods.addPromo = function(promoQuery) {
     var self = this
-    Promo.findById(promoId)
+    Promo.find({promoCode: promoQuery})
     .then(function(promo) {
         if (!promo) return;
         self.promo = promo._id;
