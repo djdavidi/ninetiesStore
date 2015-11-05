@@ -5,9 +5,11 @@ var Product = mongoose.model("Product");
 
 //Shopping Cart is front-end representation of the order
 
-var LineItemSchema = new schema({price:Number,
-                  quantity:Number,
-                  product:{type:schema.Types.ObjectId,ref:"Product"}})
+var LineItemSchema = new schema({
+    price:Number,
+    quantity:Number,
+    product:{type: mongoose.Schema.Types.ObjectId, ref: "Product"}
+})
 
 //Make address schema
 
@@ -39,7 +41,7 @@ orderSchema.methods.add=function(itemId,quantity){
     var self = this;
     var done;
     this.storedItems.forEach(function(elem, index){
-        if (elem.product === itemId) {
+        if (elem.product == itemId) {
             self.storedItems[index].quantity += quantity; 
             done = true;
         }
@@ -49,10 +51,10 @@ orderSchema.methods.add=function(itemId,quantity){
         var temp = {
             quantity: quantity
         }
-            // console.log("I AM HERE")
         return Product.findById(itemId)
         .then(function(foundItem){
             temp.price=foundItem.price;
+            temp.product = foundItem._id;
             self.storedItems.push(temp);
             return self.save()
         })
