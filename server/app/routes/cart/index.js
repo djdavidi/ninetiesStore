@@ -56,7 +56,8 @@ router.put('/:itemId', function(req,res,next){
 
 //Remove an item from cart
 router.delete('/:itemId', function(req,res,next){
-	req.body.order.removeItem(req.params.itemId) //model method
+	console.log("req.params", req.params.itemId)
+	req.order.removeItem(req.params.itemId) //model method
 	.then(function(){
 		res.send(204)
 	})
