@@ -4,5 +4,5 @@
 require('./user');
 require('./product');
 require('./review');
+require('./promos');
 require('./order');
-require('./promos')
