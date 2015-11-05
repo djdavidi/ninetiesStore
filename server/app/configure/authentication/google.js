@@ -19,18 +19,21 @@ module.exports = function (app) {
 
         UserModel.findOne({ 'google.id': profile.id }).exec()
             .then(function (user) {
-
+                console.log("USERRRRRRGOOG",profile);
                 if (user) {
                     return user;
                 } else {
                     return UserModel.create({
+                        name: profile.name.givenName,
                         google: {
                             id: profile.id
-                        }
+                        },
+                        email:profile.emails[0].value
                     });
                 }
 
             }).then(function (userToLogin) {
+                console.log("createdddd",userToLogin)
                 done(null, userToLogin);
             }, function (err) {
                 console.error('Error creating user from Google authentication', err);
