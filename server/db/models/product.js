@@ -24,9 +24,9 @@ var productSchema = new mongoose.Schema({
     },
     productRating: {
         type: Number,
-        required: true,
         min: 0,
-        max: 5
+        max: 5,
+        default: 0
     },
     category: [{
         type: String,
