@@ -10,6 +10,7 @@ app.factory("CartFactory",function($http){
 			addItem:function(itemId, currentUser){
 				return $http.put("/api/cart/addItem/", {itemId: itemId, currentUser: currentUser})
 				.then(function(response){
+					console.log("response is:", response)
 					return response.data;
 				})
 			},

@@ -6,7 +6,6 @@ var _ = require('lodash')
 
 router.get('/', function(req, res, next) {
 
-	console.log("reached")
 	Review.find().exec()
 	.then(function(reviews) {
 		res.send(reviews)
