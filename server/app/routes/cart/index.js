@@ -33,11 +33,11 @@ router.put('/addItem', function(req,res,next){
 		req.session.cart.push(req.item);
 		res.send(req.session.cart);
 	}
-	// req.order.addItem(req.item) //model method
-	// .then(function(updatedItem){
-	// 	res.status(200).send(updatedItem)
-	// })
-	// .then(null, next);
+	req.order.addItem(req.item) //model method
+	.then(function(updatedItem){
+		res.status(200).send(updatedItem)
+	})
+	.then(null, next);
 })
 
 //Remove an item from cart
