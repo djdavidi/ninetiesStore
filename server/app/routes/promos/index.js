@@ -1,4 +1,5 @@
 var router = require('express').Router();
+var mongoose = require('mongoose')
 var Promo = mongoose.model('Promo')
 
 router.get('/', function(req, res, next) {
@@ -11,9 +12,9 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
 	Promo.create(req.body)
 	.then(function(promo) {
-		promo.applyPromo(req.body.query)
 		res.status(201).send(promo)
 	})
+	.then(null, next)
 })
 
 router.get('/:id', function(req, res, next) {
@@ -21,6 +22,7 @@ router.get('/:id', function(req, res, next) {
 	.then(function(promo) {
 		res.send(promo)
 	})
+	.then(null, next)
 })
 
 router.put('/:id', function(req, res, next) {
@@ -38,8 +40,10 @@ router.put('/:id', function(req, res, next) {
 router.delete('/:id', function(req, res, next) {
 	Promo.findById(req.params.id)
 	.then(function(promo) {
-		promo.
+		promo.remove()
+		res.status(204).end()
 	})
+	.then(null, next)
 })
 
 module.exports = router

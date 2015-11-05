@@ -1,8 +1,6 @@
 var router = require('express').Router()
 var mongoose = require('mongoose')
-var Product = mongoose.model('Product')
 var Review = mongoose.model('Review')
-var _ = require('lodash')
 
 router.get('/', function(req, res, next) {
 	Review.find({product: req.requestedProduct._id}).exec()

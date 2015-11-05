@@ -14,9 +14,9 @@ var Product = mongoose.model('Product');
 describe("Product model",function(){
      
 beforeEach(function(){
-      var createdUser=function() {
+      var createdUser = function() {
          return User.create({ email: 'obama@gmail.com', password: 'potus', address: "Wash the DC"});
-      }();
+      };
        var createdProduct=function () {
          return Product.create({
             title:"delorean",
@@ -27,13 +27,13 @@ beforeEach(function(){
             rating:5,
             category:["car","time-machine"]
           });
-      }();
+      };
 })
 
     var reviewData = {
             title:"badddasss",
-            user:createdUser._id,
-            product:createdProduct._id,
+            user: createdUser._id,
+            product: createdProduct._id,
             rating:4,
             content:"to infinity and beyond"
         }
@@ -48,28 +48,4 @@ beforeEach(function(){
     it('should exist', function () {
         expect(Product).to.be.a('function');
     });
-
-    describe("addReview should add a review",function(){
-        it("should be present in reviews array",function(done){
-            createdProduct.addReview(reviewData)
-            .then(function(newReview){
-                expect(createdProduct.contains(newReview)).to.be.equal(true);
-                done();
-            })
-        })
-    })
-
-    describe("removeReview should remove a review", function () {
-        it("created review should be removed properly", function (done {
-            createdProduct.addReview(reviewData)
-            .then(function (review) {
-                var passedReview = review
-                createdProduct.removeReview(review);
-            })
-            .then(function (passedReview) {
-                expect(createdProduct.contains(passedReview)).to.be.equal(false);
-                done();
-            })
-        }))
-    })
 })

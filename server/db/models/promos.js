@@ -44,40 +44,53 @@ var promoSchema = new schema({
     	required: true
     },
     expiration: {
-    	type: Date
+    	type: Date,
+        validate: {
+            validator: function() {
+                return Date.now() > this.expiration
+            },
+            message: 'This promo has expired.'
+        }
     },
     query: querySchema
 })
 
-promoSchema.methods.applyPromo = function(productQuery) {
-	var self = this
-	Product.find(productQuery).exec()
-	.then(function(products) {
-		products.forEach(function(product) {
-			product.price = self.percentDiscount/100;
-			product.promo = self._id
-			return product.save()
-		})
-	})
-}
+// promoSchema.methods.applyPromo = function(productQuery) {
+// 	var self = this
+// 	Product.find(productQuery).exec()
+// 	.then(function(products) {
+// 		products.forEach(function(product) {
+// 			product.price = self.percentDiscount/100;
+// 			product.promo = self._id
+// 			return product.save()
+// 		})
+// 	})
+// }
 
-promoSchema.methods.removePromo = function(promo) {
-	var self = this
-	Product.find({promo: promo}).exec()
-	.then(function(products) {
-		products.forEach(function(product) {
-			product.price = 100/self.percentDiscount;
-			product.promo.remove(promo)
-			return product.save()
-		})
-	})
+// promoSchema.methods.removePromo = function(promo) {
+// 	var self = this
+// 	Product.find({promo: promo}).exec()
+// 	.then(function(products) {
+// 		products.forEach(function(product) {
+// 			product.price = 100/self.percentDiscount;
+// 			product.promo.remove()
+// 			return product.save()
+// 		})
+// 	})
+// }
+
+promoSchema.getPromoProducts = function(query) {
+    Product.find(query).exec()
+    .then(function(products) {
+        return products
+    })
 }
 
 var generateSalt = function () {
     return crypto.randomBytes(16).toString('base64');
 };
 
-var encryptPromo = function (plainText, salt) {
+var encryptpromoCode = function (plainText, salt) {
     var hash = crypto.createHash('sha1');
     hash.update(plainText);
     hash.update(salt);
@@ -102,10 +115,4 @@ promoSchema.method('correctpromoCode', function (candidatepromoCode) {
     return encryptpromoCode(candidatepromoCode, this.salt) === this.promoCode;
 });
 
-promoSchema.validate(function() {
-	if (Date.now() - this.expiration > 0) {
-		this.remove().exec()
-	}
-})
-
-mongoose.model("Promo", promoSchema)
+mongoose.model('Promo', promoSchema)

@@ -56,26 +56,6 @@ var productSchema = new mongoose.Schema({
 //     // update prices
 // })
 
-// use reviews.length and rating to help calculate rating
-// with a proper weighting
-// productSchema.methods.addReview = function (reviewData) {
-//     var self = this;
-//     return mongoose.model("Review").create(reviewData)
-//     .then(function (review) {
-//         self.reviews.addToSet(review._id);
-//         return self.save();
-//     });
-// }
-
-// productSchema.methods.removeReview = function (review) {
-//     var self = this;
-//     return Review.remove(review)
-//     .then(function () {
-//         self.reviews.pull(review);
-//         return self.save();
-//     });
-// }
-
 
 
 
