@@ -21,19 +21,30 @@ router.get('/:id', function(req, res, next) {
 })
 
 router.post('/', function(req, res, next) {
-	req.body.product = req.requestedProduct._id
-	Review.create(req.body)
-	.then(function(review) {
-		res.status(201).send(review)
-	})
-	.then(null, next)
+	if (req.user) {
+		req.body.user = req.user._id
+		req.body.product = req.requestedProduct._id
+		Review.create(req.body)
+		.then(function(review) {
+			res.status(201).send(review)
+		})
+		.then(null, next)
+	}
+	else {
+		res.status(401).end()
+	}
 })
 
 router.put('/:id', function(req, res, next) {
 	Review.findById(req.params.id)
 	.then(function(review) {
-		review.set(req.body)
-		return review.save()
+		if (req.user._id === review.user) {
+			review.set(req.body)
+			return review.save()
+		}
+		else {
+			return review
+		}
 	})
 	.then(function(savedProduct) {
 		res.send(savedProduct)
@@ -44,8 +55,13 @@ router.put('/:id', function(req, res, next) {
 router.delete('/:id', function(req, res, next) {
 	Review.findById(req.params.id)
 	.then(function(review) {
-		review.remove()
-		res.status(204).end()
+		if (req.user._id === review.user) {
+			review.remove()
+			res.status(204).end()
+		}
+		else {
+			return review
+		}
 	})
 	.then(null, next)
 })
