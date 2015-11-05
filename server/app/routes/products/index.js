@@ -17,14 +17,14 @@ router.param('id', function(req, res, next, id) {
 		req.requestedProduct = product
 		next()
 	})
+	.then(null,next)
 })
 
 router.use('/:id/reviews', require('../reviews'))
 
 // Get a specific product
 router.get('/:id', function(req, res, next) {
-	res.send(req.requestedProduct)
-	.then(null, next)
+	res.json(req.requestedProduct)
 })
 
 // Creates a product
