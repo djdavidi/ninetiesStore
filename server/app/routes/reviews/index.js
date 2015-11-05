@@ -5,13 +5,7 @@ var Review = mongoose.model('Review')
 var _ = require('lodash')
 
 router.get('/', function(req, res, next) {
-<<<<<<< HEAD
 	Review.find({product: req.requestedProduct._id}).exec()
-=======
-
-	console.log("reached")
-	Review.find().exec()
->>>>>>> FETCH_HEAD
 	.then(function(reviews) {
 		res.send(reviews)
 	})
