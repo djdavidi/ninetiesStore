@@ -23,7 +23,7 @@ var chalk = require('chalk');
 var connectToDb = require('./server/db');
 
 var User = Promise.promisifyAll(mongoose.model('User'));
-// var Order = Promise.promisifyAll(mongoose.model('Order'));
+var Order = Promise.promisifyAll(mongoose.model('Order'));
 var Product = Promise.promisifyAll(mongoose.model('Product'));
 var Review = Promise.promisifyAll(mongoose.model('Review'));
 
@@ -47,8 +47,8 @@ var seedProducts = function () {
 
 connectToDb.then(function () {
     User.remove({})
-    // .then(function () {
-    //     return Order.remove({})
+    .then(function () {
+        return Order.remove({})
     }).then(function () {
         return Product.remove({})
     }).then(function () {
@@ -70,6 +70,7 @@ connectToDb.then(function () {
         console.log(err);
         process.exit(1);
     });
+})
 
 
 

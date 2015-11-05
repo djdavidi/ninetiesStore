@@ -7,10 +7,12 @@ app.config(function($stateProvider){
 			retrievedOrder : function(AuthService,CartFactory){
 				return AuthService.getLoggedInUser()
 				.then(function(user){
-					return user
-				})
-				.then(function(user){
+					console.log("user:", user)
 					return CartFactory.getCurrentOrder(user);
+				})
+				.then(function(order){
+					console.log("orer:", order)
+					return order;
 				})
 			},
 			loggedInUser: function(AuthService){

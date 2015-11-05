@@ -40,6 +40,7 @@ router.put('/:itemId', function(req,res,next){
 	req.session.cart.push(req.params.itemId);
 	req.order.add(req.params.itemId,req.body.quantity)
 	.then(function(updatedItem){
+		console.log("updatedItem", updatedItem)
 		res.status(200).send(updatedItem)
 	})
 	.then(null, function(err) {

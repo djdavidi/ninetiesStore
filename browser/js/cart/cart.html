@@ -1,7 +1,7 @@
 <div>
-	<p> SHOPPING CART</p>
-	<p>{{ currentUser }}</p>
-	<p>{{ currentCart }}</p>
+	<h1> SHOPPING CART</h1>
+	<p>{{ currentUser.name }}</p>
+	<p ng-repeat="item in currentCart.storedItems">{{ item }}</p>
 
 
 
