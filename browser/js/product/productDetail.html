@@ -1,7 +1,5 @@
 <h5> {{ ProductDetail.title }} </h5>
 <img src="{{ ProductDetail.picture }}">
 <p> <b>Product Description:</b> <br> {{ ProductDetail.description }} </p>
-<p ng-repeat="review in ProductReviews">
-	{{ review.content }}
-</p>
+<p ng-repeat="review in ProductReviews">{{ review.content }}</p>
 <button ng-click="addItem(ProductDetail._id)" class="btn btn-default">AddToCart</button>
