@@ -17,24 +17,22 @@ router.param('id', function(req, res, next, id) {
 		req.requestedProduct = product
 		next()
 	})
+	.then(null,next)
 })
 
 router.use('/:id/reviews', require('../reviews'))
 
 // Get a specific product
 router.get('/:id', function(req, res, next) {
-	res.send(req.requestedProduct)
-	.then(null, next)
+	res.json(req.requestedProduct)
 })
 
 // Creates a product
-router.post('/', function (req, res, next) {
+router.post('/',adminCheck,function (req, res, next) {
 	Product.create(req.body)
 	.then(function (product) {
-		if(req.user.isAdmin){res.status(201).json(product)}
-		else{next(err)}
+		{res.status(201).json(product)}
 	})
-	.then(null, next);
 })
 // Updates a product
 router.put('/:id',AdminCheck, function(req, res, next) {

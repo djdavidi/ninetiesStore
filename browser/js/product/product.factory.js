@@ -10,6 +10,7 @@ app.factory("ProductFactory",function($http) {
 		getOneProduct: function (id) {
 			return $http.get('/api/products/' + id)
 			.then(function (product) {
+				console.log("product", product)
 				return product.data;
 			})
 		},
