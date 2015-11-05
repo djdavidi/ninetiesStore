@@ -2,6 +2,7 @@ var mongoose = require("mongoose");
 var schema = mongoose.Schema;
 var User = mongoose.model("User");
 var Product = mongoose.model("Product");
+var Promo = mongoose.model("Promo")
 
 //Shopping Cart is front-end representation of the order
 
@@ -22,7 +23,10 @@ var orderSchema = new schema({
                 type: String,
                 default: 'Created',
                 enum: ['Created', 'Processing', 'Cancelled', 'Completed']
-            }
+            },
+    promo: {
+        type: schema.Types.ObjectId, ref: "Promo"
+    }
 })
 
 orderSchema.pre('save', function(next){
@@ -71,6 +75,16 @@ orderSchema.methods.removeItem=function(itemId){
         }
     })
     return self.save()
+}
+
+orderSchema.methods.addPromo = function(promoId) {
+    var self = this
+    Promo.findById(promoId)
+    .then(function(promo) {
+        if (!promo) return;
+        self.promo = promo._id;
+        return self.save()
+    })
 }
 
 mongoose.model("Order", orderSchema)
