@@ -4,25 +4,30 @@ var Order = mongoose.model('Order')
 var Product = mongoose.model('Product')
 
 router.use('/', function (req, res, next) {
-	Order.findOne({ owner: req.user._id , status: 'Created'})
+	console.log("eeeeeeeeeee",req.user)
+	Order.findOne({ owner: req.user , status: 'Created'})
 	.then(function(order){
+		console.log("YYYYYYYYYYYYYYy")
 		if(order===null){
-			Order.create({owner:req.user._id})
+			Order.create({owner:req.user})
 			.then(function(newOrder){
+				console.log("newOrder",newOrder);
 				req.order=newOrder;
 				next()
 			})
 		} else {
+			console.log("AAAAAAAAAAAAAAAAA")
 			req.order = order;
 			next()
 		}
 	})
-	.then(null, next);
+	.then(null,next)
 })
 
 //Get current order
 router.get('/', function(req, res, next){
-	res.send(req.order)
+	console.log("/////////////")
+	res.send(req.order || req.session.cart)
 })
 
 //Add a new item to cart
