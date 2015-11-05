@@ -24,7 +24,9 @@ router.get('/', function(req,res){
 })
 
 //Add a new item to cart
+
 router.put('/:itemId', function(req,res,next){
+
 	if(!req.user){
 		if(!req.session.cart){
 			req.session.cart=[];

@@ -9,6 +9,7 @@ app.factory("CartFactory",function($http){
 			add:function(itemId,quantity){
 				return $http.put("/api/cart/:itemId",{quantity:quantity})
 				.then(function(response){
+					console.log("response is:", response)
 					return response.data;
 				})
 			},
