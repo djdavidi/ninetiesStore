@@ -28,10 +28,12 @@ var productSchema = new mongoose.Schema({
         max: 5,
         default: 0
     },
-    category: [{
-        type: String,
-        required: true
-    }],
+    category: {
+        type: [String],
+        required: true,
+        get: toCommaString,
+        set: fromCommaString
+    },
     picture: {
         type: String,
         default: "http://www.fillmurray.com/140/100"
@@ -44,6 +46,14 @@ var productSchema = new mongoose.Schema({
         default: 0
     }
 })
+
+function toCommaString(category) {
+    return category.join(', ');
+}
+
+function fromCommaString(category) {
+    return category.split(', ');
+}
 
 //DO THIS SHIT!!!!!! :)
 // productSchema.pre('save', function() {

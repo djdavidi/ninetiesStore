@@ -4,14 +4,22 @@
 		"price": "3.5",
 		"description": "very non-timeless",
 		"quantity": "1",
-		"category": ["Miscellaneous"]
+		"category": "Miscellaneous"
 	},
 	{
 		"title": "Bart Simpson Action Figure",
 		"price": "42",
 		"description": "Yellow",
 		"quantity": "1",
-		"category": ["Miscellaneous", "Yellow", "Spikey"],
+		"category": "Miscellaneous Yellow Spikey",
 		"picture": "http://bartsimpsonpictures.squarelogic.net/bart-simpson-11.gif"
+	},
+	{
+		"title": "Penelope",
+		"price": "1300",
+		"description": "[Destroy of Worlds",
+		"quantity": "1",
+		"category": "[Laser, Cat]",
+		"picture": "http://orig10.deviantart.net/b4fd/f/2014/359/5/0/laser_cat_attacks_by_kiribbean-d4xfsjs.jpg"
 	}
 ]
