@@ -1,8 +1,12 @@
 <div>
 	<h1> SHOPPING CART</h1>
 	<p>{{ currentUser.name }}</p>
-	<p ng-repeat="item in currentCart.storedItems">{{ item }}</p>
-
-
+	<div ng-repeat="item in currentCart.storedItems">
+		<p>{{ item }}</p>
+		<button ng-click="removeItem(item.product)" class="btn btn-default">RemoveFromCart</button>
+	</div>
+	<p> great thing is:</p>
+	<p>{{ thing }} </p>
+	<button ui-sref="order" class="btn btn-default">Purchase</button>
 
 </div>

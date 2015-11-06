@@ -2,6 +2,7 @@ var mongoose = require("mongoose");
 var schema = mongoose.Schema;
 var User = mongoose.model("User");
 var Product = mongoose.model("Product");
+var Promo = mongoose.model("Promo")
 
 //Shopping Cart is front-end representation of the order
 
@@ -9,7 +10,7 @@ var LineItemSchema = new schema({
     price:Number,
     quantity:Number,
     product:{type: mongoose.Schema.Types.ObjectId, ref: "Product"}
-})
+}, {_id:false })
 
 //Make address schema
 
@@ -22,8 +23,13 @@ var orderSchema = new schema({
                 type: String,
                 default: 'Created',
                 enum: ['Created', 'Processing', 'Cancelled', 'Completed']
-            }
+            },
+    promo: {
+        type: schema.Types.ObjectId, ref: "Promo"
+    }
 })
+
+
 
 orderSchema.pre('save', function(next){
     if (!this.isNew) {
@@ -36,6 +42,7 @@ orderSchema.pre('save', function(next){
     }
     next()
 })
+
 //addtoSet will not add if it is already present, can use this instead
 orderSchema.methods.add=function(itemId,quantity){
     console.log("ADDDADADADAD")
@@ -72,6 +79,27 @@ orderSchema.methods.removeItem=function(itemId){
             self.storedItems.splice(index,1);
         }
     })
+    return self.save()
+}
+
+orderSchema.methods.addPromo = function(promoQuery) {
+    var self = this
+    Promo.find({promoCode: promoQuery})
+    .then(function(promo) {
+        if (!promo) return;
+        self.promo = promo._id;
+        return self.save()
+    })
+}
+
+orderSchema.methods.getTotalCost = function(){
+    var self = this;
+    var totalCost = 0;
+    self.storedItems.forEach(function(item){
+        totalCost += item.price * item.quantity
+    })
+    self.totalCost = totalCost
+    console.log("selftotalcost", self.totalCost) //WORKS
     return self.save()
 }
 

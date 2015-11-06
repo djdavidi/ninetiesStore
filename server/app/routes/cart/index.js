@@ -7,7 +7,6 @@ router.use('/', function (req, res, next) {
 	console.log("eeeeeeeeeee",req.user)
 	Order.findOne({ owner: req.user , status: 'Created'})
 	.then(function(order){
-		console.log("YYYYYYYYYYYYYYy")
 		if(order===null && req.user){
 			Order.create({owner:req.user})
 			.then(function(newOrder){
@@ -72,7 +71,8 @@ router.put('/:itemId', function(req,res,next){
 
 //Remove an item from cart
 router.delete('/:itemId', function(req,res,next){
-	req.body.order.removeItem(req.params.itemId) //model method
+	console.log("req.params", req.params.itemId)
+	req.order.removeItem(req.params.itemId) //model method
 	.then(function(){
 		res.send(204)
 	})

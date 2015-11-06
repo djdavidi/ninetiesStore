@@ -3,28 +3,6 @@ var mongoose = require('mongoose')
 var schema = mongoose.Schema
 var Product = mongoose.model('Product')
 
-var querySchema = new schema({
-	title: {
-        type: String
-    },
-    price: {
-        type: Number
-    },
-    date: {
-        type: Date
-    },
-    productRating: {
-        type: Number,
-        min: 0,
-        max: 5,
-        default: 0
-    },
-    category: [{
-        type: String,
-        required: true
-    }]
-})
-
 
 var promoSchema = new schema({
 	name: {
@@ -51,40 +29,9 @@ var promoSchema = new schema({
             },
             message: 'This promo has expired.'
         }
-    },
-    query: querySchema
+    }
 })
 
-// promoSchema.methods.applyPromo = function(productQuery) {
-// 	var self = this
-// 	Product.find(productQuery).exec()
-// 	.then(function(products) {
-// 		products.forEach(function(product) {
-// 			product.price = self.percentDiscount/100;
-// 			product.promo = self._id
-// 			return product.save()
-// 		})
-// 	})
-// }
-
-// promoSchema.methods.removePromo = function(promo) {
-// 	var self = this
-// 	Product.find({promo: promo}).exec()
-// 	.then(function(products) {
-// 		products.forEach(function(product) {
-// 			product.price = 100/self.percentDiscount;
-// 			product.promo.remove()
-// 			return product.save()
-// 		})
-// 	})
-// }
-
-promoSchema.getPromoProducts = function(query) {
-    Product.find(query).exec()
-    .then(function(products) {
-        return products
-    })
-}
 
 var generateSalt = function () {
     return crypto.randomBytes(16).toString('base64');

@@ -1,17 +1,15 @@
 app.config(function($stateProvider){
-	$stateProvider.state("cart",{
-		url:"/cart",
-		templateUrl:"js/cart/cart.html",
-		controller:"cartCtrl",
+	$stateProvider.state("order",{
+		url:"/order",
+		templateUrl:"js/order/order.html",
+		controller:"orderCtrl",
 		resolve: {
 			retrievedOrder : function(AuthService,CartFactory){
 				return AuthService.getLoggedInUser()
 				.then(function(user){
-					console.log("user:", user)
-					return CartFactory.getCurrentOrder();
+					return CartFactory.getCurrentOrder(user);
 				})
 				.then(function(order){
-					// console.log("orer:", order)
 					return order;
 				})
 			},
