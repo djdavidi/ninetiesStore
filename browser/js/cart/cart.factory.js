@@ -40,4 +40,5 @@ app.factory("CartFactory",function($http){
 
 			// }
 	}
+
 })
