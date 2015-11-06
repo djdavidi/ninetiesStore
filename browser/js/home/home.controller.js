@@ -1,3 +1,4 @@
-app.controller('HomeCtrl', function ($scope, products,AuthService) {
+app.controller('HomeCtrl', function ($scope, products, categories, AuthService) {
 	$scope.products = products;
+	$scope.categories = categories
 })
