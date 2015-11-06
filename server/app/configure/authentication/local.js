@@ -45,7 +45,6 @@ module.exports = function (app) {
             req.logIn(user, function (loginErr) {
                 if (loginErr) return next(loginErr);
                 // We respond with a response object that has user with _id and email.
-                console.log("CARTTTTTT",req.session.cart)   
                 if(req.session.cart.length>=1){
                     console.log("user",req.user)
                   Order.findOne({owner:req.user._id,status:"Created"})
@@ -55,13 +54,9 @@ module.exports = function (app) {
                         }
                         return currentOrder;
                     }).then(function(stillOrder){
-                        console.log("TTTTTTTT",stillOrder)
-                        
                         req.session.cart.forEach(function(elem){
-                          console.log("TTTTTTTTYYYY",elem)
                           stillOrder.add(elem.product, elem.quantity);
                         })
-                        console.log("TTTTTTTT",stillOrder)
                         req.session.cart=[];
                         return stillOrder.save();
                     }) 
