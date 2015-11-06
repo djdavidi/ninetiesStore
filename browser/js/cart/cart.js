@@ -8,7 +8,7 @@ app.config(function($stateProvider){
 				return AuthService.getLoggedInUser()
 				.then(function(user){
 					console.log("user:", user)
-					return CartFactory.getCurrentOrder(user);
+					return CartFactory.getCurrentOrder();
 				})
 				.then(function(order){
 					console.log("orer:", order)
