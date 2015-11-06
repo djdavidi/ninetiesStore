@@ -8,9 +8,12 @@ app.controller('orderCtrl', function ($scope, CartFactory, retrievedOrder, logge
 		})
 		return totalCost
 	}
-	// $scope.removeItem = function(id){
-	// 	return CartFactory.removeItem(id)
-	// }
+	$scope.removeItem = function(id){
+		return CartFactory.removeItem(id)
+	}
+	$scope.checkPromoCoupon = function(promoCode){
+		return CartFactory.promoChecker(promoCode);
+	}
 });
 
 

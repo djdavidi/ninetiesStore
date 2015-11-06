@@ -21,6 +21,9 @@ app.factory("CartFactory",function($http){
 			},
 			removeItem:function(itemId){
 				return $http.delete("/api/cart/" + itemId)
+			},
+			promoChecker: function(promoCode){
+				return $http.get("" + promoCode)
 			}
 			// need some way of updating change and when the change is to the 
 			// cart itself making it a past order we need to change cart and create a new order..
