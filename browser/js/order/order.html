@@ -1,0 +1,11 @@
+<div>
+	<h1> ORDER FORM </h1>
+	<p>{{ currentUser.name }}</p>
+	<div ng-repeat="item in currentOrder.storedItems"
+		<p>{{ item }}</p>
+		<button ng-click="removeItem(item.product)" class="btn btn-default">RemoveFromOrder</button>
+	</div>
+	<h4>Total Cost: ${{ totalCost() }}</h4>
+	<p>PurchaseButton?</p>
+	<!-- <button ui-sref="order" class="btn btn-default">Purchase</button> -->
+</div>

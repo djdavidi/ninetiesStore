@@ -8,6 +8,7 @@ router.use('/', function (req, res, next) {
 	Order.findOne({ owner: req.user , status: 'Created'})
 	.then(function(order){
 		console.log("YYYYYYYYYYYYYYy")
+		console.log("order is:", order)
 		if(order===null){
 			Order.create({owner:req.user})
 			.then(function(newOrder){
@@ -17,7 +18,10 @@ router.use('/', function (req, res, next) {
 			})
 		} else {
 			console.log("AAAAAAAAAAAAAAAAA")
+			// order.getTotalCost();
 			req.order = order;
+			req.order.getTotalCost()
+			console.log("reqorder with TotalCost:", req.order) //DOESN'T WORK
 			next()
 		}
 	})

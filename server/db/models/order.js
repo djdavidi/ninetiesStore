@@ -29,6 +29,8 @@ var orderSchema = new schema({
     }
 })
 
+
+
 orderSchema.pre('save', function(next){
     if (!this.isNew) {
         var self = this;
@@ -40,6 +42,7 @@ orderSchema.pre('save', function(next){
     }
     next()
 })
+
 //addtoSet will not add if it is already present, can use this instead
 orderSchema.methods.add=function(itemId,quantity){
     var self = this;
@@ -85,6 +88,17 @@ orderSchema.methods.addPromo = function(promoQuery) {
         self.promo = promo._id;
         return self.save()
     })
+}
+
+orderSchema.methods.getTotalCost = function(){
+    var self = this;
+    var totalCost = 0;
+    self.storedItems.forEach(function(item){
+        totalCost += item.price * item.quantity
+    })
+    self.totalCost = totalCost
+    console.log("selftotalcost", self.totalCost) //WORKS
+    return self.save()
 }
 
 mongoose.model("Order", orderSchema)
