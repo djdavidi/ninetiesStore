@@ -2,7 +2,7 @@ app.factory("CartFactory",function($http){
 	return {
 			getCurrentOrder:function(){
 				// if(!currentUser) currentUser = "";
-				return $http.get("/api/cart")
+				return $http.get("/api/cart/")
 				.then(function(response){
 					return response.data;
 				})
