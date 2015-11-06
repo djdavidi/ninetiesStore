@@ -2,7 +2,7 @@ app.factory("CartFactory",function($http){
 	var cachedCart = [];
 	return {
 			getCachedCart: function(){
-				return cachedCart
+				return cachedCart;
 			},
 			getCurrentOrder:function(){
 				// if(!currentUser) currentUser = "";
@@ -15,8 +15,6 @@ app.factory("CartFactory",function($http){
 			add:function(itemId, quantity){
 				return $http.put("/api/cart/" + itemId,{quantity:quantity})
 				.then(function(response){
-					console.log("storedItems[0]", response.data.storedItems[0])
-					console.log("cachedCart", cachedCart)
 					cachedCart.push(response.data.storedItems[response.data.storedItems.length-1]);
 					return response.data;
 				})
@@ -39,5 +37,4 @@ app.factory("CartFactory",function($http){
 
 			// }
 	}
-
 })

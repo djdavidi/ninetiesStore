@@ -10,7 +10,7 @@ var LineItemSchema = new schema({
     price:Number,
     quantity:Number,
     product:{type: mongoose.Schema.Types.ObjectId, ref: "Product"}
-})
+}, {_id:false })
 
 //Make address schema
 
