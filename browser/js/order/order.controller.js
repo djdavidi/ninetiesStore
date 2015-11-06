@@ -9,7 +9,12 @@ app.controller('orderCtrl', function ($scope, CartFactory, retrievedOrder, logge
 		return totalCost
 	}
 	$scope.removeItem = function(id){
-		return CartFactory.removeItem(id)
+		console.log("id:", id)
+		console.log("$scope.currentOrder.storedItems", $scope.currentOrder.storedItems)
+		CartFactory.removeItem(id)
+		$scope.currentOrder.storedItems = $scope.currentOrder.storedItems.filter(function(item) {
+			return item.product !== id;
+		})
 	}
 	$scope.checkPromoCoupon = function(promoCode){
 		return CartFactory.promoChecker(promoCode);
