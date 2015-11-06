@@ -1,11 +1,64 @@
 <div>
-	<h1> ORDER FORM </h1>
+	<h1 style="margin:auto; width:300px"> ORDER FORM </h1>
 	<p>{{ currentUser.name }}</p>
 	<div ng-repeat="item in currentOrder.storedItems"
-		<p>{{ item }}</p>
-		<button ng-click="removeItem(item.product)" class="btn btn-default">RemoveFromOrder</button>
+		<div>
+			<p style="float:left">{{ item }}</p>
+			<button ng-click="removeItem(item.product)" class="btn btn-default">X</button>
+		</div>
 	</div>
 	<h4>Total Cost: ${{ totalCost() }}</h4>
-	<p>PurchaseButton?</p>
-	<!-- <button ui-sref="order" class="btn btn-default">Purchase</button> -->
+
+
+	<div class="container">
+
+		<div class="row">
+			<div class="col-md-6">
+			<h5 style="margin-left:212px;">Details</h5>
+			<table border="0" cellpadding="0" width="350" id="table1">
+				<tr>
+				<td width="340" align="right">Name: </td>
+				<td width="10">&nbsp;</td>
+				<td width="200" align="left"><input type="text" name="Name" size="30" tabindex="1"></td>
+				</tr>
+				<tr>
+				<td width="340" align="right">Email: </td>
+				<td width="10">&nbsp;</td>
+				<td width="200"><input type="text" name="Email" size="30" tabindex="1"></td>
+				</tr>
+				<tr>
+				<tr>
+				<td width="340" align="right">Mailing Address: </td>
+				<td width="10">&nbsp;</td>
+				<td width="200"><input type="text" name="Email" size="30" tabindex="1"></td>
+				</tr>
+				<tr>
+				<td width="340" align="right">&nbsp;</td>
+				<td width="10">&nbsp;</td>
+				<td width="200">&nbsp;</td>
+				</tr>
+			</table>
+			</div>
+
+			<div class="col-md-6">
+				<h5 style="margin-left:172px;">Payment Information</h5>
+				<table border="0" cellpadding="0" width="350" id="table1">
+				<tr>
+				<td width="340" align="right">Credit Card #: </td>
+				<td width="10">&nbsp;</td>
+				<td width="200" align="left"><input type="text" name="Name" size="30" tabindex="1"></td>
+				</tr>
+				<tr>
+				<td width="340" align="right">&nbsp;</td>
+				<td width="10">&nbsp;</td>
+				<td width="200">&nbsp;</td>
+				</tr>
+			</table>
+			</div>
+		</div>
+
+	</div>
+	<label>Promo Code</label>
+	<input></input>
+	<button class="btn btn-default" style="display:block">Purchase</button>
 </div>
