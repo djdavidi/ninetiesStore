@@ -6,6 +6,11 @@ app.controller('orderCtrl', function ($scope, $state, CartFactory, retrievedOrde
 		$scope.currentOrder.storedItems.forEach(function(elem){
 			totalCost += elem.price * elem.quantity
 		})
+		//for getting right amount of decimals, zero's  and cents
+		var num = parseFloat(totalCost.toString().replace(',', ''));
+	    num = num.toFixed(2);
+	    totalCost = num;
+
 		return totalCost
 	}
 	$scope.removeItem = function(id){
