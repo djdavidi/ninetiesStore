@@ -1,7 +1,7 @@
 var fs = require('fs');
 var ejs = require('ejs');
 var path = require('path');
-var mandrillKey = require('../../../mandrillKey.js');
+var mandrillKey = require('../../mandrillKey.js');
 
 var emailTemplate = fs.readFileSync(path.join(__dirname, '/email_template.html'), 'utf8');
 
