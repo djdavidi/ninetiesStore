@@ -59,6 +59,19 @@
 
 	</div>
 	<label>Promo Code</label>
-	<input></input>
+	<form name="PromoForm" ng-submit="checkPromoCoupon()">
+		<input name="promoCode" ng-model="promocode" ng-minlength="6"></input>
+<!-- 		<div ng-show="PromoForm.$valid && PromoForm.$dirty" class="alert alert-warning">Try to apply it!
+			<button type="submit" class="btn btn-default" style="display:block">Apply</button>
+		</div> -->
+
+		<div style="display:inline-block" ng-show="PromoForm.$valid && PromoForm.$dirty">
+			<button type="submit" class="btn btn-default" style="display:block">Apply</button>
+		</div>
+
+
+
+	</form>
+	<!-- ng-change? -->
 	<button class="btn btn-default" style="display:block">Purchase</button>
 </div>

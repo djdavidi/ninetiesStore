@@ -16,26 +16,25 @@ app.controller('orderCtrl', function ($scope, CartFactory, retrievedOrder, logge
 			return item.product !== id;
 		})
 	}
-	$scope.checkPromoCoupon = function(promoCode){
-		return CartFactory.promoChecker(promoCode);
+
+	$scope.checkPromoCoupon = function(){
+		console.log("$scope.promocode", $scope.promocode)
+		//or write if (CartFactory.promoChecker($scope.promocode)) [updateCost-re-run Total Cost, or be capturing Current Cost]
+		CartFactory.promoChecker($scope.promocode)
+		.then(function(result){
+				console.log("trying)", result) //false
+			if (result == false){
+				var newCost = $scope.totalCost() - ($scope.totalCost() * result.percentDiscount)
+				console.log("newCost is", newCost) //NaN
+				return $scope.totalCost() - ($scope.totalCost() * result.percentDiscount)
+			}
+		});
 	}
 });
 
 
-//THIS GOES IN THE ORDER.JS MODEL and REPLACE $SCOPE.totalCost from above ^^ - but its not ready yet
+//This could Go in the order.js model and REPLACE $SCOPE.totalCost from above ^^
 //http://stackoverflow.com/questions/12221368/mongoose-how-to-tap-schema-middleware-into-the-init-event
-
-/*
-orderSchema.pre('init',function(next){
-    var totalCost = 0;
-    this.storedItems.forEach(function(item){
-        totalCost += item.price * item.quantity
-    })
-    this.totalCost = totalCost; //will this stay?
-	next()
-})
-*/
-
 // orderSchema.methods.getTotalCost = function(){
 // 	var self = this;
 // 	var totalCost = 0;

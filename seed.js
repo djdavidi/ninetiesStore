@@ -26,11 +26,15 @@ var User = Promise.promisifyAll(mongoose.model('User'));
 var Order = Promise.promisifyAll(mongoose.model('Order'));
 var Product = Promise.promisifyAll(mongoose.model('Product'));
 var Review = Promise.promisifyAll(mongoose.model('Review'));
+var Promo = Promise.promisifyAll(mongoose.model('Promo'));
 
 var usersData = JSON.parse(fs.readFileSync('./seed_data/user_data.json'));
 // var ordersData = JSON.parse(fs.readFileSync('./seed_data/order_data.json'));
 var productsData = JSON.parse(fs.readFileSync('./seed_data/product_data.json'));
 // var reviewsData = JSON.parse(fs.readFileSync('./seed_data/review_data.json'));
+var promosData = JSON.parse(fs.readFileSync('./seed_data/promo_data.json'));
+// var reviewsData = JSON.parse(fs.readFileSync('./seed_data/review_data.json'));
+
 
 var seedUsers = function () {
     return User.createAsync(usersData);
@@ -44,6 +48,10 @@ var seedProducts = function () {
 // var seedReviews = function () {
 //     return Review.createAsync(reviewsData);
 // };
+
+var seedPromos = function () {
+    return Promo.createAsync(promosData);
+};
 
 connectToDb.then(function () {
     User.remove({})
@@ -63,7 +71,10 @@ connectToDb.then(function () {
         return seedProducts();
     // }).then(function () {
     //     return seedReviews();
-    }).then(function () {
+    }).then(function(){
+        return seedPromos();
+    })
+    .then(function () {
         console.log("Database successfully seeded");
         process.exit(0);
     }).catch(function (err) {
