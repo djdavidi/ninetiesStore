@@ -2,27 +2,40 @@ var fs = require('fs');
 var ejs = require('ejs');
 var path = require('path');
 var mandrillKey = require('../../../mandrillKey.js');
+var mongoose = require('mongoose')
+var Product = mongoose.model('Product')
 
 var emailTemplate = fs.readFileSync(path.join(__dirname, '/email_template.html'), 'utf8');
 
 var mandrill = require('mandrill-api/mandrill');
 var mandrill_client = new mandrill.Mandrill(mandrillKey);
+ 
+function sendConfirmationEmail(order, email, address, customizedTemplate){ 
+          var orderItems = [];
+          // var orderItemTitles = [];
+          // var orderCost;
 
-function sendConfirmationEmail(order, email, address){ 
+          order.storedItems.forEach(function(el){
+            orderItems.push(el)
+          })
+
+
+
           var copyTemplate = emailTemplate;
-          
           var customizedTemplate = ejs.render(
             copyTemplate,  {
             firstName: order.owner, 
             email: email,
-            address: address                                                       
+            address: address,
+            orderItems: orderItems
            });
 
-          sendEmail(order.owner, email, "McFly's", "mcflys@ninetiesstore.com", "Order XYZ Confirmed", customizedTemplate);          
+          sendEmail(order.owner, email, "McFly's", "mcflys@ninetiesstore.com", "Order Confirmed", customizedTemplate);          
   };
 
 
 function sendEmail(to_name, to_email, from_name, from_email, subject, message_html){
+    //22. add keys in message for storedItem product names
     var message = {
         "html": message_html,
         "subject": subject,

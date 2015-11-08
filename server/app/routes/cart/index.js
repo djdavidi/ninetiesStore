@@ -5,7 +5,7 @@ var Product = mongoose.model('Product')
 var MandrillApp = require('../../mandrill.js') 
 
 router.use('/', function (req, res, next) {
-	console.log("eeeeeeeeeee",req.user)
+	// console.log("eeeeeeeeeee",req.user)
 	Order.findOne({ owner: req.user , status: 'Created'})
 	.then(function(order){
 		if(order===null && req.user){
@@ -29,8 +29,8 @@ router.use('/', function (req, res, next) {
 
 //Get current order
 router.get('/', function(req, res, next){
-	console.log("req.session.cart",req.session.cart);
-	console.log("req.order",req.order)
+	// console.log("req.session.cart",req.session.cart);
+	// console.log("req.order",req.order)
 	res.send(req.order || req.session.cart)
 })
 
@@ -90,9 +90,33 @@ router.put('/checkout/:cartId', function(req,res,next){
 		}
 	})
 	.then(function(order){
-		console.log("responsing back order", order)
-		console.log("MandrillApp is:", MandrillApp)
-		//4. Call to Mandrill to email the person
+	  // 1. Do not delete this comemnted stuff
+	  /*
+	  var itemTitles = [];
+	  order.storedItems.forEach(function(item){ //.select(title) ?
+	  	Product.findById(item.product)
+	  	.then(function(title){
+	  		itemTitles.push(title)
+	  	}) 
+	  })
+	  order.storedItem
+	  */
+
+
+	  // 2.
+      // order.storedItems.forEach(function(el){
+      //   orderItems.push(el)
+      // })
+      // orderItems.forEach(function(item){
+      //   Product.findById(item.product)
+      //   .then(function(product){
+      //       console.log("title", product.title)
+      //       orderItemTitles.push(product.title);
+      //       return;
+      //   })
+      // })
+
+		//MandrillApp is sendConfirmaitonEmail(...)
 		try { MandrillApp(order, req.body.email, req.body.address)
 		} catch (e){
 			console.log("erros are:")
