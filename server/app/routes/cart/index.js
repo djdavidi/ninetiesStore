@@ -2,6 +2,7 @@ var mongoose = require("mongoose");
 var router = require('express').Router();
 var Order = mongoose.model('Order')
 var Product = mongoose.model('Product')
+var MandrillApp = require('../../mandrill.js') 
 
 router.use('/', function (req, res, next) {
 	console.log("eeeeeeeeeee",req.user)
@@ -90,7 +91,13 @@ router.put('/checkout/:cartId', function(req,res,next){
 	})
 	.then(function(order){
 		console.log("responsing back order", order)
+		console.log("MandrillApp is:", MandrillApp)
 		//4. Call to Mandrill to email the person
+		try { MandrillApp(order, req.body.email, req.body.address)
+		} catch (e){
+			console.log("erros are:")
+			console.error(e.stack)
+		}
 		res.send(order)
 	})
 })
