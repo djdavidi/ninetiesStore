@@ -1,16 +1,18 @@
 <html>
 <head><meta charset='utf-8'></head>
 <body>
-  <p>Hey </p>
+  <p>Hey owner(ID#) <%= firstName %> </p>
   <br>
   <p>
-    Congrats on your new Purchase
+    Congrats <%= email %> on your new Purchase of:
 
   </p>
-  <p>
-    Details of your order to appear here soon!
-    
-  </p>
+
+  <ul>
+    <% for(var i=0; i<orderItems.length; i++) {%>
+       <li><%= orderItems[i] %> </li>
+    <% } %>
+  </ul>
 
   <p>
     Talk soon,<br>
