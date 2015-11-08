@@ -79,6 +79,22 @@ router.delete('/:itemId', function(req,res,next){
 	.then(null, next);
 })
 
+router.put('/checkout/:cartId', function(req,res,next){
+	var cartId = req.params.cartId
+	Order.findByIdAndUpdate(cartId, {
+		$set: { 
+			status: "Completed", 
+			email: req.body.email,
+			address: req.body.address
+		}
+	})
+	.then(function(order){
+		console.log("responsing back order", order)
+		//4. Call to Mandrill to email the person
+		res.send(order)
+	})
+})
+
 //Updating Quantity
 // router.put('/add', function(req,res,next){
 // 	req.body.order.updateQuantity(req.params.itemId, req.body.quantity)

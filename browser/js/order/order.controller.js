@@ -1,4 +1,4 @@
-app.controller('orderCtrl', function ($scope, CartFactory, retrievedOrder, loggedInUser) {	
+app.controller('orderCtrl', function ($scope, $state, CartFactory, retrievedOrder, loggedInUser) {	
 	$scope.currentOrder = retrievedOrder;
 	$scope.currentUser = loggedInUser;
 	$scope.totalCost = function(){
@@ -29,6 +29,11 @@ app.controller('orderCtrl', function ($scope, CartFactory, retrievedOrder, logge
 				return $scope.totalCost() - ($scope.totalCost() * result.percentDiscount)
 			}
 		});
+	}
+
+	$scope.checkout = function(){
+		CartFactory.checkout($scope.order.email, $scope.order.address)
+		$state.go('transactionComplete');
 	}
 });
 
