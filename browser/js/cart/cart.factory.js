@@ -34,6 +34,9 @@ app.factory("CartFactory",function($http){
 						return false;
 					}
 				})
+			},
+			checkout: function(email, address){
+				return $http.put('/api/cart/checkout/' + cachedCart._id, {email: email, address: address})
 			}
 			// need some way of updating change and when the change is to the 
 			// cart itself making it a past order we need to change cart and create a new order..
