@@ -15,8 +15,8 @@ app.factory("CartFactory",function($http){
 			add:function(itemId, quantity){
 				return $http.put("/api/cart/" + itemId,{quantity:quantity})
 				.then(function(response){
-					cachedCart.push(response.data.storedItems[response.data.storedItems.length-1]);
-					return response.data;
+					cachedCart.push(response.data[response.data.length-1]);
+					return cachedCart;
 				})
 			},
 			removeItem:function(itemId){
@@ -41,7 +41,6 @@ app.factory("CartFactory",function($http){
 			// need some way of updating change and when the change is to the 
 			// cart itself making it a past order we need to change cart and create a new order..
 			// maybe not, i think something else takes care of taht but still needs to be a put on the order to change it
-
 
 
 			// ,

@@ -1,5 +1,21 @@
 <h5> {{ ProductDetail.title }} </h5>
+<p> {{ProductDetail.productRating}} </p>
 <img src="{{ ProductDetail.picture }}">
 <p> <b>Product Description:</b> <br> {{ ProductDetail.description }} </p>
-<p ng-repeat="review in ProductReviews">{{ review.content }}</p>
 <button ng-click="add(ProductDetail._id)" class="btn btn-default">AddToCart</button>
+<h3>Reviews</h3>
+<div ng-repeat="review in ProductReviews">
+	<p> <b> {{review.title}} </b> {{review.reviewRating}} </p>
+	<p> {{ review.content }} </p></div>
+<p ng-hide="isAuthenticated()">To leave a review, please sign in.</p>
+<div ng-show="isAuthenticated()">
+	<p>Leave a review!</p>
+	 <form >
+	Title: <input type="title" ng-model="review.title"/>
+    <br>
+    Content: <input type="content" ng-model="review.content" /><br />
+    Rating: <input type="rating" ng-model="review.reviewRating"/>
+    <br>
+    <input type="submit" ng-click="postReview(ProductDetail._id, review)" value="Post Review" />
+  </form>
+ </div>
