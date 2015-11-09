@@ -66,10 +66,35 @@
 		"picture": "http://i.imgur.com/nrBMnaB.png"
 	},
 	{
-		"title": "a 90s relic",
-		"price": "3.5",
-		"description": "very non-timeless",
+		"title": "Nerf Gun",
+		"price": "7",
+		"description": "Very Non-Lethal",
 		"quantity": "1",
-		"category": "Steve Zissou"
+		"category": "Toys",
+		"picture": "http://i.ebayimg.com/00/s/NjEwWDYxMA==/z/5oYAAOxyEqNTlwUC/$_32.JPG"
+	},
+	{
+		"title": "Socker Boppers",
+		"price": "7",
+		"description": "Knock your friends out!",
+		"quantity": "1",
+		"category": "Toys",
+		"picture": "http://ecx.images-amazon.com/images/I/81myG2GZ6FL._SL1500_.jpg"
+	},
+	{
+		"title": "3D View Master",
+		"price": "14",
+		"description": "Kinda looks like Wall-E, lol",
+		"quantity": "1",
+		"category": "Toys",
+		"picture": "http://www.androidpolice.com/wp-content/uploads/2015/02/nexus2cee_raw-1328272073.jpg"
+	},
+	{
+		"title": "Furby",
+		"price": "52",
+		"description": "Guaranteed to kill you in your sleep, or your money back",
+		"quantity": "1",
+		"category": "Toys",
+		"picture": "http://www.hasbro.com/common/productimages/en_US/0e08edaa50569047f52923776bb37ef4/b271a27e5a0db11de3dc87990ade91a8b24a235c.jpg"
 	}
 ]
