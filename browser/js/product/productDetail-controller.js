@@ -11,4 +11,11 @@ app.controller('ProductDetailCtrl', function($scope, productDetail, productRevie
 		return ReviewFactory.postReview(id, theReview)
 	}
 	$scope.isAuthenticated = AuthService.isAuthenticated
+	$scope.currentUser = AuthService.getLoggedInUser
+	$scope.removeReview = function(product, id) {
+		ReviewFactory.removeReview(product, id)
+		$scope.ProductReviews = $scope.ProductReviews.filter(function(item) {
+			return item !== id
+		})
+	}
 })

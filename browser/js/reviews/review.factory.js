@@ -11,6 +11,9 @@ app.factory('ReviewFactory', function($http){
 			.then(function(response) {
 				return response.data
 			})
+		},
+		removeReview: function(productId, reviewId) {
+			return $http.delete('/api/products/' + productId + '/reviews/' + reviewId)
 		}
 	}
 })
