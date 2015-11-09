@@ -3,7 +3,7 @@
 }
 
 body {
-  background: #fdfdfd;
+   background-image: url('http://i.imgur.com/zGrJ0tW.png');
 }
 
 @mixin clearfix {
@@ -19,6 +19,8 @@ body {
   width: 1200px;
   margin: 0 auto;
 }
+
+
 
 @import 'directives/main';
 @import 'home/main';

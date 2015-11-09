@@ -1,18 +1,85 @@
 <section id="home">
-    <fullstack-logo></fullstack-logo>
-    <rando-greeting></rando-greeting>
-    <h1>Search</h1>
-    <input ng-model="query.title"></input>
-    <h2>Category</h2>
-    <p>{{ categories }}</p>
-    <p>{{ products }}</p>
-    <select ng-model="query.category">
-    	<option ng-repeat="category in categories">{{ category }}</option>
-    </select>
-    <ul>
-    	<li ng-repeat="product in products | filter: query">
-    		<img src="{{ product.picture }}" style="height:500px;width:500px"/>
-            <a ui-sref="productDetail({productId: product._id})">{{ product.title }}</a>
-    	</li>
-    </ul>
+    <div class="col-md-12">
+        <div id="searchBar">
+            <!-- <fullstack-logo></fullstack-logo>
+            <rando-greeting></rando-greeting> -->
+
+            <label for="categorySelect">Category</label>
+            <select ng-model="query.category" id="categorySelect">
+                <option ng-repeat="category in categories">{{ category }}</option>
+            </select>
+            
+            <label for="searchInput">Search</label>
+            <input ng-model="query.title" id="searchInput"></input>
+        </div>
+
+        <!-- <carousel interval="2000">
+            <slide ng-repeat="product in products | startFrom : 1">
+                <img height="300" ng-src="{{ product.picture }}" />
+            </slide>
+        </carousel> -->
+
+
+        <!-- Category Block -->
+        <div class="col-md-6" id="categoryBlock" style="position:absolute;left:0px;">
+            <li id="mainImg" ng-repeat="product in products.slice(0,4)" ng-show="$first">
+                <img src="{{ product.picture }}"/>
+            </li>
+            <div id="sideImg">
+                <li ng-repeat="product in products.slice(0,4)" ng-hide="$first">
+                    <img src="{{ product.picture }}"/>
+                </li>
+            </div>
+            <div id="bottomInfo">
+                <div class="col-md-8">
+                    <h3>Category Name</h3>
+                    <p>Ennui chambray selfies yr ethical vegan. Pug post-ironic chartreuse, plaid fashion axe vinyl art party etsy. Tousled hella occupy franzen. Banh mi +1 sartorial pickled art party, squid cronut. Cray everyday carry venmo, cred vice yuccie chia fixie readymade brooklyn DIY banjo gentrify heirloom.</p>
+                </div>
+                <div class="col-md-4">
+                    <ul>
+                        <li># of Items</li>
+                        <hr>
+                        <li>Price Range</li>
+                        <hr>
+                        <li>Shop Now</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category Block -->
+        <div class="col-md-6" id="categoryBlock" style="position:absolute;right:0px;">
+            <li id="mainImg" ng-repeat="product in products.slice(4,8)" ng-show="$first">
+                <img src="{{ product.picture }}"/>
+            </li>
+            <div id="sideImg">
+                <li ng-repeat="product in products.slice(4,8)" ng-hide="$first">
+                    <img src="{{ product.picture }}"/>
+                </li>
+            </div>
+            <div id="bottomInfo">
+                <div class="col-md-8">
+                    <h3>Category Name</h3>
+                    <p>Ennui chambray selfies yr ethical vegan. Pug post-ironic chartreuse, plaid fashion axe vinyl art party etsy. Tousled hella occupy franzen. Banh mi +1 sartorial pickled art party, squid cronut. Cray everyday carry venmo, cred vice yuccie chia fixie readymade brooklyn DIY banjo gentrify heirloom.</p>
+                </div>
+                <div class="col-md-4">
+                    <ul>
+                        <li># of Items</li>
+                        <hr>
+                        <li>Price Range</li>
+                        <hr>
+                        <li>Shop Now</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+      <!--   <ul>
+            <li ng-repeat="product in products | filter: query">
+                <img src="{{ product.picture }}" style="height:500px;width:500px"/>
+                <a ui-sref="productDetail({productId: product._id})">{{ product.title }}</a>
+            </li>
+        </ul> -->
+    </div>
 </section>

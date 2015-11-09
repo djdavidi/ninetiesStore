@@ -1,7 +1,8 @@
 navbar {
 
   display: block;
-  background: white;
+  // background: white;
+  background-image: url('https://s-media-cache-ak0.pinimg.com/originals/67/59/01/675901c5bef37f60114064b937160e9e.jpg');
   border-bottom: 1px solid black;
   box-shadow: 1px 1px 14px -3px black;
 
@@ -15,6 +16,17 @@ navbar {
     margin-top: 5px;
     margin-right: 20px;
     width: 40px;
+  }
+  // nineties-logo {
+  //   margin-top: 5px;
+  //   margin-right: 20px;
+  //   width: 40px;
+  // }
+
+  #ninetiesLogo {
+    // height: 164px;
+    width: 40px;
+
   }
 
   a {
