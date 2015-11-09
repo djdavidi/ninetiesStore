@@ -1,13 +1,13 @@
 <div>
 	<h1 style="margin:auto; width:300px"> ORDER FORM </h1>
 	<p>{{ currentUser.name }}</p>
-	<div ng-repeat="item in currentOrder.storedItems"
+	<div ng-repeat="item in currentOrder"
 		<div>
 			<p style="float:left">{{ item }}</p>
 			<button ng-click="removeItem(item.product)" class="btn btn-default">X</button>
 		</div>
 	</div>
-	<h4>Total Cost: ${{ totalCost() }}</h4>
+	<h4>Total Cost: ${{ currentCost }}</h4>
 
 
 	<div class="container">

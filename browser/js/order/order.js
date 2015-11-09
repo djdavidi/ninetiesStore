@@ -10,6 +10,7 @@ app.config(function($stateProvider){
 					return CartFactory.getCurrentOrder(user);
 				})
 				.then(function(order){
+					console.log("retrieeved", order)
 					return order;
 				})
 			},

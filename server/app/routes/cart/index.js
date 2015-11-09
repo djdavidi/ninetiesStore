@@ -93,10 +93,12 @@ router.put('/checkout/:cartId', function(req,res,next){
 		$set: { 
 			status: "Completed", 
 			email: req.body.email,
-			address: req.body.address
+			address: req.body.address,
+			finalCost: req.body.currentCost
 		}
 	})
 	.then(function(order){
+		console.log("finalOrder is:", order)
 	  // 1. Do not delete this comemnted stuff
 	  /*
 	  var itemTitles = [];
@@ -138,6 +140,7 @@ router.put('/withPromo/:cartId', function(req,res,next){
 	var discount = req.body.promo.percentDiscount;
 	var promoCode = req.body.promo.promoCode; //define promoCode property
 	console.log("router-cart promoCode", promoCode)
+	console.log("router-cart cartId", cartId)
 
 	Order.findById(cartId)
 	.then(function(order){
