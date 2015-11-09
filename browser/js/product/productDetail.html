@@ -14,7 +14,8 @@
             </div>
             <p> <b>Description:</b> <br> {{ ProductDetail.description }} </p>
             <p> <b>Price:</b> <br> ${{ ProductDetail.price | number: 2 }} </p>
-            <button ng-click="add(ProductDetail._id)" class="btn btn-default">AddToCart</button>
+            <p> <b>Quantity:</b> <input ng-model="quantity" ></p>
+            <button ng-disabled="notNumber(quantity) || quantity.length < 1" ng-click="add(ProductDetail._id, quantity)" class="btn btn-default">AddToCart</button>
             <h3>Reviews</h3>
             <div ng-repeat="review in ProductReviews">
                 <p> <b> {{review.user.name}}</b></p>
