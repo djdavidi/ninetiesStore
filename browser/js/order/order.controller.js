@@ -1,37 +1,38 @@
 app.controller('orderCtrl', function ($scope, $state, CartFactory, retrievedOrder, loggedInUser) {	
 	$scope.currentOrder = retrievedOrder;
 	$scope.currentUser = loggedInUser;
-	$scope.totalCost = function(){
-		var totalCost = 0;
-		//use Reduce
-		$scope.currentOrder.storedItems.forEach(function(elem){
-			totalCost += elem.price * elem.quantity
-		})
-		//for getting right amount of decimals, zero's  and cents
-		var num = parseFloat(totalCost.toString().replace(',', ''));
-	    num = num.toFixed(2);
-	    totalCost = num;
+	$scope.currentCost = $scope.currentOrder.reduce(function(total, curVal){
+		console.log("yo")
+		return total + curVal.price * curVal.quantity
+	}, 0)
+	$scope.couponApplied = false;
 
-		return totalCost
-	}
 	$scope.removeItem = function(id){
 		console.log("id:", id)
-		console.log("$scope.currentOrder.storedItems", $scope.currentOrder.storedItems)
 		CartFactory.removeItem(id)
-		$scope.currentOrder.storedItems = $scope.currentOrder.storedItems.filter(function(item) {
+		$scope.currentOrder = $scope.currentOrder.filter(function(item) {
 			return item.product !== id;
 		})
+		$scope.currentCost = $scope.currentOrder.reduce(function(total, curVal){
+			console.log("yo")
+			return total + curVal.price
+		}, 0)
 	}
 
 	$scope.checkPromoCoupon = function(){
 		console.log("$scope.promocode", $scope.promocode)
+		console.log("$scope.currentOrder", $scope.currentOrder);
+
+		if ($scope.couponApplied) return;
 
 		CartFactory.promoChecker($scope.promocode)
 		.then(function(promo){
+			console.log("cartfactory ran")
 			if (promo){
-				//should not be re-running the totalcost() function. Should have totalCost saved as a value
-				var newCost = $scope.totalCost() - ($scope.totalCost() * promo.percentDiscount)
-				return $scope.totalCost() - ($scope.totalCost() * promo.percentDiscount)
+				var newCost = $scope.currentCost - ($scope.currentCost * (promo.percentDiscount/100))
+				console.log("newCost", newCost)
+				$scope.currentCost = newCost;
+				$scope.couponApplied = true;
 			} else {
 				console.log("nadda")
 			}
@@ -39,7 +40,7 @@ app.controller('orderCtrl', function ($scope, $state, CartFactory, retrievedOrde
 	}
 
 	$scope.checkout = function(){
-		CartFactory.checkout($scope.order.email, $scope.order.address)
+		CartFactory.checkout($scope.order.email, $scope.order.address, $scope.currentCost)
 		.then(function () {
 			$state.go('transactionComplete');
 		})
