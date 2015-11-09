@@ -3,7 +3,7 @@ var mongoose = require('mongoose')
 var Review = mongoose.model('Review')
 
 router.get('/', function(req, res, next) {
-	Review.find({product: req.requestedProduct._id}).exec()
+	Review.find({product: req.requestedProduct._id}).populate('user').exec()
 	.then(function(reviews) {
 		res.send(reviews)
 	})

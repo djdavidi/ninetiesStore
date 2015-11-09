@@ -29,8 +29,7 @@ router.use('/', function (req, res, next) {
 
 //Get current order
 router.get('/', function(req, res, next){
-	// console.log("req.session.cart",req.session.cart);
-	// console.log("req.order",req.order)
+	console.log("req.session.cart",req.session.cart);
 	res.send(req.order || req.session.cart)
 })
 
