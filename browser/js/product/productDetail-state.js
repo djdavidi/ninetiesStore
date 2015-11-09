@@ -5,8 +5,11 @@ app.config(function($stateProvider){
 		controller:"ProductDetailCtrl",
 		resolve:{
 			productDetail: function(ProductFactory, $stateParams){
-				return ProductFactory.getOneProduct($stateParams.productId)
+				return ProductFactory.getOneProduct($stateParams.productId);
 			},
+			// productDetailByCategory: function (ProductFactory, $stateParams) {
+			// 	return ProductFactory.getAllProductsByCategory($stateParams.category)
+			// },
 			productReviews: function(ReviewFactory, $stateParams){
 				return ReviewFactory.getReviews($stateParams.productId)
 			}

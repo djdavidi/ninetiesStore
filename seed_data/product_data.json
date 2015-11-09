@@ -4,8 +4,10 @@
 		"price": "700",
 		"description": "The modern day Godzilla",
 		"quantity": "1",
+		"productRating": 3,
 		"category": "Laser Cat",
-		"picture": "http://www.rudyland.com/wp-content/uploads/2011/07/tumblr_l7qee2MuJO1qzzhpp.jpg"
+		"picture": "http://www.rudyland.com/wp-content/uploads/2011/07/tumblr_l7qee2MuJO1qzzhpp.jpg",
+		"review": "This is a review, OK???"
 	},
 	{
 		"title": "Penelope",
