@@ -46,10 +46,6 @@ var userSchema = new mongoose.Schema({
     rating: {
         type: Number
     },
-    cart: [{
-        quantity: Number,
-        type: mongoose.Schema.Types.ObjectId, ref: 'Product'
-    }],
     orderHistory: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Order' }]
 });
 
