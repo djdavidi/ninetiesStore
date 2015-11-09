@@ -7,38 +7,6 @@ app.config(function ($stateProvider) {
             products: function (ProductFactory) {                
                 return ProductFactory.getAllProducts();
             },
-            // categories: function (ProductFactory) {
-            //     ProductFactory.getAllProducts()
-            //     .then(function (products) {
-            //         var uniqueCategories = new Set();
-            //         // console.log("productsss", products)
-            //         products.forEach(function(product) {
-            //             // console.log("SPLIT", product.category.split(', '))
-            //             product.category.split(', ').forEach(function(categoryElem) {
-            //                 uniqueCategories.add(categoryElem);
-            //             })
-            //         })
-
-            //         var categoryList = Array.from(uniqueCategories);
-            //         console.log("categoryList", categoryList)
-            //         return categoryList;
-            //     })
-            // }
-            // categories: function (ProductFactory) {
-            //     ProductFactory.getAllProducts()
-            //     .then(function (products) {
-            //         var uniqueCategories = [];
-            //         products.forEach(function(product) {
-            //             product.category.split(', ').forEach(function(categoryElem) {
-            //                 if(uniqueCategories.indexOf(categoryElem) == -1) {
-            //                     uniqueCategories.push(categoryElem);
-            //                 }
-            //             })
-            //         })
-            //         console.log("uniqueCategories", uniqueCategories)
-            //         return uniqueCategories;
-            //     })
-            // }
             categories: function (products) {
                 var uniqueCategories = [];
                 products.forEach(function(product) {
@@ -59,3 +27,17 @@ app.controller('HomeCtrl', function ($scope, products, categories) {
     $scope.products = products;
     $scope.categories = categories;
 })
+
+// Allows you to ngRepeat over a dataset from a specified index
+app.filter('startFrom', function() {
+    return function(input, start) {
+        if(input) {
+            start = +start; //parse to int
+            var appended = input.slice(0,start);
+            var initialArray = input.slice(start);
+            var finalArray= initialArray.concat(appended);
+            return finalArray;
+        }
+        return [];
+    }
+});

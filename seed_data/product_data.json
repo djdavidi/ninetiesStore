@@ -1,33 +1,73 @@
 [
 	{
-		"title": "a 90s relic",
-		"price": "3.5",
-		"description": "very non-timeless",
+		"title": "Kyle From Next Door",
+		"price": "700",
+		"description": "The modern day Godzilla",
 		"quantity": "1",
-		"category": "Steve Zissou"
-	},
-	{
-		"title": "Bart Simpson Action Figure",
-		"price": "42",
-		"description": "Yellow",
-		"quantity": "1",
-		"category": "Miscellaneous, Yellow, Spikey",
-		"picture": "http://bartsimpsonpictures.squarelogic.net/bart-simpson-11.gif"
+		"category": "Laser Cat",
+		"picture": "http://www.rudyland.com/wp-content/uploads/2011/07/tumblr_l7qee2MuJO1qzzhpp.jpg"
 	},
 	{
 		"title": "Penelope",
 		"price": "1300",
 		"description": "Destroy of Worlds",
 		"quantity": "1",
-		"category": "Laser, Cat",
+		"category": "Laser Cat",
 		"picture": "http://orig10.deviantart.net/b4fd/f/2014/359/5/0/laser_cat_attacks_by_kiribbean-d4xfsjs.jpg"
 	},
 	{
-		"title": "Kyle From Next Door",
-		"price": "700",
-		"description": "The modern day Godzilla",
+		"title": "Leo",
+		"price": "4000",
+		"description": "Stone Cold Steve Austin, but a cat",
 		"quantity": "1",
-		"category": "Laser, Cat",
-		"picture": "http://www.rudyland.com/wp-content/uploads/2011/07/tumblr_l7qee2MuJO1qzzhpp.jpg"
+		"category": "Laser Cat",
+		"picture": "http://data.whicdn.com/images/79011117/large.jpg"
+	},
+	{
+		"title": "Prancing Lily",
+		"price": "3000",
+		"description": "RAINS DEATH FROM ABOVE",
+		"quantity": "1",
+		"category": "Laser Cat",
+		"picture": "https://s-media-cache-ak0.pinimg.com/236x/5e/40/0e/5e400ef29fa117b28f1ef5bd224732be.jpg"
+	},
+	{
+		"title": "Bart Simpson",
+		"price": "42",
+		"description": "Rebel",
+		"quantity": "1",
+		"category": "Simpsons",
+		"picture": "http://bartsimpsonpictures.squarelogic.net/bart-simpson-11.gif"
+	},
+	{
+		"title": "Lisa Simpson",
+		"price": "39",
+		"description": "Sassy",
+		"quantity": "1",
+		"category": "Simpsons",
+		"picture": "http://www.simpsoncrazy.com/content/pictures/lisa/LisaSimpson3.gif"
+	},
+	{
+		"title": "Homer Simpson",
+		"price": "39",
+		"description": "Drunk",
+		"quantity": "1",
+		"category": "Simpsons",
+		"picture": "http://rs141.pbsrc.com/albums/r73/salem21_2006/homer-simpson.gif~c200"
+	},
+	{
+		"title": "Marge Simpson",
+		"price": "39",
+		"description": "Blue",
+		"quantity": "1",
+		"category": "Simpsons",
+		"picture": "http://i.imgur.com/nrBMnaB.png"
+	},
+	{
+		"title": "a 90s relic",
+		"price": "3.5",
+		"description": "very non-timeless",
+		"quantity": "1",
+		"category": "Steve Zissou"
 	}
 ]
