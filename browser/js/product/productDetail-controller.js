@@ -1,8 +1,8 @@
 app.controller('ProductDetailCtrl', function($scope, productDetail, productReviews, CartFactory, $state, ReviewFactory, AuthService){
 	$scope.ProductDetail = productDetail;
 	$scope.ProductReviews = productReviews
-	$scope.add = function(id, currentUser){
-		return CartFactory.add(id, 1)
+	$scope.add = function(id, quantity){
+		return CartFactory.add(id, quantity)
 		.then(function() {
 			$state.go('cart')
 		})
@@ -17,5 +17,8 @@ app.controller('ProductDetailCtrl', function($scope, productDetail, productRevie
 		$scope.ProductReviews = $scope.ProductReviews.filter(function(item) {
 			return item !== id
 		})
+	}
+	$scope.notNumber = function(num) {
+		return isNaN(num)
 	}
 })
