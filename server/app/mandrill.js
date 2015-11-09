@@ -1,7 +1,7 @@
 var fs = require('fs');
 var ejs = require('ejs');
 var path = require('path');
-var mandrillKey = require('../../../mandrillKey.js');
+var mandrillKey = require('../../mandrillKey.js');
 var mongoose = require('mongoose')
 var Product = mongoose.model('Product')
 
