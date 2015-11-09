@@ -1,5 +1,14 @@
-<h1>TEST</h1>
-<div ng-repeat="product in products">
+<div id="searchBar">
+    <label for="categorySelect">Category</label>
+    <select ng-model="query.category" id="categorySelect">
+        <option ng-repeat="category in categories">{{ category }}</option>
+    </select>
+    
+    <label for="searchInput">Search</label>
+    <input ng-model="query.title" id="searchInput" autocomplete="on"></input>
+</div>
+
+<div class="col-md-6" ng-repeat="product in products | filter: query">
 	<section id="productList">
 	    <div id="productPane" class="row">
 	        <div id="leftSide" class="col-md-6">
@@ -37,5 +46,4 @@
 	        </div>
 	    </div>
 	</section>
-
 </div>

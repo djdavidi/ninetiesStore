@@ -1,3 +1,13 @@
+#searchBar {
+  margin-bottom: 50px;
+  input {
+    background-image: url('http://i.imgur.com/nPhJRNM.png');
+    width: 80%;
+  }
+}
+
+#categorySelect {}
+
 #productList {
 	padding-bottom: 40px;
   h1 {
@@ -24,6 +34,7 @@
       padding-left: 20px;
       border-top: 1px solid black;
       border-right: 1px solid black;
+      border-left: 1px solid black;
       border-bottom: 1px solid black;
       vertical-align: baseline;
       display: inline-block;
