@@ -23,14 +23,13 @@ app.factory("CartFactory",function($http){
 				return $http.delete("/api/cart/" + itemId)
 			},
 			promoChecker: function(enteredPromoCode){
-				console.log("promocheckerFACTORY")
 				return $http.get("/api/promos/" + enteredPromoCode)
-				.then(function(response){
-					if (response.data !== false){
-						console.log("response, it matches?", response)
-						return response.data
+				.then(function(responsePromo){
+					if (responsePromo.data){
+						$http.put("/api/cart/withPromo/" + cachedCart._id, {promo: responsePromo.data})
+						return responsePromo.data
 					} else {
-						console.log("NOT FOUND...")
+						//promo not found in DB
 						return false;
 					}
 				})

@@ -79,6 +79,7 @@ router.delete('/:itemId', function(req,res,next){
 	.then(null, next);
 })
 
+//Checkout(buy) order and send Email
 router.put('/checkout/:cartId', function(req,res,next){
 	var cartId = req.params.cartId
 	Order.findByIdAndUpdate(cartId, {
@@ -122,6 +123,19 @@ router.put('/checkout/:cartId', function(req,res,next){
 			console.error(e.stack)
 		}
 		res.send(order)
+	})
+})
+
+router.put('/withPromo/:cartId', function(req,res,next){
+	console.log("cart_router - /withPromo called")
+	var cartId = req.params.cartId
+	var discount = req.body.responsePromo.data.percentDiscount;
+	var promoCode = req.body.responsePromo.data.promoCode; //define promoCode property
+
+	Order.findById(cartId)
+	then(function(order){
+		order.addPromo(promoCode)
+		res.send(200);
 	})
 })
 
