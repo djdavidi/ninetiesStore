@@ -47,6 +47,7 @@ var userSchema = new mongoose.Schema({
         type: Number
     },
     cart: [{
+        // GTNE: this is a little weird
         quantity: Number,
         type: mongoose.Schema.Types.ObjectId, ref: 'Product'
     }],

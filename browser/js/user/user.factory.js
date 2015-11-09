@@ -3,6 +3,8 @@ app.factory('UserFactory', function ($http) {
 		return response.data;
 	}
 
+
+  // GTNE: very RESTful
 	var UserFactory = {
 		getUsers: function () {
 			return $http.get('/api/users')
@@ -50,7 +52,7 @@ app.factory('UserFactory', function ($http) {
 	// 		return $http.get(this.getUrl())
 	// 		.then(function(res) {
 	// 			var user = new User(res.data)
-				
+
 	// 		})
 	// 	}
 	// 	User.prototype.cart = function(id) {

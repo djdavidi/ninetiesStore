@@ -8,6 +8,7 @@ app.factory("CartFactory",function($http){
 				// if(!currentUser) currentUser = "";
 				return $http.get("/api/cart/")
 				.then(function(response){
+          // GTNE: why angular copy?
 					angular.copy(response.data, cachedCart);
 					return cachedCart;
 				})
@@ -21,6 +22,7 @@ app.factory("CartFactory",function($http){
 			},
 			removeItem:function(itemId){
 				return $http.delete("/api/cart/" + itemId)
+        // GTNE: shouldn't you remove from cached cart?
 			},
 			promoChecker: function(enteredPromoCode){
 				console.log("promocheckerFACTORY")
@@ -31,14 +33,16 @@ app.factory("CartFactory",function($http){
 						return response.data
 					} else {
 						console.log("NOT FOUND...")
+            // GTNE: maybe this should throw
 						return false;
 					}
 				})
 			},
 			checkout: function(email, address){
+        // GTNE: does the cachedCart have an id? isn't it an array?
 				return $http.put('/api/cart/checkout/' + cachedCart._id, {email: email, address: address})
 			}
-			// need some way of updating change and when the change is to the 
+			// need some way of updating change and when the change is to the
 			// cart itself making it a past order we need to change cart and create a new order..
 			// maybe not, i think something else takes care of taht but still needs to be a put on the order to change it
 
