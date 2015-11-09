@@ -10,7 +10,7 @@
         <p> <b> {{review.user.name}}</b></p>
     	<p> <b> {{review.title}} </b> {{review.reviewRating}} <button ng-show="getLoggedInUser()._id === review.user" ng-click="removeReview(ProductDetail._id, review._id)" class="btn btn-default">X</button> </p>
     	<p> {{ review.content }} </p></div>
-    <p ng-hide="isAuthenticated()">To leave a review, please sign in.</p>
+    <p ng-hide="isAuthenticated()">To leave a review, please <a ui-sref="login">sign in.</a></p>
     <div ng-show="isAuthenticated()">
     	<p>Leave a review!</p>
     	 <form >
