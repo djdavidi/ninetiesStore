@@ -23,10 +23,12 @@
 	                <span class="glyphicon glyphicon-star" ng-show="product.productRating > 3"></span>
 	                <span class="glyphicon glyphicon-star" ng-show="product.productRating > 4"></span>
 	            </div>
-	            <p> <b>Description:</b> <br> {{ product.description }} </p>
-	            <p> <b>Price:</b> <br> ${{ product.price | number: 2 }} </p>
-	            <button ng-click="add(product._id)" class="btn btn-default">AddToCart</button>
-	            <h3>Reviews</h3>
+	            <p> <b>Description:</b> {{ product.description }} </p>
+	            <div class="row">
+		            <p class="col-md-5"> <b>Price:</b> <br> ${{ product.price | number: 2 }} </p>
+		            <button ng-click="add(product._id)" class="btn btn-default col-md-6" style="margin-right:2px;">Add To Cart</button>
+	            </div>
+	            <h4>Reviews</h4>
 	            <div ng-repeat="review in ProductReviews">
 	                <p> <b> {{review.user.name}}</b></p>
 	            	<p> <b> {{review.title}} </b> {{review.reviewRating}} <button ng-show="getLoggedInUser()._id === review.user" ng-click="removeReview(product._id, review._id)" class="btn btn-default">X</button> </p>
