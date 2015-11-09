@@ -15,9 +15,6 @@ router.get('/', function (req, res, next) {
 router.get('/:id', function (req, res, next) {
 	Order.findById(req.params.id)
 	.then(function (order) {
-		order.storedItems.forEach(function(item) {
-			item.populate('product')
-		})
 		res.json(order);
 	})
 	.then(null, next);
