@@ -38,7 +38,9 @@ app.controller('orderCtrl', function ($scope, $state, CartFactory, retrievedOrde
 
 	$scope.checkout = function(){
 		CartFactory.checkout($scope.order.email, $scope.order.address)
-		$state.go('transactionComplete');
+		.then(function () {
+			$state.go('transactionComplete');
+		})
 	}
 });
 
