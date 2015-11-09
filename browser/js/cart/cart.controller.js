@@ -9,4 +9,11 @@ app.controller('cartCtrl', function ($scope, CartFactory, retrievedOrder, logged
 			})
 		})
 	}
+	$scope.totalCost = function() {
+		var sum = 0;
+		$scope.currentCart.forEach(function(item) {
+			sum += item.price*item.quantity
+		})
+		return sum
+	}
 });
