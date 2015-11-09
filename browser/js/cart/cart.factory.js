@@ -26,12 +26,12 @@ app.factory("CartFactory",function($http){
 				return $http.get("/api/promos/" + enteredPromoCode)
 				.then(function(responsePromo){
 					if (responsePromo.data){
+						console.log("responsePromo.data is:", responsePromo.data)
 						$http.put("/api/cart/withPromo/" + cachedCart._id, {promo: responsePromo.data})
 						return responsePromo.data
-					} else {
-						//promo not found in DB
-						return false;
 					}
+					console.log("promo not found in db")
+						return false;
 				})
 			},
 			checkout: function(email, address){

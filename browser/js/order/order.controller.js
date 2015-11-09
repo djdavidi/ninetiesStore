@@ -28,10 +28,12 @@ app.controller('orderCtrl', function ($scope, $state, CartFactory, retrievedOrde
 
 		CartFactory.promoChecker($scope.promocode)
 		.then(function(promo){
-			if (result){
+			if (promo){
 				//should not be re-running the totalcost() function. Should have totalCost saved as a value
 				var newCost = $scope.totalCost() - ($scope.totalCost() * promo.percentDiscount)
-				return $scope.totalCost() - ($scope.totalCost() * result.percentDiscount)
+				return $scope.totalCost() - ($scope.totalCost() * promo.percentDiscount)
+			} else {
+				console.log("nadda")
 			}
 		});
 	}

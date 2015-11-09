@@ -26,6 +26,9 @@ var promoSchema = new schema({
             },
             message: 'This promo has expired.'
         }
+    },
+    promoCodeDigits: {
+        type: Number
     }
 })
 
@@ -42,11 +45,12 @@ var encryptpromoCode = function (plainText) {
 };
 
 promoSchema.pre('save', function (next) {
+    this.promoCodeDigits = Math.floor((Math.random()*999999)+1);
 
-    if (this.isModified('promoCode')) {
+    // if (this.isModified('promoCode')) {
         // this.salt = this.constructor.generateSalt();
-        this.promoCode = this.constructor.encryptpromoCode(this.promoCode);
-    }
+        this.promoCode = this.constructor.encryptpromoCode(this.promoCodeDigits.toString());
+    // }
 
     next();
 

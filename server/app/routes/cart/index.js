@@ -127,13 +127,14 @@ router.put('/checkout/:cartId', function(req,res,next){
 })
 
 router.put('/withPromo/:cartId', function(req,res,next){
-	console.log("cart_router - /withPromo called")
 	var cartId = req.params.cartId
-	var discount = req.body.responsePromo.data.percentDiscount;
-	var promoCode = req.body.responsePromo.data.promoCode; //define promoCode property
+	var discount = req.body.promo.percentDiscount;
+	var promoCode = req.body.promo.promoCode; //define promoCode property
+	console.log("router-cart promoCode", promoCode)
 
 	Order.findById(cartId)
-	then(function(order){
+	.then(function(order){
+		console.log("router-cart order is:", order)
 		order.addPromo(promoCode)
 		res.send(200);
 	})
