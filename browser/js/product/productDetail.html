@@ -1,25 +1,37 @@
 <section id="productDetail">
-    <h5> {{ ProductDetail.title }} </h5>
-    <p> {{ProductDetail.productRating | number: 2}} </p>
-    <img src="{{ ProductDetail.picture }}">
-    <p> <b>Product Description:</b> <br> {{ ProductDetail.description }} </p>
-    <p> <b>Price:</b> <br> ${{ ProductDetail.price | number: 2 }} </p>
-    <button ng-click="add(ProductDetail._id)" class="btn btn-default">AddToCart</button>
-    <h3>Reviews</h3>
-    <div ng-repeat="review in ProductReviews">
-        <p> <b> {{review.user.name}}</b></p>
-    	<p> <b> {{review.title}} </b> {{review.reviewRating}} <button ng-show="getLoggedInUser()._id === review.user" ng-click="removeReview(ProductDetail._id, review._id)" class="btn btn-default">X</button> </p>
-    	<p> {{ review.content }} </p></div>
-    <p ng-hide="isAuthenticated()">To leave a review, please sign in.</p>
-    <div ng-show="isAuthenticated()">
-    	<p>Leave a review!</p>
-    	 <form >
-    	Title: <input type="title" ng-model="review.title"/>
-        <br>
-        Content: <input type="content" ng-model="review.content" /><br />
-        Rating: <input type="rating" ng-model="review.reviewRating"/>
-        <br>
-        <input type="submit" ng-click="postReview(ProductDetail._id, review)" value="Post Review" />
-      </form>
-     </div>
- </section>
+    <div id="productPane" class="row">
+        <div id="leftSide" class="col-md-6">
+            <img src="{{ ProductDetail.picture }}">
+        </div>
+        <div id="rightSide" class="col-md-6">
+            <h3> {{ ProductDetail.title }} </h3>
+            <div class="starList">
+                <span class="glyphicon glyphicon-star" ng-show="ProductDetail.productRating > 0"></span>
+                <span class="glyphicon glyphicon-star" ng-show="ProductDetail.productRating > 1"></span>
+                <span class="glyphicon glyphicon-star" ng-show="ProductDetail.productRating > 2"></span>
+                <span class="glyphicon glyphicon-star" ng-show="ProductDetail.productRating > 3"></span>
+                <span class="glyphicon glyphicon-star" ng-show="ProductDetail.productRating > 4"></span>
+            </div>
+            <p> <b>Description:</b> <br> {{ ProductDetail.description }} </p>
+            <p> <b>Price:</b> <br> ${{ ProductDetail.price | number: 2 }} </p>
+            <button ng-click="add(ProductDetail._id)" class="btn btn-default">AddToCart</button>
+            <h3>Reviews</h3>
+            <div ng-repeat="review in ProductReviews">
+                <p> <b> {{review.user.name}}</b></p>
+            	<p> <b> {{review.title}} </b> {{review.reviewRating}} <button ng-show="getLoggedInUser()._id === review.user" ng-click="removeReview(ProductDetail._id, review._id)" class="btn btn-default">X</button> </p>
+            	<p> {{ review.content }} </p></div>
+            <p ng-hide="isAuthenticated()">To leave a review, please sign in.</p>
+            <div ng-show="isAuthenticated()">
+            	<p>Leave a review!</p>
+            	 <form >
+            	Title: <input type="title" ng-model="review.title"/>
+                <br>
+                Content: <input type="content" ng-model="review.content" /><br />
+                Rating: <input type="rating" ng-model="review.reviewRating"/>
+                <br>
+                <input type="submit" ng-click="postReview(ProductDetail._id, review)" value="Post Review" />
+              </form>
+             </div>
+        </div>
+    </div>
+</section>

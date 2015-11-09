@@ -7,6 +7,17 @@ app.factory("ProductFactory",function($http) {
 			})
 		},
 
+		getAllProductsByCategory: function (category) {
+			var spacelessCategory = category.replace(/ /g,"");
+			return $http.get('/api/products')
+			.then(function (products) {
+				console.log("getAllProducts products.data", products.data)
+				products.data.filter(function(product) {
+					return product.category === spacelessCategory;
+				})
+			})
+		},
+
 		getOneProduct: function (id) {
 			return $http.get('/api/products/' + id)
 			.then(function (product) {
