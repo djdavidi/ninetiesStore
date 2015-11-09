@@ -1,9 +1,9 @@
-app.controller('AdminCtrl', function ($scope,AuthService) {
-			$scope.getAnyUser=function(name){
+app.controller('AdminCtrl', function ($scope,AuthService,ProductFactory,AdminFactory) {
+			$scope.getOneUser=function(id){
 
 			}
 			$scope.updateAnyUser=function(id,change){
-
+				//promote to Admin, other things
 			}
 			$scope.deleteAnyUser=function(id){
 
@@ -11,12 +11,18 @@ app.controller('AdminCtrl', function ($scope,AuthService) {
 			//Create and edit products with name, description,
 			//price and one or more photos
 			$scope.createProduct=function(){
-
+				ProductFactory
 			}
 			$scope.editProduct=function(){
-
+				//products with name, description,
+				// price and one or more photos
+				//availibiility /quantity to none
+				//categories
+				ProductFactory
 			}
 			$scope.getAllOrders=function(){
+				//Filter orders by status
+				// (Created, Processing, Cancelled, Completed)
 
 			}
 			$scope.changeOrderStatus=function(){
@@ -32,7 +38,9 @@ app.controller('AdminCtrl', function ($scope,AuthService) {
 			}
 
 			$scope.promoCodes=function(){
-
+				//ccess the promo code tab where they can create,
+				// edit, delete promo codesAdmins should be able 
+				//to see which if any promo was applied to any order
 			}
 
 
