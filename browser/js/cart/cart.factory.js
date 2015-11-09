@@ -8,7 +8,12 @@ app.factory("CartFactory",function($http){
 				// if(!currentUser) currentUser = "";
 				return $http.get("/api/cart/")
 				.then(function(response){
-					angular.copy(response.data, cachedCart);
+					if (response.data.storedItems) {
+						angular.copy(response.data.storedItems, cachedCart);
+					}
+					else {
+						angular.copy(response.data, cachedCart);
+					}
 					return cachedCart;
 				})
 			},

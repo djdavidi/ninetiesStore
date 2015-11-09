@@ -45,7 +45,7 @@ router.put('/:itemId', function(req,res,next){
 		req.session.cart.forEach(function(item) {
 			if (item.product === req.params.itemId) {
 				item.quantity ++
-				var foundItemWithin = true
+				foundItemWithin = true
 			}
 		})
 		if (!foundItemWithin) {
@@ -71,12 +71,19 @@ router.put('/:itemId', function(req,res,next){
 
 //Remove an item from cart
 router.delete('/:itemId', function(req,res,next){
-	console.log("req.params", req.params.itemId)
-	req.order.removeItem(req.params.itemId) //model method
-	.then(function(){
-		res.send(204)
-	})
-	.then(null, next);
+	if (!req.order) {
+		req.session.cart = req.session.cart.filter(function(item) {
+			return item.product !== req.params.itemId
+		})
+		res.send(req.session.cart)
+	}
+	else {
+		req.order.removeItem(req.params.itemId) //model method
+		.then(function(){
+			res.send(204)
+		})
+		.then(null, next);
+	}
 })
 
 //Checkout(buy) order and send Email
