@@ -29,7 +29,6 @@ router.use('/', function (req, res, next) {
 
 //Get current order
 router.get('/', function(req, res, next){
-	console.log("req.session.cart",req.session.cart);
 	res.send(req.order || req.session.cart)
 })
 
@@ -37,36 +36,41 @@ router.get('/', function(req, res, next){
 
 router.put('/:itemId', function(req,res,next){
 	console.log("req.params.itemId", req.params.itemId)
-	if(!req.user){
-		if(!req.session.cart){
-			req.session.cart=[];
-		}
-		var foundItemWithin;
-		req.session.cart.forEach(function(item) {
-			if (item.product === req.params.itemId) {
-				item.quantity ++
-				foundItemWithin = true
+	Product.findById(req.params.itemId).exec()
+	.then(function(product) {
+		if(!req.user){
+			if(!req.session.cart){
+				req.session.cart=[];
 			}
-		})
-		if (!foundItemWithin) {
-			req.session.cart.push({
-				product: req.params.itemId,
-				quantity: req.body.quantity || 1
+			var foundItemWithin;
+			req.session.cart.forEach(function(item) {
+				if (item.product === req.params.itemId) {
+					item.quantity ++
+					foundItemWithin = true
+				}
+			})
+			if (!foundItemWithin) {
+				req.session.cart.push({
+					title: product.title,
+					price: product.price,
+					product: req.params.itemId,
+					quantity: req.body.quantity || 1
+				});
+			}
+			res.send(req.session.cart)
+		}
+		else{
+			req.order.add(req.params.itemId,req.body.quantity)
+			.then(function(updatedItem){
+				console.log("updatedItem", updatedItem)
+				res.status(200).send(updatedItem)
+			})
+			.then(null, function(err) {
+				// console.error(err.stack)
+				next(err);
 			});
 		}
-		res.send(req.session.cart)
-	}
-	else{
-		req.order.add(req.params.itemId,req.body.quantity)
-		.then(function(updatedItem){
-			console.log("updatedItem", updatedItem)
-			res.status(200).send(updatedItem)
-		})
-		.then(null, function(err) {
-			// console.error(err.stack)
-			next(err);
-		});
-	}
+	})
 })
 
 //Remove an item from cart
