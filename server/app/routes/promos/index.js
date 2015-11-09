@@ -19,33 +19,52 @@ router.post('/', adminCheck, function(req, res, next) {
 	.then(null, next)
 })
 
+var encryptpromoCode = function (plainText) {
+    var hash = crypto.createHash('sha1');
+    hash.update(plainText);
+    // hash.update(salt);
+    return hash.digest('hex');
+};
+
 router.get('/:id', function(req, res, next) {
 	var userEnteredPromo = req.params.id
-	console.log("router hit")
-	Promo.find()
-	.then(function(resultPromos){
-		var matched = false;
-		resultPromos.forEach(function(promo){
-			console.log("promo is:", promo)
-			if (promo.correctpromoCode(userEnteredPromo)){
-				matched = true;
-				var matchedPromo = promo
-			}
-		})
-		if (matched == true) {
-			console.log("HALLELUJAH IT MATCHED", matchedPromo)
-			res.send(matchedPromo)
-		} else { 
-			console.log("NO MATCH")
-			res.send(false)
-		}
+	console.log("router-promos userEnteredPromo", userEnteredPromo)
+
+	var hashedPromoCode = encryptpromoCode(userEnteredPromo);
+	console.log("router-promos hashedPromocode", hashedPromoCode)
+	Promo.findOne( { promoCode: hashedPromoCode })
+	.then(function(promo) {
+		// if (promo){
+		// 	console.log("promo the router found:", promo)
+		// 	res.send(promo)
+		// } else {
+		// 	console.log("404in it!")
+		// 	res.send(404);
+		// }
+		console.log("promo is:", promo)
+		res.send(promo);
 	})
-	// Promo.findOne({ promoCode : req.params.id })
-	// .then(function(promo) {
-	// 	console.log("promo the router found:", promo)
-	// 	res.send(promo)
-	// })
 	.then(null, next)
+	
+	// Promo.find()
+	// .then(function(resultPromos){
+	// 	var matched = false;
+	// 	resultPromos.forEach(function(promo){
+	// 		console.log("promo is:", promo)
+	// 		if (promo.correctpromoCode(userEnteredPromo)){
+	// 			matched = true;
+	// 			var matchedPromo = promo
+	// 		}
+	// 	})
+	// 	if (matched == true) {
+	// 		console.log("HALLELUJAH IT MATCHED", matchedPromo)
+	// 		res.send(matchedPromo)
+	// 	} else { 
+	// 		console.log("NO MATCH")
+	// 		res.send(false)
+	// 	}
+	// })
+	
 })
 
 router.put('/:id', adminCheck, function(req, res, next) {

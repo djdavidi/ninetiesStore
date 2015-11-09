@@ -4,9 +4,16 @@ app.controller('cartCtrl', function ($scope, CartFactory, retrievedOrder, logged
 	$scope.removeItem = function(id){
 		CartFactory.removeItem(id)
 		.then(function () {
-			$scope.currentCart.storedItems = $scope.currentCart.storedItems.filter(function(item) {
+			$scope.currentCart = $scope.currentCart.filter(function(item) {
 				return item.product !== id;
 			})
 		})
+	}
+	$scope.totalCost = function() {
+		var sum = 0;
+		$scope.currentCart.forEach(function(item) {
+			sum += item.price*item.quantity
+		})
+		return sum
 	}
 });

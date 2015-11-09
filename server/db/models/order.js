@@ -7,6 +7,7 @@ var Promo = mongoose.model("Promo")
 //Shopping Cart is front-end representation of the order
 
 var LineItemSchema = new schema({
+    title: String,
     price:Number,
     quantity:Number,
     product:{type: mongoose.Schema.Types.ObjectId, ref: "Product"}
@@ -62,6 +63,7 @@ orderSchema.methods.add=function(itemId,quantity){
         }
         return Product.findById(itemId)
         .then(function(foundItem){
+            temp.title=foundItem.title;
             temp.price=foundItem.price;
             temp.product = foundItem._id;
             self.storedItems.push(temp);
@@ -87,7 +89,10 @@ orderSchema.methods.addPromo = function(promoQuery) {
     Promo.find({promoCode: promoQuery})
     .then(function(promo) {
         if (!promo) return;
-        self.promo = promo._id;
+        console.log("methods. promo", promo)
+        console.log("methods. promo._id", promo[0]._id)
+        self.promo = promo[0]._id;
+        console.log("self.promo", self.promo)
         return self.save()
     })
 }

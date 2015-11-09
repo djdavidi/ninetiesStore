@@ -3,6 +3,7 @@ app.controller('orderCtrl', function ($scope, $state, CartFactory, retrievedOrde
 	$scope.currentUser = loggedInUser;
 	$scope.totalCost = function(){
 		var totalCost = 0;
+		//use Reduce
 		$scope.currentOrder.storedItems.forEach(function(elem){
 			totalCost += elem.price * elem.quantity
 		})
@@ -24,14 +25,15 @@ app.controller('orderCtrl', function ($scope, $state, CartFactory, retrievedOrde
 
 	$scope.checkPromoCoupon = function(){
 		console.log("$scope.promocode", $scope.promocode)
-		//or write if (CartFactory.promoChecker($scope.promocode)) [updateCost-re-run Total Cost, or be capturing Current Cost]
+
 		CartFactory.promoChecker($scope.promocode)
-		.then(function(result){
-				console.log("trying)", result) //false
-			if (result == false){
-				var newCost = $scope.totalCost() - ($scope.totalCost() * result.percentDiscount)
-				console.log("newCost is", newCost) //NaN
-				return $scope.totalCost() - ($scope.totalCost() * result.percentDiscount)
+		.then(function(promo){
+			if (promo){
+				//should not be re-running the totalcost() function. Should have totalCost saved as a value
+				var newCost = $scope.totalCost() - ($scope.totalCost() * promo.percentDiscount)
+				return $scope.totalCost() - ($scope.totalCost() * promo.percentDiscount)
+			} else {
+				console.log("nadda")
 			}
 		});
 	}

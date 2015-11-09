@@ -8,7 +8,12 @@ app.factory("CartFactory",function($http){
 				// if(!currentUser) currentUser = "";
 				return $http.get("/api/cart/")
 				.then(function(response){
-					angular.copy(response.data, cachedCart);
+					if (response.data.storedItems) {
+						angular.copy(response.data.storedItems, cachedCart);
+					}
+					else {
+						angular.copy(response.data, cachedCart);
+					}
 					return cachedCart;
 				})
 			},
@@ -23,16 +28,15 @@ app.factory("CartFactory",function($http){
 				return $http.delete("/api/cart/" + itemId)
 			},
 			promoChecker: function(enteredPromoCode){
-				console.log("promocheckerFACTORY")
 				return $http.get("/api/promos/" + enteredPromoCode)
-				.then(function(response){
-					if (response.data !== false){
-						console.log("response, it matches?", response)
-						return response.data
-					} else {
-						console.log("NOT FOUND...")
-						return false;
+				.then(function(responsePromo){
+					if (responsePromo.data){
+						console.log("responsePromo.data is:", responsePromo.data)
+						$http.put("/api/cart/withPromo/" + cachedCart._id, {promo: responsePromo.data})
+						return responsePromo.data
 					}
+					console.log("promo not found in db")
+						return false;
 				})
 			},
 			checkout: function(email, address){
