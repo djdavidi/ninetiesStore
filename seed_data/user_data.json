@@ -32,5 +32,11 @@
         "email": "josh@josh.com",
         "password": "password",
         "isAdmin": true
+    },
+    {
+        "name": "notAdmin",
+        "email": "not@admin.com",
+        "password": "admin",
+        "isAdmin": false
     }
 ]
