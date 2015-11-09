@@ -31,7 +31,7 @@ router.get('/:userId', function (req, res, next) {
 
 // Update a specific user
 router.put('/:userId', function (req, res, next) {
-	if (req.user._id === req.params.userId) {
+	if (req.user._id === req.params.userId ||req.user.isAdmin) {
 		req.user.set(req.body);
 		req.user.save()
 		.then(function (user) {
@@ -46,7 +46,7 @@ router.put('/:userId', function (req, res, next) {
 
 // Delete a specific user
 router.delete('/:userId', function (req, res, next) {
-	if (req.user._id === req.params.userId) {
+	if (req.user._id === req.params.userId|| req.user.isAdmin) {
 		User.findByIdAndRemove(req.user._id)
 		.then(function (user) {
 			res.json(user);
