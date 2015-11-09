@@ -1,15 +1,18 @@
 app.factory('ReviewFactory', function($http){
+	var chachedReviews = []
 	return {
 		getReviews: function(id){
 			return $http.get('/api/products/' + id + '/reviews')
 			.then(function(reviews){
-				return reviews.data
+				angular.copy(reviews.data, chachedReviews)
+				return chachedReviews
 			})
 		},
 		postReview: function(id, review) {
 			return $http.post('/api/products/' + id + '/reviews', review)
 			.then(function(response) {
-				return response.data
+				chachedReviews.push(response.data)
+				return chachedReviews
 			})
 		},
 		removeReview: function(productId, reviewId) {
