@@ -87,7 +87,10 @@ orderSchema.methods.addPromo = function(promoQuery) {
     Promo.find({promoCode: promoQuery})
     .then(function(promo) {
         if (!promo) return;
-        self.promo = promo._id;
+        console.log("methods. promo", promo)
+        console.log("methods. promo._id", promo[0]._id)
+        self.promo = promo[0]._id;
+        console.log("self.promo", self.promo)
         return self.save()
     })
 }

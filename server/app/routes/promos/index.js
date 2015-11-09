@@ -28,13 +28,21 @@ var encryptpromoCode = function (plainText) {
 
 router.get('/:id', function(req, res, next) {
 	var userEnteredPromo = req.params.id
-	console.log("router hit")
+	console.log("router-promos userEnteredPromo", userEnteredPromo)
 
 	var hashedPromoCode = encryptpromoCode(userEnteredPromo);
-	Promo.findOne({ promoCode : req.params.id })
+	console.log("router-promos hashedPromocode", hashedPromoCode)
+	Promo.findOne( { promoCode: hashedPromoCode })
 	.then(function(promo) {
-		console.log("promo the router found:", promo)
-		res.send(promo)
+		// if (promo){
+		// 	console.log("promo the router found:", promo)
+		// 	res.send(promo)
+		// } else {
+		// 	console.log("404in it!")
+		// 	res.send(404);
+		// }
+		console.log("promo is:", promo)
+		res.send(promo);
 	})
 	.then(null, next)
 	
