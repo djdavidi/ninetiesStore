@@ -139,14 +139,14 @@ router.put('/withPromo/:cartId', function(req,res,next){
 	})
 })
 
-//Updating Quantity
-// router.put('/add', function(req,res,next){
-// 	req.body.order.updateQuantity(req.params.itemId, req.body.quantity)
-// 	.then(function(updatedItem){
-// 		res.send(200).send(updatedItem)
-// 	})
-// 	.then(null, next);
-// })
+// Updating Quantity
+router.put('/add', function(req,res,next){
+	req.body.order.updateQuantity(req.params.itemId, req.body.quantity)
+	.then(function(updatedItem){
+		res.send(200).send(updatedItem)
+	})
+	.then(null, next);
+})
 
 
 
