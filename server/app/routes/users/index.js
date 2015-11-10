@@ -2,6 +2,7 @@ var router = require('express').Router();
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 var Review = mongoose.model('Review')
+var Order = mongoose.model('Order')
 
 // Get all users
 router.get('/', function(req, res, next) {
@@ -67,16 +68,17 @@ router.get('/:userId/reviews', function (req, res, next) {
 	.then(null, next);
 })
 
+// Get a user's past orders
+router.get('/:userId/orderHistory', function (req, res, next) {
+	Order.find({owner: req.user._id})
+	.then(function (orders) {
+		res.send(orders)
+	})
+	.then(null, next)
+})
 
 // THE FOLLOWING CAN USE 'userId' INSTEAD OF ':id'
 
-// Get specific user's orders
-router.get('/:id/orders', function(req, res, next) {
-	User.findById(req.params.id)
-	.then(function(user) {
-		res.send(user.orderHistory)
-	})
-})
 
 // Post specific user's vendorProducts
 router.post('/:id/vendorProducts', function(req, res, next) {
