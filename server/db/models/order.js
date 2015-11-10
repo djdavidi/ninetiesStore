@@ -53,7 +53,6 @@ orderSchema.pre('save', function(next){
 //addtoSet will not add if it is already present, can use this instead
 orderSchema.methods.add=function(itemId,quantity){
     console.log("ADDDADADADAD")
-    quantity= quantity || 1;
     var self = this;
     var done;
     this.storedItems.forEach(function(elem, index){

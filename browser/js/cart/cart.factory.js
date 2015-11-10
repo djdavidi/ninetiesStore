@@ -48,11 +48,15 @@ app.factory("CartFactory",function($http){
 			})
 		},
 		updateQuantity: function(itemId, quantity) {
-			console.log("reaching the factory")
-			return $http.put("/api/cart/updateQuantity/", {itemId: itemId, quantity: quantity})
+			return $http.put("/api/cart/updateQuantity", {itemId: itemId, quantity: quantity})
 			.then(function(response){
-				console.log("from factory: response:", response)
-				return response.data;
+				if (response.data.storedItems) {
+					angular.copy(response.data.storedItems, cachedCart);
+				}
+				else {
+					angular.copy(response.data, cachedCart);
+				}
+				return cachedCart;
 			})
 		}	
 	}
