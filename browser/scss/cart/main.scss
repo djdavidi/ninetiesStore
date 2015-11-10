@@ -1,0 +1,16 @@
+#cart {
+	#cartItems {
+		#cartImg {
+			.col-md-3 {
+				padding-left: 0;
+			}
+		}
+		background: white;
+		cartImg {
+			img{
+				height: 200px;
+				width: 200px;
+			}
+		}
+	}
+}

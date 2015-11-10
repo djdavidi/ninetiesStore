@@ -1,6 +1,7 @@
-app.controller('cartCtrl', function ($scope, CartFactory, retrievedOrder, loggedInUser) {	
+app.controller('cartCtrl', function ($scope, CartFactory, cartProducts, retrievedOrder, loggedInUser, ProductFactory) {	
 	$scope.currentCart = CartFactory.getCachedCart();
 	$scope.currentUser = loggedInUser;
+	$scope.cartProducts = cartProducts
 	$scope.removeItem = function(id){
 		CartFactory.removeItem(id)
 		.then(function () {

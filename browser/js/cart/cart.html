@@ -1,4 +1,4 @@
-<div>
+<!-- <div>
 	<h1> SHOPPING CART</h1>
 	<p>{{ currentUser.name }}</p>
 	<div ng-repeat="item in currentCart">
@@ -10,4 +10,23 @@
 	<p>Total: ${{totalCost() | number: 2}} </p>
 	<button ng-disabled="currentCart.length < 1" ui-sref="order" class="btn btn-default">Proceed To Checkout</button>
 
+</div> -->
+
+<h3>Shopping Cart</h3>
+<div id="cart" class="col-md-10">
+	<div ng-repeat="item in currentCart">
+		<!-- <div ng-repeat="product in cartProducts"> -->
+			<div id="cartItems" class="row">
+				<div id="cartImg" class="col-md-3">
+					<!-- <p>item{{ item }}</p> -->
+					<!-- <p>product{{ product }}</p> -->
+					<img style="height:250px;width:250px;" src="{{ cartProducts[$index].picture }}">
+				</div>
+				<div class="col-md-4">
+					<h4>{{ item.title }}</h4>
+				</div>
+				<div class="col-md-4">Something Else</div>
+			</div>
+		</div>
+	</div>
 </div>
