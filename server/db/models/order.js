@@ -27,6 +27,9 @@ var orderSchema = new schema({
             },
     promo: {
         type: schema.Types.ObjectId, ref: "Promo"
+    },
+    finalCost: {
+        type: Number
     }
 })
 
