@@ -154,13 +154,21 @@ router.post('/checkout', function(req,res,next){
 })
 
 //Updating Quantity
-// router.put('/add', function(req,res,next){
-// 	req.body.order.updateQuantity(req.params.itemId, req.body.quantity)
-// 	.then(function(updatedItem){
-// 		res.send(200).send(updatedItem)
-// 	})
-// 	.then(null, next);
-// })
+router.put('/updateQuantity', function(req,res,next){
+	var itemId = req.body.itemId;
+	var quantity = req.body.quantity;
+	console.log("updateQuantity reached")
+	if (req.user){
+		req.body.order.add(itemId, quantity)
+		.then(function(updatedItem){
+			res.send(200).send(updatedItem)
+		})
+		.then(null, next);
+	} else {
+		console.log("no user")
+		res.send(200)
+	}
+})
 
 
 

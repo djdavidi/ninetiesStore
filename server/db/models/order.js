@@ -55,7 +55,7 @@ orderSchema.methods.add=function(itemId,quantity){
     var done;
     this.storedItems.forEach(function(elem, index){
         if (elem.product == itemId) {
-            self.storedItems[index].quantity += quantity; 
+            self.storedItems[index].quantity = quantity; 
             done = true;
         }
     })
