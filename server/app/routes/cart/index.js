@@ -5,7 +5,7 @@ var Product = mongoose.model('Product')
 var MandrillApp = require('../../mandrill.js') 
 
 router.use('/', function (req, res, next) {
-	// console.log("eeeeeeeeeee",req.user)
+	console.log("eeeeeeeeeee",req.user)
 	Order.findOne({ owner: req.user , status: 'Created'})
 	.then(function(order){
 		if(order===null && req.user){
@@ -87,8 +87,31 @@ router.delete('/:itemId', function(req,res,next){
 	}
 })
 
+
+router.put('/withPromo', function(req,res,next){
+	var promoCode = req.body.promo.promoCode; //define promoCode property
+	// console.log("router-cart promoCode", promoCode)
+	if (!req.user) {
+		req.session.cart.promoCode = promoCode
+		res.send(req.session.cart)
+		.then(null, next)
+	}
+	else {
+		req.order.addPromo(promoCode)
+		res.send(req.order)
+		.then(null, next)
+	}
+	// Order.findById(cartId)
+	// .then(function(order){
+	// 	console.log("router-cart order is:", order)
+	// 	order.addPromo(promoCode)
+	// 	res.send(200);
+	// })
+})
+
 //Checkout(buy) order and send Email
-router.put('/checkout', function(req,res,next){
+router.post('/checkout', function(req,res,next){
+	console.log("req.user", req.user)
 	if (!req.user) {
 		Order.create({
 			storedItems : req.session.cart,
@@ -98,10 +121,15 @@ router.put('/checkout', function(req,res,next){
 			finalCost: req.body.currentCost
 		})
 		.then(function(order) {
+			if (req.session.cart.promoCode) {
+				order.addPromo(promo)
+			}
 			req.session.cart = []
+			req.session.cart.promoCode = null
 			MandrillApp(order, req.body.email, req.body.address)
 			res.send(order)
 		})
+		.then(null, next)
 	}
 	else {
 		req.order.email = req.body.email;
@@ -121,32 +149,19 @@ router.put('/checkout', function(req,res,next){
 			MandrillApp(order, req.body.email, req.body.address)
 			res.send(order)
 		})
+		.then(null, next)
 	}
 })
 
-router.put('/withPromo/:cartId', function(req,res,next){
-	var cartId = req.params.cartId
-	var discount = req.body.promo.percentDiscount;
-	var promoCode = req.body.promo.promoCode; //define promoCode property
-	console.log("router-cart promoCode", promoCode)
-	console.log("router-cart cartId", cartId)
+//Updating Quantity
+// router.put('/add', function(req,res,next){
+// 	req.body.order.updateQuantity(req.params.itemId, req.body.quantity)
+// 	.then(function(updatedItem){
+// 		res.send(200).send(updatedItem)
+// 	})
+// 	.then(null, next);
+// })
 
-	Order.findById(cartId)
-	.then(function(order){
-		console.log("router-cart order is:", order)
-		order.addPromo(promoCode)
-		res.send(200);
-	})
-})
-
-// Updating Quantity
-router.put('/add', function(req,res,next){
-	req.body.order.updateQuantity(req.params.itemId, req.body.quantity)
-	.then(function(updatedItem){
-		res.send(200).send(updatedItem)
-	})
-	.then(null, next);
-})
 
 
 

@@ -4,11 +4,8 @@ app.config(function($stateProvider){
 		templateUrl:"js/cart/cart.html",
 		controller:"cartCtrl",
 		resolve: {
-			retrievedOrder : function(AuthService,CartFactory){
-				return AuthService.getLoggedInUser()
-				.then(function(user){
-					return CartFactory.getCurrentOrder();
-				})
+			retrievedOrder : function(CartFactory){
+				return CartFactory.getCurrentOrder()
 				.then(function(order){
 					return order;
 				})
