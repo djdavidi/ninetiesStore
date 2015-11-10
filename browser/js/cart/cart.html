@@ -13,19 +13,22 @@
 </div> -->
 
 <h3>Shopping Cart</h3>
-<div id="cart" class="col-md-10">
+<div id="shoppingCart">
 	<div ng-repeat="item in currentCart">
-		<!-- <div ng-repeat="product in cartProducts"> -->
-			<div id="cartItems" class="row">
-				<div id="cartImg" class="col-md-3">
-					<!-- <p>item{{ item }}</p> -->
-					<!-- <p>product{{ product }}</p> -->
-					<img style="height:250px;width:250px;" src="{{ cartProducts[$index].picture }}">
+		<div class="col-md-10">
+				<div class="row">
+					<div id="cartImg" class="col-md-3">
+						<!-- <p>item{{ item }}</p> -->
+						<!-- <p>product{{ product }}</p> -->
+						<img src="{{ cartProducts[$index].picture }}">
+					</div>
+					<div id="midCol" class="col-md-4">
+						<h4>{{ item.title }}</h4>
+					</div>
+					<div id="rightCol" class="col-md-3">
+						<button ng-click="removeItem(item.product)" class="btn btn-default">Remove From Cart</button>
+					</div>
 				</div>
-				<div class="col-md-4">
-					<h4>{{ item.title }}</h4>
-				</div>
-				<div class="col-md-4">Something Else</div>
 			</div>
 		</div>
 	</div>
