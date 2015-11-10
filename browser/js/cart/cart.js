@@ -7,7 +7,6 @@ app.config(function($stateProvider){
 			retrievedOrder : function(CartFactory){
 				return CartFactory.getCurrentOrder()
 				.then(function(order){
-					console.log("order", order)
 					return order;
 				})
 			},
@@ -19,7 +18,6 @@ app.config(function($stateProvider){
 			},
 			cartProducts: function (ProductFactory, retrievedOrder) {
 				var cartProductsArr = [];
-				console.log("retrievedOrder", retrievedOrder)
 				retrievedOrder.forEach(function(productElem) {
 					ProductFactory.getOneProduct(productElem.product)
 					.then(function (product) {
