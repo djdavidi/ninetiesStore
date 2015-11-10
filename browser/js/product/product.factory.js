@@ -41,7 +41,6 @@ app.factory("ProductFactory",function($http) {
 
 		deleteProduct: function (id) {
 			return $http.delete('/api/products/' + id)
-
 		}
 	}
 })
