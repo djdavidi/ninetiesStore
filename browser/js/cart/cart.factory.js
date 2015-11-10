@@ -48,8 +48,10 @@ app.factory("CartFactory",function($http){
 			})
 		},
 		updateQuantity: function(itemId, quantity) {
+			console.log("reaching the factory")
 			return $http.put("/api/cart/updateQuantity/", {itemId: itemId, quantity: quantity})
 			.then(function(response){
+				console.log("from factory: response:", response)
 				return response.data;
 			})
 		}	
