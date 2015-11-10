@@ -11,12 +11,10 @@ router.use('/', function (req, res, next) {
 		if(order===null && req.user){
 			Order.create({owner:req.user})
 			.then(function(newOrder){
-				console.log("newOrder",newOrder);
 				req.order=newOrder;
 				next()
 			})
 		} else if (req.user) {
-			console.log("order",order)
 			req.order = order;
 			next()
 		}
@@ -35,7 +33,6 @@ router.get('/', function(req, res, next){
 //Add a new item to cart
 
 router.put('/:itemId', function(req,res,next){
-	console.log("req.params.itemId", req.params.itemId)
 	Product.findById(req.params.itemId).exec()
 	.then(function(product) {
 		if(!req.user){
@@ -91,52 +88,40 @@ router.delete('/:itemId', function(req,res,next){
 })
 
 //Checkout(buy) order and send Email
-router.put('/checkout/:cartId', function(req,res,next){
-	var cartId = req.params.cartId
-	Order.findByIdAndUpdate(cartId, {
-		$set: { 
-			status: "Completed", 
-			email: req.body.email,
+router.put('/checkout', function(req,res,next){
+	if (!req.user) {
+		Order.create({
+			storedItems : req.session.cart,
 			address: req.body.address,
+			email: req.body.email,
+			status: 'Processing',
 			finalCost: req.body.currentCost
-		}
-	})
-	.then(function(order){
-		console.log("finalOrder is:", order)
-	  // 1. Do not delete this comemnted stuff
-	  /*
-	  var itemTitles = [];
-	  order.storedItems.forEach(function(item){ //.select(title) ?
-	  	Product.findById(item.product)
-	  	.then(function(title){
-	  		itemTitles.push(title)
-	  	}) 
-	  })
-	  order.storedItem
-	  */
-
-
-	  // 2.
-      // order.storedItems.forEach(function(el){
-      //   orderItems.push(el)
-      // })
-      // orderItems.forEach(function(item){
-      //   Product.findById(item.product)
-      //   .then(function(product){
-      //       console.log("title", product.title)
-      //       orderItemTitles.push(product.title);
-      //       return;
-      //   })
-      // })
-
-		//MandrillApp is sendConfirmaitonEmail(...)
-		try { MandrillApp(order, req.body.email, req.body.address)
-		} catch (e){
-			console.log("erros are:")
-			console.error(e.stack)
-		}
-		res.send(order)
-	})
+		})
+		.then(function(order) {
+			req.session.cart = []
+			MandrillApp(order, req.body.email, req.body.address)
+			res.send(order)
+		})
+	}
+	else {
+		req.order.email = req.body.email;
+		req.order.address = req.body.address
+		req.order.status = 'Processing'
+		req.order.finalCost = req.body.currentCost
+		return req.order.save()
+		// Order.findByIdAndUpdate(cartId, {
+		// 	$set: { 
+		// 		status: "Completed", 
+		// 		email: req.body.email,
+		// 		address: req.body.address,
+		// 		finalCost: req.body.currentCost
+		// 	}
+		// })
+		.then(function(order){
+			MandrillApp(order, req.body.email, req.body.address)
+			res.send(order)
+		})
+	}
 })
 
 router.put('/withPromo/:cartId', function(req,res,next){
