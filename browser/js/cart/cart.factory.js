@@ -33,7 +33,7 @@ app.factory("CartFactory",function($http){
 					if (responsePromo.data){
 						console.log("responsePromo.data is:", responsePromo.data)
 						console.log("cachedCar._id is:", cachedCart)
-						$http.put("/api/cart/withPromo/" + cachedCart._id, {promo: responsePromo.data})
+						$http.put("/api/cart/withPromo", {promo: responsePromo.data})
 						return responsePromo.data
 					}
 					console.log("promo not found in db")
@@ -41,7 +41,11 @@ app.factory("CartFactory",function($http){
 				})
 			},
 			checkout: function(email, address, currentCost){
-				return $http.put('/api/cart/checkout/' + cachedCart._id, {email: email, address: address, currentCost: currentCost})
+				cachedCart = []
+				return $http.post('/api/cart/checkout', {email: email, address: address, currentCost: currentCost})
+				.then(function(response) {
+					return response.data
+				})
 			}
 			// need some way of updating change and when the change is to the 
 			// cart itself making it a past order we need to change cart and create a new order..
