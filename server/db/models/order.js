@@ -30,6 +30,9 @@ var orderSchema = new schema({
     },
     finalCost: {
         type: Number
+    },
+    date: {
+        type: Date
     }
 })
 

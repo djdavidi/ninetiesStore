@@ -114,7 +114,24 @@ router.post('/checkout', function(req,res,next){
 })
 
 //Updating Quantity
-router.put('/updateQuantity', function(req,res,next){
+// router.put('/updateQuantity', function(req,res,next){
+// 	var itemId = req.body.itemId;
+// 	var quantity = req.body.quantity;
+// 	console.log("updateQuantity reached")
+// 	if (req.user){
+// 		req.body.order.add(itemId, quantity)
+// 		.then(function(updatedItem){
+// 			res.send(200).send(updatedItem)
+// 		})
+// 		.then(null, next);
+// 	} else {
+// 		console.log("no user")
+// 		res.send(200)
+// 	}
+// })
+
+router.put('/updateQuantity', function (res, req, next) {
+	console.log("coming from the router")
 	var itemId = req.body.itemId;
 	var quantity = req.body.quantity;
 
@@ -171,10 +188,6 @@ router.put('/:itemId', function(req,res,next){
 		}
 	})
 })
-
-
-
-
 
 
 module.exports = router;
