@@ -46,13 +46,13 @@ app.factory("CartFactory",function($http){
 			.then(function(response) {
 				return response.data
 			})
-		}
-		// updateQuantity: function(itemId, quantity, currentUser) {
-		// 	return $http.put("/api/cart/updateQuantity/", {itemId: itemId,quantity: quantity})
-		// 	.then(function(response){
-		// 		return response.data;
-		// 	})
-		// }	
+		},
+		updateQuantity: function(itemId, quantity) {
+			return $http.put("/api/cart/updateQuantity/", {itemId: itemId, quantity: quantity})
+			.then(function(response){
+				return response.data;
+			})
+		}	
 	}
 
 })
