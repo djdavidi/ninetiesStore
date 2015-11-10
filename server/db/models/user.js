@@ -42,11 +42,7 @@ var userSchema = new mongoose.Schema({
     picture: {
         type: String,
         default: "http://www.fillmurray.com/140/100"
-    },
-    rating: {
-        type: Number
-    },
-    orderHistory: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Order' }]
+    }
 });
 
 userSchema.methods.addProduct = function (productData) {

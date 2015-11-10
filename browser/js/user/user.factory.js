@@ -26,6 +26,10 @@ app.factory('UserFactory', function ($http) {
 		getUserReviews: function (id) {
 			return $http.get('/api/users/' + id + '/reviews')
 			.then(transform);
+		},
+		getUserOrders: function(id) {
+			return $http.get('/api/users/' + id + '/orderHistory')
+			.then(transform)
 		}
 	}
 	return UserFactory;
