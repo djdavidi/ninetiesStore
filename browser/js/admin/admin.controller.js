@@ -1,32 +1,34 @@
-app.controller('AdminCtrl', function ($scope,AuthService,ProductFactory,AdminFactory) {
+app.controller('AdminCtrl', function ($scope,AuthService,ProductFactory,AdminFactory,allUsers,allProducts,allOrders,allPromos) {
+			$scope.test=5;
+			$scope.allUsers=allUsers
+			$scope.allProducts=allProducts
+			$scope.allOrders=allOrders
+			$scope.allPromos=allPromos
+			console.log(allOrders)
+			console.log("promo",allPromos)
 			$scope.getOneUser=function(id){
-
+				return AdminFactory.getOneUser();
 			}
 			$scope.updateAnyUser=function(id,change){
-				//promote to Admin, other things
+				return AdminFactory.updateAnyUser(id,change);
 			}
 			$scope.deleteAnyUser=function(id){
-
+				AdminFactory.deleteAnyUser(id);
 			}
 			//Create and edit products with name, description,
 			//price and one or more photos
-			$scope.createProduct=function(){
-				ProductFactory
+			$scope.createProduct=function(newProduct){
+				return ProductFactory.addProduct(newProduct);
 			}
-			$scope.editProduct=function(){
+			$scope.editProduct=function(id,product){
 				//products with name, description,
 				// price and one or more photos
 				//availibiility /quantity to none
 				//categories
-				ProductFactory
+				return ProductFactory.updateProduct(id,product)
 			}
-			$scope.getAllOrders=function(){
-				//Filter orders by status
-				// (Created, Processing, Cancelled, Completed)
-
-			}
-			$scope.changeOrderStatus=function(){
-
+			$scope.editOrder=function(id,change){
+				return AdminFactory.editOrder(id,change);
 			}
 
 			$scope.getOneOrder=function(){
@@ -37,10 +39,11 @@ app.controller('AdminCtrl', function ($scope,AuthService,ProductFactory,AdminFac
 				//on first time they log in again
 			}
 
-			$scope.promoCodes=function(){
-				//ccess the promo code tab where they can create,
-				// edit, delete promo codesAdmins should be able 
-				//to see which if any promo was applied to any order
+			$scope.editPromo=function(id,body){
+				return AdminFactory.editAnyPromo(id,body);
+			}
+			$scope.createPromo=function(body){
+				return AdminFactory.createPromo(body);
 			}
 
 

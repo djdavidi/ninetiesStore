@@ -1,5 +1,22 @@
+
+<div class="col-sm-6">
+<h2>Current Promo Codes</h2>
+<div ng-repeat="promo in allPromos">
+    <label class="labelly">Name:</label> <input type="text" ng-model="promo.name" class="inputty"/><br>
+    <label class="labelly">Discount:</label> <input type="text" ng-model="promo.percentDiscount" class="inputty"/><br>
+    <label class="labelly">Update Promo</label><button ng-click="editPromo(promo._id,promo)" class="inputty">Button</button>
+	<br>
+	<br>
+</div>
+</div>
+<div class="col-sm-6">
+<h2>Create a Promo Code</h2>
 <div>
-	admin promo
-
-
+  <form novalidate class="simple-form">
+   <label class="labelly">Title:</label> <input type="text" class="inputty" ng-model="newPromo.name" /><br>
+    <label class="labelly">Price:</label> <input class="inputty" type="number" ng-model="newPromo.percentDiscount" /><br>
+    <label class="labelly">Description:</label> <input class="inputty" type="text" ng-model="newPromo.promocode" /><br>
+    <input type="submit" ng-click="createProduct(newProduct)"/>
+  </form>
+</div>
 </div>

@@ -1,6 +1,26 @@
 <div>
 admin user	
+<div class="col-md-6">
+<div ng-repeat="user in allUsers">
+	 Name:<input type="text" ng-model="user.name" value="{{user.name}}" /></input>
+	 Email:<input type="text" ng-model="user.email" value="{{user.email}}" /></input>
+	 isAdmin:<input type="text" ng-model="user.isAdmin" value="{{user.isAdmin}}" /></input>
+	<button ng-click="deleteAnyUser(user._id)">Delete this User</button>
+	<button ng-click="updateAnyUser(user._id,user)">Update this User</button>
+	<br>
+</div>
+</div>
 
+<div class="col-md-6">
+<div ng-repeat="order in allOrders">
+	 Owner:<input type="text" ng-model="order.owner.name" value="{{order.owner}}" /></input>
+	  Status:<input type="text" ng-model="order.status" value="{{order.status}}" /></input>
+	<button ng-click="editOrder(order_id,order)">Update this Order</button>
+</div>
+</div>
+
+
+</div>
 
 
 </div>

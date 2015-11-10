@@ -5,6 +5,7 @@ var Order = mongoose.model('Order');
 // Get all orders
 router.get('/', function (req, res, next) {
 	Order.find({})
+	.populate("owner")
 	.then(function (orders) {
 		res.json(orders);
 	})
