@@ -13,10 +13,8 @@ app.controller('cartCtrl', function ($scope, CartFactory, cartProducts, retrieve
 	}
 
 	$scope.updateProdQuantity = function(id, quantity) {
+		console.log("updatedprodquantity", id, quantity)
 		CartFactory.updateQuantity(id, quantity)
-		.then(function (response) {
-			console.log("response")
-		})
 	}
 
 	$scope.totalCost = function() {

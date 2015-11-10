@@ -41,7 +41,8 @@
 							<small>Item Price: ${{ item.price }}.00</small>
 						</div>
 						<div id="rightCol" class="col-md-3">
-							<select ng-model="quantity">
+							
+							<select ng-model="quantity" ng-change="updateProdQuantity(item.product, quantity)">
 			            		<option value="1">1</option>
 			            		<option value="2">2</option>
 			            		<option value="3">3</option>
