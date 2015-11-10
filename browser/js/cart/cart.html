@@ -38,7 +38,7 @@
 				            </div>
 							<hr>
 							<small>Condition: Good, totally</small>
-							<small>Item Price: ${{ item.price }}.00</small>
+							<small>Item Price: ${{ item.price | number: 2}}</small>
 						</div>
 						<div id="rightCol" class="col-md-3">
 							<select ng-model="quantity">
@@ -48,6 +48,7 @@
 			            		<option value="4">4</option>
 			            		<option value="5">5</option>
 			            	</select>
+			            	<button ng-click="updateProdQuantity(item.product, quantity)" class="btn btn-default">update</button>
 
 							<p>Qty: {{ quantity }}</p><p>Price: ${{item.price | number: 2}}</p>
 							<!-- <p>Qty: {{ item.quantity }}</p><p>Price: ${{item.price | number: 2}}</p> -->
@@ -69,7 +70,7 @@
 	<hr>
 	<p>Covers your purchase price plus original shipping on virtually all items. Get the item you ordered or get your money back.</p>
 	<div id="priceStuff">
-		<h4>Total: ${{totalCost()}}.00</h4>
-		<button ng-disabled="currentCart.length < 1" ui-sref="order" class="btn btn-default">Proceed To Checkout</button>
+		<h4>Total: ${{totalCost() | number: 2}}</h4>
+		<button id="checkoutBtn" ng-disabled="currentCart.length < 1" ui-sref="order" class="btn btn-default">Proceed To Checkout</button>
 	</div>
 </div>

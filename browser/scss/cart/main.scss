@@ -41,7 +41,8 @@
 
 #summaryPane {
 	width: 240px;
-	height: 55vh;
+	// height: 55vh;
+	height: 100%;
 	margin-bottom: 50px;
 	background: white;
 	border-radius: 10px;
@@ -69,5 +70,8 @@
 	#priceStuff {
 		align: center;
 		text-align: center;
+	}
+	#checkoutBtn {
+		margin-bottom: 10px;
 	}
 }
