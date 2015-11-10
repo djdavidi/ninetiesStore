@@ -1,15 +1,24 @@
-#cart {
-	#cartItems {
-		#cartImg {
-			.col-md-3 {
-				padding-left: 0;
-			}
-		}
+#shoppingCart {
+	.col-md-10 {
+		display: inline-block;
 		background: white;
-		cartImg {
-			img{
-				height: 200px;
-				width: 200px;
+		margin-bottom: 60px;
+		border: 1px solid black;
+		height: 230px;
+		width: 900px;
+		.row {
+			// border-bottom: 1px solid black;
+			#cartImg {
+				border-right: 1px solid black;
+				img{
+					margin-top: 15px;
+					margin-bottom: 15px;
+					height: 200px;
+					width: 200px;
+					border: 1px solid black;
+				}
+			}
+			midCol {
 			}
 		}
 	}
