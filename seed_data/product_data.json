@@ -34,6 +34,38 @@
 		"picture": "https://s-media-cache-ak0.pinimg.com/236x/5e/40/0e/5e400ef29fa117b28f1ef5bd224732be.jpg"
 	},
 	{
+		"title": "Radiohead - OK Computer",
+		"price": "23",
+		"description": "OK Computer is the third studio album by the English alternative rock band Radiohead, released in 1997 on Parlophone and Capitol Records. OK Computer was the first self-produced Radiohead album, with assistance from Nigel Godrich.",
+		"quantity": "1",
+		"category": "Music",
+		"picture": "http://ecx.images-amazon.com/images/I/81ni71zIxIL._SL1406_.jpg"
+	},
+	{
+		"title": "Nirvana - Nevermind",
+		"price": "23",
+		"description": "Nevermind is the second studio album by the American rock band Nirvana, released on September 24, 1991. Produced by Butch Vig, Nevermind was the group's first release on DGC Records.",
+		"quantity": "1",
+		"category": "Music",
+		"picture": "http://images.rapgenius.com/180ec864a554a1ebdc8cd21979b5a4c8.1000x1000x1.jpg"
+	},
+	{
+		"title": "Notorious B.I.G. - Ready To Die",
+		"price": "19",
+		"description": "Ready to Die is the debut studio album by American rapper The Notorious B.I.G.; it was released on September 13, 1994, by Bad Boy Records.",
+		"quantity": "1",
+		"category": "Music",
+		"picture": "http://www.waxpoetics.com/wp-content/uploads/2014/09/Notorious-BIG-Ready-To-Die11.jpg"
+	},
+	{
+		"title": "Now That's What I Call Music, Vol. 19",
+		"price": "47",
+		"description": "Now! 19 has been certified 2× Platinum and features one Billboard Hot 100 number-one hit, 'Hollaback Girl'.",
+		"quantity": "1",
+		"category": "Music",
+		"picture": "http://ecx.images-amazon.com/images/I/61AMZA9HKDL._SY300_.jpg"
+	},
+	{
 		"title": "Bart Simpson",
 		"price": "42",
 		"description": "Rebel",

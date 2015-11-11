@@ -115,14 +115,14 @@
             </div>
 
             <!-- Category Block #4-->
-            <!-- <div class="col-md-6" id="categoryBlock" style="position:absolute;right:0px;margin-top:680px;">
-                <li id="mainImg" ng-repeat="product in products.slice(0,4)" ng-show="$first">
+            <div class="col-md-6" id="categoryBlock" style="position:absolute;right:0px;margin-top:680px;">
+                <li id="mainImg" ng-repeat="product in products.slice(12,16)" ng-show="$first">
                     <a ui-sref="productDetail({productId: product._id})">
                         <img src="{{ product.picture }}"/>
                     </a>
                 </li>
                 <div id="sideImg">
-                    <li ng-repeat="product in products.slice(0,4)" ng-hide="$first">
+                    <li ng-repeat="product in products.slice(12,16)" ng-hide="$first">
                         <a ui-sref="productDetail({productId: product._id})">
                         <img src="{{ product.picture }}"/>
                     </a>
@@ -130,7 +130,7 @@
                 </div>
                 <div id="bottomInfo">
                     <div class="col-md-8">
-                        <h3>Laser Cat</h3>
+                        <h3>{{ categories[3] }}</h3>
                         <p>Ennui chambray selfies yr ethical vegan. Pug post-ironic chartreuse, plaid fashion axe vinyl art party etsy. Tousled hella occupy franzen. Banh mi +1 sartorial pickled art party, squid cronut. Cray everyday carry venmo, cred vice yuccie chia fixie readymade brooklyn DIY banjo gentrify heirloom.</p>
                     </div>
                     <div class="col-md-4">
@@ -143,7 +143,7 @@
                         </ul>
                     </div>
                 </div>
-            </div> -->
+            </div>
 
         </div>
 
