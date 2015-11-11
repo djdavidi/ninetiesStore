@@ -39,7 +39,7 @@ app.factory("CartFactory",function($http){
 			})
 		},
 		checkout: function(email, address, currentCost){
-			cachedCart = []
+			// cachedCart = []
 			return $http.post('/api/cart/checkout', {email: email, address: address, currentCost: currentCost})
 			.then(function(response) {
 				return response.data

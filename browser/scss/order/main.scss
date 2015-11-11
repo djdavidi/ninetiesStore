@@ -74,7 +74,7 @@
 	}
 	#orderSummary {
 		width: 240px;
-		height: 240px;
+		height: 265px;
 		background: white;
 		border: 1px solid black;
 		border-radius: 15px;
@@ -83,6 +83,10 @@
 		small {
 			display: block;
 			margin-left: 5px;
+		}
+		button {
+			text-align: center;
+			margin-left: 55px;
 		}
 	}
 }

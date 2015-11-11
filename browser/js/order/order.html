@@ -5,15 +5,18 @@
 			<div id="addressForms" class="col-md-4">
 				<h5>Shipping Address</h5>
 				<td><input placeholder="Name"></td>
-				<td><input placeholder="Street"></td>
-				<td><input placeholder="City"></td>
-				<td><input placeholder="State"></td>
-				<td><input placeholder="Zip Code"></td>
+				<!-- <td><input placeholder="Email" ng-model="order.email"></td> -->
+				<td><input placeholder="Street" ng-model="order.address.street"></td>
+				<td><input placeholder="City" ng-model="order.address.city"></td>
+				<td><input placeholder="State" ng-model="order.address.state"></td>
+				<td><input placeholder="Zip Code" ng-model="order.address.zip"></td>
+				<!-- <p>{{ orderAddress }}</p> -->
 				<button class="btn btn-default">Submit</button>
 			</div>
 			<div id="addressForms" class="col-md-4">
 				<h5>Billing Address</h5>
 				<td><input placeholder="Name"></td>
+				<!-- <td><input placeholder="Email" ng-model="order.email"></td> -->
 				<td><input placeholder="Street"></td>
 				<td><input placeholder="City"></td>
 				<td><input placeholder="State"></td>
@@ -58,5 +61,6 @@
 		<small>Estimated Tax: ${{ currentCost*0.06 | number: 2}}</small>
 		<hr>
 		<h4>Order Total: ${{ promoDiscount*currentCost*1.11 | number: 2}}</h4>
+		<button ng-click="checkout()" type="submit" class="btn btn-default">Purchase</button>
 	</div>
 </div>
