@@ -1,17 +1,20 @@
 #shoppingCart {
-	.col-md-10 {
+	.col-md-7 {
+		border-radius: 10px;
 		display: inline-block;
 		background: white;
 		margin-bottom: 30px;
 		border: 1px solid black;
 		height: 230px;
-		width: 900px;
+		width: 750px;
 		.row {
+			width: 900px;
 			#cartImg {
 				border-right: 1px solid black;
 				height: 230px;
 				width: 230px;
 				img{
+					border-radius: 10px;
 					margin-top: 15px;
 					margin-bottom: 15px;
 					height: 200px;
@@ -19,8 +22,56 @@
 					border: 1px solid black;
 				}
 			}
-			midCol {
+			#midCol {
+				hr {
+					margin-top: 7px;
+					margin-bottom: 15px;
+				}
+				h4 {
+					margin-top: 20px;
+				}
+				small {
+					margin-top: 5px;
+					display: block;
+				}
 			}
 		}
+	}
+}
+
+#summaryPane {
+	width: 240px;
+	// height: 55vh;
+	height: 100%;
+	margin-bottom: 50px;
+	background: white;
+	border-radius: 10px;
+	border: 1px solid black;
+	margin-left: 40px;
+	p {
+		margin-top: 30px;
+		margin-bottom: 50px;
+	}
+	#topTitle {
+		width: 240px;
+		.col-md-9 {
+			padding-right: 0;
+			padding-left: 10px;
+			margin-bottom: 0;
+		}
+		.col-md-3 {
+			margin-top: 27px;
+			margin-left: -5px;
+			padding-right: 10px;
+			padding-left: 0;
+		}
+		display: inline-block;
+	}
+	#priceStuff {
+		align: center;
+		text-align: center;
+	}
+	#checkoutBtn {
+		margin-bottom: 10px;
 	}
 }

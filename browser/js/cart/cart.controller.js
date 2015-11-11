@@ -2,24 +2,33 @@ app.controller('cartCtrl', function ($scope, CartFactory, cartProducts, retrieve
 	$scope.currentCart = CartFactory.getCachedCart();
 	$scope.currentUser = loggedInUser;
 	$scope.cartProducts = cartProducts
-	$scope.removeItem = function(id, cartProductsIndex){
-		console.log("cartProductsIndex", cartProductsIndex)
+	$scope.removeItem = function(id, cartProductsIndex) {
 		CartFactory.removeItem(id)
 		.then(function () {
+			$scope.cartProducts.splice(cartProductsIndex,1);
 			$scope.currentCart = $scope.currentCart.filter(function(item) {
 				return item.product !== id;
 			})
-		}).then(function () {
-			$scope.cartProducts.slice(cartProductsIndex,1);
-			console.log("$scope.cartProducts", $scope.cartProducts)
-			return $scope.cartProducts;
 		})
+	}
+	$scope.updateProdQuantity = function(id, quantity) {
+
+		console.log("updatedprodquantity", id, quantity)
+		CartFactory.updateQuantity(id, quantity)
+
 	}
 	$scope.totalCost = function() {
 		var sum = 0;
 		$scope.currentCart.forEach(function(item) {
 			sum += item.price*item.quantity
 		})
-		return sum
+		return sum;
+	}
+	$scope.numItems = function () {
+		var num = 0;
+		$scope.currentCart.forEach(function(item) {
+			num += item.quantity;
+		})
+		return num;
 	}
 });

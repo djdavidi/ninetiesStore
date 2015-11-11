@@ -13,27 +13,65 @@
 </div> -->
 
 <h3>Shopping Cart</h3>
+<p>{{ currentCart }}</p>
+<p>{{ cartProducts }}</p>
 <div id="shoppingCart">
-	<div ng-repeat="item in currentCart">
-		<div class="col-md-10">
-				<div class="row">
-					<div id="cartImg" class="col-md-3">
-						<!-- <p>item{{ item }}</p> -->
-						<!-- <p>product{{ product }}</p> -->
-						<!-- <p>{{ $index }}</p> -->
-						<img src="{{ cartProducts[$index].picture }}">
-					</div>
-					<div id="midCol" class="col-md-4">
-						<h4>{{ item.title }}</h4>
+	<div class="col-md-9">
+		<div ng-repeat="item in currentCart">
+			<!-- <div class="row"> -->
+				<div class="col-md-7">
+					<div class="row">
+						<div id="cartImg" class="col-md-3">
+							<!-- <p>item{{ item }}</p> -->
+							<!-- <p>product{{ product }}</p> -->
+							<!-- <p>{{ $index }}</p> -->
+							<img src="{{ cartProducts[$index].picture }}">
+						</div>
+						<div id="midCol" class="col-md-3">
+							<h4>{{ item.title }}</h4>
+							<div class="starList">
+				                <span class="glyphicon glyphicon-star" ng-show="cartProducts[$index].productRating > 0"></span>
+				                <span class="glyphicon glyphicon-star" ng-show="cartProducts[$index].productRating > 1"></span>
+				                <span class="glyphicon glyphicon-star" ng-show="cartProducts[$index].productRating > 2"></span>
+				                <span class="glyphicon glyphicon-star" ng-show="cartProducts[$index].productRating > 3"></span>
+				                <span class="glyphicon glyphicon-star" ng-show="cartProducts[$index].productRating > 4"></span>
+				            </div>
+							<hr>
+							<small>Condition: Good, totally</small>
+							<small>Item Price: ${{ item.price | number: 2}}</small>
+						</div>
+						<div id="rightCol" class="col-md-3">
+							
+							<select ng-model="quantity" ng-change="updateProdQuantity(item.product, quantity)">
+			            		<option value="1">1</option>
+			            		<option value="2">2</option>
+			            		<option value="3">3</option>
+			            		<option value="4">4</option>
+			            		<option value="5">5</option>
+			            	</select>
+			            	<button ng-click="updateProdQuantity(item.product, quantity)" class="btn btn-default">update</button>
 
-					</div>
-					<div id="rightCol" class="col-md-3">
-						<p>Qty: {{ item.quantity }}</p><p>Price: ${{item.price | number: 2}}</p>
-						<button ng-click="removeItem(item.product, $index)" class="btn btn-default">Remove From Cart</button>
-						<button ng-disabled="currentCart.length < 1" ui-sref="order" class="btn btn-default">Proceed To Checkout</button>
+							<p>Qty: {{ quantity }}</p><p>Price: ${{item.price | number: 2}}</p>
+							<!-- <p>Qty: {{ item.quantity }}</p><p>Price: ${{item.price | number: 2}}</p> -->
+							<button ng-click="removeItem(item.product, $index)" class="btn btn-default">Remove From Cart</button>
+							
+						</div>
 					</div>
 				</div>
-			</div>
+			<!-- </div> -->
 		</div>
+	</div>
+</div>
+
+<div id="summaryPane" class="col-md-2">
+	<div id="topTitle" class="row">
+		<h3 class="col-md-9">Cart Summary</h3>
+		<small class="col-md-3">({{numItems()}} items)</small>
+	</div>
+	<hr>
+	<p>Covers your purchase price plus original shipping on virtually all items. Get the item you ordered or get your money back.</p>
+	<div id="priceStuff">
+		<h4>Total: ${{totalCost() | number: 2}}</h4>
+		<button id="checkoutBtn" ng-disabled="currentCart.length < 1" ui-sref="order" class="btn btn-default">Proceed To Checkout</button>
 	</div>
 </div>

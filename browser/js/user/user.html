@@ -1,0 +1,13 @@
+<h1>My Profile</h1>
+<img src="{{user.picture}}">
+<h4>Name: {{user.name}}</h4>
+<h4>Email: {{user.email}}</h4>
+<h4>My Reviews</h4>
+<ul ng-repeat="review in reviews">
+	<li>{{review}}</li>
+</ul>
+<h4>My Orders</h4>
+<ul ng-repeat="order in orders">
+	<p ng-show="orders.length === 0">You have not placed any orders.</p>
+	<li ng-show="order.status!=='Created'">{{order}}</li>
+</ul>
