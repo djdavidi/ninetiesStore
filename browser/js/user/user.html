@@ -1,41 +1,42 @@
-<h1>My Profile</h1>
-<img src="{{user.picture}}">
-<h4>Name: {{user.name}}</h4>
-<h4>Email: {{user.email}}</h4>
-<h4>My Reviews</h4>
-<p ng-show="reviews.length === 0">You have not written any reviews.</p>
-<table ng-hide="reviews.length === 0">
-	<thead>
-		<td><b>Date</b></td>
-		<td><b>Title</b></td>
-		<td><b>Product</b></td>
-		<td><b>Review</b></td>
-	</thead>
-	<tbody>
-		<tr ng-repeat="review in reviews">
-			<td>{{convertDate(review.date)}}</td>
-			<td>{{review.title}}</td>
-			<td>{{review.product.title}}</td>
-			<td>{{review.content}}</td>
-		</tr>
-	</tbody>
-</table>
-<h4>My Orders</h4>
-<p ng-show="orders.length === 0">You have not placed any orders.</p>
-<table ng-hide="orders.length === 0">
+<div id="userPage" class="container">
+	<h1>My Profile</h1>
+	<img src="{{user.picture}}">
+	<h4>Name: {{user.name}}</h4>
+	<h4>Email: {{user.email}}</h4>
+	<h4>My Reviews</h4>
 	<p ng-show="reviews.length === 0">You have not written any reviews.</p>
-	<thead ng-hide="reviews.length === 0">
-		<td><b>Date</b></td>
-		<td><b>Products</b></td>
-		<td><b>Order Status</b></td>
-		<td><b>Cost</b></td>
-	</thead>
-	<tbody>
-		<tr ng-repeat="order in orders" ng-show="order.status!=='Created'">
-			<td>{{convertDate(order.date)}}</td>
-			<td><ul ng-repeat="item in order.storedItems"><li><a ui-sref="productDetail({productId: item.product})">{{item.title}}</a></li></ul</td>
-			<td>{{order.status}}</td>
-			<td>{{order.finalCost}}</td>
-		</tr>
-	</tbody>
-</table>
+	<table class="center col-lg-12" ng-hide="reviews.length === 0">
+		<thead>
+			<td class="col-lg-3"><b>Date</b></td>
+			<td class="col-lg-3"><b>Title</b></td>
+			<td class="col-lg-3"><b>Product</b></td>
+			<td class="col-lg-3"><b>Review</b></td>
+		</thead>
+		<tbody>
+			<tr ng-repeat="review in reviews">
+				<td class="col-lg-3">{{convertDate(review.date)}}</td>
+				<td class="col-lg-3">{{review.title}}</td>
+				<td class="col-lg-3">{{review.product.title}}</td>
+				<td class="col-lg-3">{{review.content}}</td>
+			</tr>
+		</tbody>
+	</table>
+	<h4>My Orders</h4>
+	<p ng-show="orders.length === 0">You have not placed any orders.</p>
+	<table class="center col-lg-12" ng-hide="orders.length === 0">
+		<thead>
+			<td class="col-lg-3"><b>Date</b></td>
+			<td class="col-lg-3"><b>Products</b></td>
+			<td class="col-lg-3"><b>Order Status</b></td>
+			<td class="col-lg-3"><b>Total Cost</b></td>
+		</thead>
+		<tbody>
+			<tr ng-repeat="order in orders">
+				<td class="col-lg-3">{{convertDate(order.date)}}</td>
+				<td class="col-lg-3"><ul class="list-unstyled" ng-repeat="item in order.storedItems"><li><a ui-sref="productDetail({productId: item.product})">{{item.title}}</a>: {{item.quantity}}</li></ul</td>
+				<td class="col-lg-3">{{order.status}}</td>
+				<td class="col-lg-3">${{order.finalCost | number: 2}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
