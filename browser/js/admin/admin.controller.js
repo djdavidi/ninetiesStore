@@ -4,7 +4,7 @@ app.controller('AdminCtrl', function ($scope,AuthService,ProductFactory,AdminFac
 			$scope.allProducts=allProducts
 			$scope.allOrders=allOrders
 			$scope.allPromos=allPromos
-			console.log(allOrders)
+			console.log(allUsers)
 			console.log("promo",allPromos)
 			$scope.getOneUser=function(id){
 				return AdminFactory.getOneUser();

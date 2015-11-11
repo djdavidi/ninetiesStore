@@ -1,4 +1,5 @@
-app.config(function ($stateProvider) {
+app.config(function ($stateProvider,$urlRouterProvider) {
+	$urlRouterProvider.when('/admin', '/admin/user');
 	$stateProvider.state('admin', {
 		url: '/admin',
 		templateUrl: 'js/admin/admin.html',
