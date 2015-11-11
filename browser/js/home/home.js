@@ -18,14 +18,23 @@ app.config(function ($stateProvider) {
                 })
                 console.log("uniqueCategories", uniqueCategories)
                 return uniqueCategories;
+            },
+            needReset:function(AuthService){
+                return AuthService.getLoggedInUser()
+                .then(function(response){
+                    console.log("respon",response.data)
+                    return response.data;
+                })
             }
         }
     });
 });
 
-app.controller('HomeCtrl', function ($scope, products, categories) {
+app.controller('HomeCtrl', function ($scope, products, categories, needReset) {
     $scope.products = products;
     $scope.categories = categories;
+    $scope.shouldReset= needReset;
+    console.log("res",needReset)
 })
 
 // Allows you to ngRepeat over a dataset from a specified index
