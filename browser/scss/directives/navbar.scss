@@ -11,12 +11,26 @@ navbar {
     max-width: 1340px;
     padding-top: 20px;
   }
+  .navbar-header {
+    #fullstackLogo {
+      // border-radius: 100%;
+      // height: 92px;
+      // width: 92px;
+      // margin-top: -20px;
+      // margin-bottom: -20px;
+    }
+  }
 
   fullstack-logo {
-    margin-top: 5px;
+    // margin-top: 5px;
+    margin-bottom: -20px;
+    margin-top: -20px;
     margin-right: 20px;
-    width: 40px;
+    width: 92px;
+    height: 92px;
+    // border-radius: 100%;
   }
+
   // nineties-logo {
   //   margin-top: 5px;
   //   margin-right: 20px;
