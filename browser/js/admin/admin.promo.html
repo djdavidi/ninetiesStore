@@ -3,8 +3,9 @@
 <h2>Current Promo Codes</h2>
 <div ng-repeat="promo in allPromos">
     <label class="labelly">Name:</label> <input type="text" ng-model="promo.name" class="inputty"/><br>
-    <label class="labelly">Discount:</label> <input type="text" ng-model="promo.percentDiscount" class="inputty"/><br>
-    <label class="labelly">Update Promo</label><button ng-click="editPromo(promo._id,promo)" class="inputty">Button</button>
+    <label class="labelly">Discount:</label> <input type="text" ng-model="promo.percentDiscount" class="inputty"><br>
+    <label class="labelly">Update Promo</label><button ng-click="editPromo(promo._id,promo)" class="inputty">Update</button>
+     <label class="labelly">Delete</label><button ng-click="deletePromo(promo._id)" class="inputty">Delete</button>
 	<br>
 	<br>
 </div>
@@ -13,8 +14,8 @@
 <h2>Create a Promo Code</h2>
 <div>
   <form novalidate class="simple-form">
-   <label class="labelly">Name:</label> <input type="text" class="inputty" ng-model="newPromo.name" /><br>
-    <label class="labelly">Discount:</label> <input class="inputty" type="number" ng-model="newPromo.percentDiscount" /><br>
+   <label class="labelly">Name:</label> <input type="text" class="inputty" ng-model="newPromo.name"><br>
+    <label class="labelly">Discount:</label> <input class="inputty" type="number" ng-model="newPromo.percentDiscount"><br>
     <label class="labelly">Submit</label><button class="inputty" ng-click="createPromo(newPromo)">New Promo</button>
   </form>
 </div>

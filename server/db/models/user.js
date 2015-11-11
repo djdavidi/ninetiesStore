@@ -42,6 +42,10 @@ var userSchema = new mongoose.Schema({
     picture: {
         type: String,
         default: "http://www.fillmurray.com/140/100"
+    },
+    reset:{
+        type:Boolean,
+        default:false
     }
 });
 

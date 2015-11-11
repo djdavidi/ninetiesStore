@@ -47,6 +47,9 @@ app.controller('AdminCtrl', function ($scope,AuthService,ProductFactory,AdminFac
 			$scope.createPromo=function(body){
 				return AdminFactory.createPromo(body);
 			}
+			$scope.deletePromo=function(id){
+				$http.delete("/api/promos/"+id);
+			}
 
 
 

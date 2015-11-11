@@ -18,10 +18,18 @@ app.config(function ($stateProvider) {
                 })
                 console.log("uniqueCategories", uniqueCategories)
                 return uniqueCategories;
+            },
+            needReset:function(AuthService){
+                return AuthService.getLoggedInUser()
+                .then(function(response){
+                    console.log("respon",response.data)
+                    return response.data;
+                })
             }
         }
     });
 });
+
 
 // app.controller('HomeCtrl', function ($scope, products, categories) {
 //     $scope.products = products;
