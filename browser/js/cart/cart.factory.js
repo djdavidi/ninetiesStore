@@ -30,10 +30,7 @@ app.factory("CartFactory",function($http){
 		promoChecker: function(enteredPromoCode){
 			return $http.get("/api/promos/" + enteredPromoCode)
 			.then(function(responsePromo){
-				console.log("responsePromo", responsePromo)
 				if (responsePromo.data){
-					console.log("responsePromo.data is:", responsePromo.data)
-					console.log("cachedCar._id is:", cachedCart)
 					$http.put("/api/cart/withPromo/" + cachedCart._id, {promo: responsePromo.data})
 					return responsePromo.data
 				}

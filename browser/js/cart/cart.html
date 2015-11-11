@@ -1,17 +1,3 @@
-<!-- <div>
-	<h1> SHOPPING CART</h1>
-	<p>{{ currentUser.name }}</p>
-	<div ng-repeat="item in currentCart">
-		<h3><a ui-sref="productDetail({productId: item.product})">{{ item.title }} </a></h3>
-		<p>Quantity:{{ item.quantity }}</p>
-		<p>Price:${{item.price | number: 2}}</p>
-		<button ng-click="removeItem(item.product)" class="btn btn-default">Remove From Cart</button>
-	</div>
-	<p>Total: ${{totalCost() | number: 2}} </p>
-	<button ng-disabled="currentCart.length < 1" ui-sref="order" class="btn btn-default">Proceed To Checkout</button>
-
-</div> -->
-
 <h3>Shopping Cart</h3>
 <p>{{ currentCart }}</p>
 <p>{{ cartProducts }}</p>
