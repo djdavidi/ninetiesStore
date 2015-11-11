@@ -197,7 +197,7 @@ router.put('/edit/:Id', function(req,res,next){
 		return order.save()
 	})
 	.then(function(updatedOrder){
-		MandrillApp(order, req.order.email, req.order.address, 'orderStatusChanged')
+		MandrillApp(updatedOrder, req.order.email, req.order.address, 'orderStatusChanged')
 		console.log("updatedOrder", updatedOrder)
 		res.status(200).send(updatedOrder)
 	})

@@ -35,7 +35,7 @@ function sendConfirmationEmail(order, email, address, customizedTemplate, type){
             email: email,
             address: address,
             orderItems: orderItems,
-            orderStatus: orderStatus
+            orderStatus: type
            });
 
           sendEmail(order.owner, email, "McFly's", "mcflys@ninetiesstore.com", "Order Confirmed", customizedTemplate);          
