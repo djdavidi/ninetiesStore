@@ -16,21 +16,29 @@
             <p> <b>Price:</b> <br> ${{ ProductDetail.price | number: 2 }} </p>
             <p> <b>Quantity:</b> <input ng-model="quantity" ></p>
             <button ng-disabled="notNumber(quantity) || quantity.length < 1" ng-click="add(ProductDetail._id, quantity)" class="btn btn-default">AddToCart</button>
+        </div>
+        <div id="bottom" class="col-md-12">
             <h3>Reviews</h3>
             <div ng-repeat="review in ProductReviews">
-                <p> <b> {{review.user.name}}</b></p>
-            	<p> <b> {{review.title}} </b> {{review.reviewRating}} <button ng-show="getLoggedInUser()._id === review.user" ng-click="removeReview(ProductDetail._id, review._id)" class="btn btn-default">X</button> </p>
+                <p> <b>Posted By: {{review.user.name}}</b></p>
+            	<p> <b> {{review.title}} </b> {{review.reviewRating}} Stars <button ng-show="getLoggedInUser()._id === review.user" ng-click="removeReview(ProductDetail._id, review._id)" class="btn btn-default">X</button> </p>
             	<p> {{ review.content }} </p></div>
             <p ng-hide="isAuthenticated()">To leave a review, please sign in.</p>
             <div ng-show="isAuthenticated()">
             	<p>Leave a review!</p>
-            	 <form >
-            	Title: <input type="title" ng-model="review.title"/>
+            	<form>
+            	Title: <input class="review-input" type="title" ng-model="review.title">
+                Content: <input class="review-input" type="content" ng-model="review.content" size="70" height="20"><br>
                 <br>
-                Content: <input type="content" ng-model="review.content" /><br />
-                Rating: <input type="rating" ng-model="review.reviewRating"/>
+                Rating: <select class="review-input" ng-model="review.reviewRating">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
                 <br>
-                <input type="submit" ng-click="postReview(ProductDetail._id, review)" value="Post Review" />
+                <input type="submit" ng-click="postReview(ProductDetail._id, review)" value="Post Review">
               </form>
              </div>
         </div>
