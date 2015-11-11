@@ -17,7 +17,7 @@
 <div ng-repeat="order in allOrders |filter:{status:search}">
 	 <label class="labelly">Owner:</label><input type="text" class="inputty" ng-model="order.owner.name" value="{{order.owner}}" /></input>
 	  <label class="labelly">Status:</label><input type="text" class="inputty"ng-model="order.status" value="{{order.status}}" /></input>
-	<button ng-click="editOrder(order_id,order)">Update this Order</button>
+	<button ng-click="editOrder(order._id,order.status)">Update this Order</button>
 </div>
 </div>
 
