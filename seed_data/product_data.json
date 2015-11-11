@@ -3,7 +3,7 @@
 		"title": "Kyle From Next Door",
 		"price": "700",
 		"description": "The modern day Godzilla",
-		"quantity": "1",
+		"quantity": "12",
 		"productRating": 3,
 		"category": "Laser Cat",
 		"picture": "http://www.rudyland.com/wp-content/uploads/2011/07/tumblr_l7qee2MuJO1qzzhpp.jpg",
@@ -13,7 +13,7 @@
 		"title": "Penelope",
 		"price": "1300",
 		"description": "Destroy of Worlds",
-		"quantity": "1",
+		"quantity": "3",
 		"category": "Laser Cat",
 		"picture": "http://orig10.deviantart.net/b4fd/f/2014/359/5/0/laser_cat_attacks_by_kiribbean-d4xfsjs.jpg"
 	},
@@ -21,7 +21,7 @@
 		"title": "Leo",
 		"price": "4000",
 		"description": "Stone Cold Steve Austin, but a cat",
-		"quantity": "1",
+		"quantity": "4",
 		"category": "Laser Cat",
 		"picture": "http://data.whicdn.com/images/79011117/large.jpg"
 	},
@@ -29,55 +29,55 @@
 		"title": "Prancing Lily",
 		"price": "3000",
 		"description": "RAINS DEATH FROM ABOVE",
-		"quantity": "1",
+		"quantity": "23",
 		"category": "Laser Cat",
 		"picture": "https://s-media-cache-ak0.pinimg.com/236x/5e/40/0e/5e400ef29fa117b28f1ef5bd224732be.jpg"
 	},
 	{
 		"title": "Bart Simpson",
 		"price": "42",
-		"description": "Rebel",
-		"quantity": "1",
+		"description": "Ayy carumba, lmao.",
+		"quantity": "100",
 		"category": "Simpsons",
 		"picture": "http://bartsimpsonpictures.squarelogic.net/bart-simpson-11.gif"
 	},
 	{
 		"title": "Lisa Simpson",
 		"price": "39",
-		"description": "Sassy",
-		"quantity": "1",
+		"description": "Best sax player ever, I cri evertim.",
+		"quantity": "100",
 		"category": "Simpsons",
 		"picture": "http://www.simpsoncrazy.com/content/pictures/lisa/LisaSimpson3.gif"
 	},
 	{
 		"title": "Homer Simpson",
 		"price": "39",
-		"description": "Drunk",
-		"quantity": "1",
+		"description": "Remember Duff Man? Oh YEAHHHH!",
+		"quantity": "100",
 		"category": "Simpsons",
 		"picture": "http://rs141.pbsrc.com/albums/r73/salem21_2006/homer-simpson.gif~c200"
 	},
 	{
 		"title": "Marge Simpson",
 		"price": "39",
-		"description": "Blue",
-		"quantity": "1",
+		"description": "Mom of the year FOR LIFE.",
+		"quantity": "100",
 		"category": "Simpsons",
 		"picture": "http://i.imgur.com/nrBMnaB.png"
 	},
 	{
 		"title": "Nerf Gun",
 		"price": "7",
-		"description": "Very Non-Lethal",
-		"quantity": "1",
+		"description": "Do not shoot the elderly. It will sadden them.",
+		"quantity": "42",
 		"category": "Toys",
 		"picture": "http://i.ebayimg.com/00/s/NjEwWDYxMA==/z/5oYAAOxyEqNTlwUC/$_32.JPG"
 	},
 	{
-		"title": "Socker Boppers",
+		"title": "Sockem Boppers",
 		"price": "7",
-		"description": "Knock your friends out!",
-		"quantity": "1",
+		"description": "Verified by Alan Rickman, more fun than a pillow fight.",
+		"quantity": "22",
 		"category": "Toys",
 		"picture": "http://ecx.images-amazon.com/images/I/81myG2GZ6FL._SL1500_.jpg"
 	},
@@ -85,7 +85,7 @@
 		"title": "3D View Master",
 		"price": "14",
 		"description": "Kinda looks like Wall-E, lol",
-		"quantity": "1",
+		"quantity": "45",
 		"category": "Toys",
 		"picture": "http://www.androidpolice.com/wp-content/uploads/2015/02/nexus2cee_raw-1328272073.jpg"
 	},
@@ -93,8 +93,144 @@
 		"title": "Furby",
 		"price": "52",
 		"description": "Guaranteed to kill you in your sleep, or your money back",
-		"quantity": "1",
+		"quantity": "10",
 		"category": "Toys",
 		"picture": "http://www.hasbro.com/common/productimages/en_US/0e08edaa50569047f52923776bb37ef4/b271a27e5a0db11de3dc87990ade91a8b24a235c.jpg"
+	},
+	{
+		"title": "Aladdin on VHS",
+		"price": "15",
+		"description": "I miss Robin Williams.",
+		"quantity": "24",
+		"category": "Movies",
+		"picture": "http://www.google.com/imgres?imgurl=http://t2.gstatic.com/images%3Fq%3Dtbn:ANd9GcSsSEOwh6rx0SSBgd5IHoAZMaU3jLtyxMfFbtfJFTjc-SYHsFQL&imgrefurl=http://t2.gstatic.com/images?q%3Dtbn:ANd9GcSsSEOwh6rx0SSBgd5IHoAZMaU3jLtyxMfFbtfJFTjc-SYHsFQL&h=1080&w=719&tbnid=Rsug-ZpT9OKJgM:&tbnh=186&tbnw=123&usg=__U-v7oBkHWRjovfDNmxl9U01t8KM=&docid=I5WgRs5fTIwAAM&itg=1"
+	},
+	{
+		"title": "Dunkaroos",
+		"price": "3.5",
+		"description": "Yummy snack, very tasty.",
+		"quantity": "284",
+		"category": "Food",
+		"picture": "https://www.google.com/search?q=dunkaroos&safe=off&espv=2&biw=1280&bih=653&tbm=isch&imgil=lp-HbxsM2b_SQM%253A%253BsXviHYylHKjCaM%253Bhttp%25253A%25252F%25252Fwww.manrepeller.com%25252Fbest_of_internet%25252Fare-you-looking-for-dunkaroos.html&source=iu&pf=m&fir=lp-HbxsM2b_SQM%253A%252CsXviHYylHKjCaM%252C_&usg=__EMAUoU7_asE-XQFFXgOEPtWyRds%3D&ved=0CCgQyjdqFQoTCNSO7ZyuiMkCFUM4JgodT6YLzA&ei=LDNDVtTIJMPwmAHPzK7gDA#imgrc=lp-HbxsM2b_SQM%3A&usg=__EMAUoU7_asE-XQFFXgOEPtWyRds%3D"
+	},
+	{
+		"title": "Monica Lewinsky Poster",
+		"price": "19.99",
+		"description": "Very hot lady, did dirty things.",
+		"quantity": "31",
+		"category": "Celebrities",
+		"picture": "https://usatlife.files.wordpress.com/2014/05/ap-d-lewinsky-22-retribution.jpg?w=1000&h=750"
+	},
+	{
+		"title": "Nevermind (Nirvana)",
+		"price": "25.5",
+		"description": "Kurt Kobain gets me.",
+		"quantity": "241",
+		"category": "Music",
+		"picture": "http://cdn.pastemagazine.com/www/blogs/lists/nevermind.jpg"
+	},
+	{
+		"title": "Cabbage Patch Kids",
+		"price": "56.49",
+		"description": "Friends for life. Allegedly.",
+		"quantity": "10",
+		"category": "Toys",
+		"picture": "http://cdn.sheknows.com/articles/2013/10/Elizabeth_S/vintage-style-cabbage-patch-dolls.jpg"
+	},
+	{
+		"title": "Nintendo 64",
+		"price": "100",
+		"description": "Nintendo went downhill after this.",
+		"quantity": "120",
+		"category": "Video Games",
+		"picture": "https://upload.wikimedia.org/wikipedia/commons/e/e9/Nintendo-64-wController-L.jpg"
+	},
+	{
+		"title": "Mouse Trap",
+		"price": "30",
+		"description": "Who cut the cheese?",
+		"quantity": "73",
+		"category": "Toys",
+		"picture": "https://upload.wikimedia.org/wikipedia/en/b/b3/Mouse_Trap_Board_and_Boxjpg.jpg"
+	},
+	{
+		"title": "Star Fox 64",
+		"price": "49.99",
+		"description": "Obvious do a barrel roll referrence.",
+		"quantity": "40",
+		"category": "Video Games",
+		"picture": "https://upload.wikimedia.org/wikipedia/en/6/63/StarFox64_N64_Game_Box.jpg"
+	},
+	{
+		"title": "Gameboy Color",
+		"price": "69.99",
+		"description": "Pokemon games, pls.",
+		"quantity": "16",
+		"category": "Video Games",
+		"picture": "http://cdn2.bigcommerce.com/server3000/6334b/product_images/uploaded_images/gameboycolor.png?t=1418350528"
+	},
+	{
+		"title": "Rugrats on VHS",
+		"price": "23",
+		"description": "The orange tapes were always the best.",
+		"quantity": "10",
+		"category": "Television",
+		"picture": "http://www.neighborhoodarchive.com/images/misc/cameos/rugrats/0001.jpg"
+	},
+	{
+		"title": "Push Up Pops",
+		"price": "5",
+		"description": "Creamy goodness.",
+		"quantity": "102",
+		"category": "Food",
+		"picture": "http://images.complex.com/complex/image/upload/t_article_image/pmqgdreaz56msss6buvu.jpg"
+	},
+	{
+		"title": "Play-Doh",
+		"price": "10",
+		"description": "Don't eat or you will poop funny colors.",
+		"quantity": "32",
+		"category": "Toys",
+		"picture": "http://ecx.images-amazon.com/images/I/81tEFtVFzBL._SY355_.jpg"
+	},
+	{
+		"title": "Goosebumps: The Entire Collection",
+		"price": "250",
+		"description": "Read for spooks",
+		"quantity": "8",
+		"category": "Books",
+		"picture": "http://i1215.photobucket.com/albums/cc519/mahmoudahmed92/bDSFVxV.jpg"
+	},
+	{
+		"title": "Enema of the State (Blink-182)",
+		"price": "24.99",
+		"description": "Awl tha, smawl theengs.",
+		"quantity": "50",
+		"category": "Music",
+		"picture": "http://www.billboard.com/files/blink-182-enema-of-the-state.jpg"
+	},
+	{
+		"title": "Slime",
+		"price": "50",
+		"description": "Tastes oddly good.",
+		"quantity": "5",
+		"category": "Miscellaneous",
+		"picture": "http://cdn.trendhunterstatic.com/thumbs/nickelodeon-slime-your-class.jpeg"
+	},
+	{
+		"title": "Where's Waldo?",
+		"price": "16",
+		"description": "Back when it was a challenge.",
+		"quantity": "25",
+		"category": "Books",
+		"picture": "https://upload.wikimedia.org/wikipedia/en/c/c1/WheresWaldoNesBox.jpg"
+	},
+	{
+		"title": "Bill Nye the Science Guy on VHS",
+		"price": "18",
+		"description": "So much knowledge",
+		"quantity": "21",
+		"category": "Television",
+		"picture": "http://cdn.viewmixed.com/wp-content/uploads/2014/10/bill-nye-the-science-guy-original.jpg"
 	}
 ]
