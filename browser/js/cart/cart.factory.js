@@ -31,8 +31,6 @@ app.factory("CartFactory",function($http){
 			return $http.get("/api/promos/" + enteredPromoCode)
 			.then(function(responsePromo){
 				if (responsePromo.data){
-					console.log("responsePromo.data is:", responsePromo.data)
-					console.log("cachedCar._id is:", cachedCart)
 					$http.put("/api/cart/withPromo/" + cachedCart._id, {promo: responsePromo.data})
 					return responsePromo.data
 				}
@@ -48,7 +46,7 @@ app.factory("CartFactory",function($http){
 			})
 		},
 		updateQuantity: function(itemId, quantity) {
-			return $http.put("/api/cart/updateQuantity", {itemId: itemId, quantity: quantity})
+			return $http.put("/api/cart/" + itemId + "/updateQuantity", {quantity: quantity})
 			.then(function(response){
 				if (response.data.storedItems) {
 					angular.copy(response.data.storedItems, cachedCart);

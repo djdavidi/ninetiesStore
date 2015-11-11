@@ -12,10 +12,7 @@ app.controller('cartCtrl', function ($scope, CartFactory, cartProducts, retrieve
 		})
 	}
 	$scope.updateProdQuantity = function(id, quantity) {
-
-		console.log("updatedprodquantity", id, quantity)
 		CartFactory.updateQuantity(id, quantity)
-
 	}
 	$scope.totalCost = function() {
 		var sum = 0;
@@ -27,7 +24,7 @@ app.controller('cartCtrl', function ($scope, CartFactory, cartProducts, retrieve
 	$scope.numItems = function () {
 		var num = 0;
 		$scope.currentCart.forEach(function(item) {
-			num += item.quantity;
+			num += parseInt(item.quantity);
 		})
 		return num;
 	}

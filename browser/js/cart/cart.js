@@ -28,4 +28,4 @@ app.config(function($stateProvider){
 			}
 		}
 	})
-})
+});
