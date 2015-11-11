@@ -13,7 +13,8 @@
 
 <div class="col-md-6">
 <h2>ORDERS</h2>
-<div ng-repeat="order in allOrders">
+<label class="labelly">Search: <input class="inputty"ng-model="searchText"></label>
+<div ng-repeat="order in allOrders |filter:{status:search}">
 	 <label class="labelly">Owner:</label><input type="text" class="inputty" ng-model="order.owner.name" value="{{order.owner}}" /></input>
 	  <label class="labelly">Status:</label><input type="text" class="inputty"ng-model="order.status" value="{{order.status}}" /></input>
 	<button ng-click="editOrder(order_id,order)">Update this Order</button>
