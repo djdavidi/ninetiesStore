@@ -78,7 +78,8 @@ router.post('/checkout', function(req,res,next){
 			address: req.body.address,
 			email: req.body.email,
 			status: 'Processing',
-			finalCost: req.body.currentCost
+			finalCost: req.body.currentCost,
+			date: Date.now()
 		})
 		.then(function(order) {
 			if (req.session.cart.promoCode) {
@@ -86,7 +87,7 @@ router.post('/checkout', function(req,res,next){
 			}
 			req.session.cart = []
 			req.session.cart.promoCode = null
-			MandrillApp(order, req.body.email, req.body.address)
+			MandrillApp(order, req.body.email, req.body.address, 'orderPlaced')
 			res.send(order)
 		})
 		.then(null, next)
@@ -96,6 +97,7 @@ router.post('/checkout', function(req,res,next){
 		req.order.address = req.body.address
 		req.order.status = 'Processing'
 		req.order.finalCost = req.body.currentCost
+		req.order.date = Date.now()
 		return req.order.save()
 		// Order.findByIdAndUpdate(cartId, {
 		// 	$set: { 
@@ -106,7 +108,7 @@ router.post('/checkout', function(req,res,next){
 		// 	}
 		// })
 		.then(function(order){
-			MandrillApp(order, req.body.email, req.body.address)
+			MandrillApp(order, req.body.email, req.body.address, 'orderPlaced')
 			res.send(order)
 		})
 		.then(null, next)
@@ -129,12 +131,9 @@ router.post('/checkout', function(req,res,next){
 // 		res.send(200)
 // 	}
 // })
-
-router.put('/updateQuantity', function (res, req, next) {
-	console.log("coming from the router")
-	var itemId = req.body.itemId;
+router.put('/:itemId/updateQuantity', function (req, res, next) {
+	var itemId = req.params.itemId;
 	var quantity = req.body.quantity;
-
 	if (req.user){
 		req.order.add(itemId, quantity)
 		.then(function(updatedItem){
@@ -151,8 +150,9 @@ router.put('/updateQuantity', function (res, req, next) {
     }		
 })
 
+
 //Add a new item to cart
-router.put('/:itemId', function(req,res,next){
+router.put('/:itemId', function(req,res,next){	
 	Product.findById(req.params.itemId).exec()
 	.then(function(product) {
 		if(!req.user){
@@ -162,7 +162,7 @@ router.put('/:itemId', function(req,res,next){
 			var foundItemWithin;
 			req.session.cart.forEach(function(item) {
 				if (item.product === req.params.itemId) {
-					item.quantity ++
+					item.quantity++
 					foundItemWithin = true
 				}
 			})
@@ -186,6 +186,20 @@ router.put('/:itemId', function(req,res,next){
 				next(err);
 			});
 		}
+	})
+})
+
+//Edit an Order (Status)
+router.put('/edit/:Id', function(req,res,next){
+	Order.findById(req.params.Id)
+	.then(function(order){
+		order.set(req.body)
+		return order.save()
+	})
+	.then(function(updatedOrder){
+		MandrillApp(updatedOrder, req.order.email, req.order.address, 'orderStatusChanged')
+		console.log("updatedOrder", updatedOrder)
+		res.status(200).send(updatedOrder)
 	})
 })
 

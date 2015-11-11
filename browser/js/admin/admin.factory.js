@@ -24,8 +24,10 @@ app.factory("AdminFactory",function($http){
 				.then(resp);
 			},
 			editOrder:function(id,change){
-				return $http.put("api/cart/"+id,change)
-				.then(resp);
+				return $http.put("api/cart/edit/"+id,{status:change})
+				.then(function(resp){
+					console.log("order edited:", resp)
+				});
 			},
 			getOneOrder:function(){
 				return $http.get("/api/cart/"+id)
@@ -41,7 +43,7 @@ app.factory("AdminFactory",function($http){
 			},
 			createPromo:function(body){
 				return $http.post("/api/promos/",body)
-				.then(resp);
+				.then(resp)
 			}
 
 

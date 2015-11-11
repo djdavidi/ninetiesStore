@@ -61,7 +61,7 @@ router.delete('/:userId', function (req, res, next) {
 
 // Get a specific user's reviews
 router.get('/:userId/reviews', function (req, res, next) {
-	Review.find({user: req.user._id})
+	Review.find({user: req.user._id}).populate('product')
 	.then(function (reviews) {
 		res.json(reviews)
 	})

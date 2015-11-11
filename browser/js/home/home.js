@@ -30,12 +30,11 @@ app.config(function ($stateProvider) {
     });
 });
 
-app.controller('HomeCtrl', function ($scope, products, categories, needReset) {
-    $scope.products = products;
-    $scope.categories = categories;
-    $scope.shouldReset= needReset;
-    console.log("res",needReset)
-})
+
+// app.controller('HomeCtrl', function ($scope, products, categories) {
+//     $scope.products = products;
+//     $scope.categories = categories;
+// })
 
 // Allows you to ngRepeat over a dataset from a specified index
 app.filter('startFrom', function() {

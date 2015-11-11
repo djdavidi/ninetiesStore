@@ -28,6 +28,8 @@ app.controller('AdminCtrl', function ($scope,AuthService,ProductFactory,AdminFac
 				return ProductFactory.updateProduct(id,product)
 			}
 			$scope.editOrder=function(id,change){
+				console.log("id is:", id)
+				console.log("change is:", change)
 				return AdminFactory.editOrder(id,change);
 			}
 

@@ -14,7 +14,11 @@ router.get('/', function(req, res, next) {
 router.post('/', adminCheck, function(req, res, next) {
 	Promo.create(req.body)
 	.then(function(promo) {
-		res.status(201).send(promo)
+		console.log("router.promo - post created", promo)
+		res.status(201)
+	})
+	.then(null, function(outcome){
+		console.log("outcome", outcome)
 	})
 	.then(null, next)
 })
@@ -27,7 +31,6 @@ var encryptpromoCode = function (plainText) {
 };
 
 //checkPromoCode
-
 router.get('/:id', function(req, res, next) {
 	var userEnteredPromo = req.params.id
 	console.log("router-promos userEnteredPromo", userEnteredPromo)
