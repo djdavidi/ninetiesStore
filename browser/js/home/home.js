@@ -18,14 +18,14 @@ app.config(function ($stateProvider) {
                 })
                 console.log("uniqueCategories", uniqueCategories)
                 return uniqueCategories;
-            },
-            needReset:function(AuthService){
-                return AuthService.getLoggedInUser()
-                .then(function(response){
-                    console.log("respon",response.data)
-                    return response.data;
-                })
             }
+            // needReset:function(AuthService){
+            //     return AuthService.getLoggedInUser()
+            //     .then(function(response){
+            //         console.log("respon",response.data)
+            //         return response.data;
+            //     })
+            // }
         }
     });
 });
