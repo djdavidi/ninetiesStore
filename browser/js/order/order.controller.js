@@ -2,6 +2,7 @@ app.controller('orderCtrl', function ($scope, $state, CartFactory, retrievedOrde
 	$scope.currentOrder = retrievedOrder;
 	$scope.currentUser = loggedInUser;
 	$scope.cartProducts = cartProducts;
+	$scope.promoDiscount = 1;
 	$scope.currentCost = $scope.currentOrder.reduce(function(total, curVal){
 		return total + curVal.price * curVal.quantity
 	}, 0)
@@ -25,12 +26,12 @@ app.controller('orderCtrl', function ($scope, $state, CartFactory, retrievedOrde
 
 		CartFactory.promoChecker($scope.promocode)
 		.then(function(promo){
-			if (promo){
-				var newCost = $scope.currentCost - ($scope.currentCost * (promo.percentDiscount/100))
-				$scope.currentCost = newCost;
-				$scope.couponApplied = true;
-			} else {
-			}
+			$scope.promoDiscount = promo.percentDiscount/100;
+			// if (promo){
+			// 	var newCost = $scope.currentCost - ($scope.currentCost * (promo.percentDiscount/100))
+			// 	$scope.currentCost = newCost;
+			// 	$scope.couponApplied = true;
+			// }
 		});
 	}
 

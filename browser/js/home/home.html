@@ -10,7 +10,7 @@
             </select>
             
             <label for="searchInput">Search</label>
-            <input ng-model="query.title" id="searchInput"></input>
+            <input ng-submit="searchRedirect(query)" ng-model="query.title" id="searchInput"></input>
         </div>
 
         <!-- <carousel interval="2000">
@@ -25,7 +25,7 @@
             <div class="col-md-6" id="categoryBlock" style="position:absolute;left:0px;">
                 <li id="mainImg" ng-repeat="product in products.slice(0,4)" ng-show="$first">
                     <a ui-sref="productDetail({productId: product._id})">
-                        <img src="{{ product.picture }}"/>
+                        <img ng-src="{{ product.picture }}"/>
                     </a>
                 </li>
                 <div id="sideImg">
