@@ -60,6 +60,6 @@
 		<small>Estimated Tax: ${{ currentCost*0.06 | number: 2}}</small>
 		<hr>
 		<h4>Order Total: ${{ promoDiscount*currentCost*1.11 | number: 2}}</h4>
-		<button ng-click="checkout()" type="submit" class="btn btn-default">Purchase</button>
+		<button ng-click="checkout(order.email, orderAddress, currentCost)" type="submit" class="btn btn-default">Purchase</button>
 	</div>
 </div>
