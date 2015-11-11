@@ -15,7 +15,7 @@ admin user
 <div ng-repeat="order in allOrders">
 	 Owner:<input type="text" ng-model="order.owner.name" value="{{order.owner}}" /></input>
 	  Status:<input type="text" ng-model="order.status" value="{{order.status}}" /></input>
-	<button ng-click="editOrder(order_id,order)">Update this Order</button>
+	<button ng-click="editOrder(order._id,order.status)">Update this Order</button>
 </div>
 </div>
 

@@ -5,29 +5,37 @@ var mandrillKey = require('../../mandrillKey.js');
 var mongoose = require('mongoose')
 var Product = mongoose.model('Product')
 
-var emailTemplate = fs.readFileSync(path.join(__dirname, '/email_template.html'), 'utf8');
+var templateOrderPlaced = fs.readFileSync(path.join(__dirname, '/email_template.html'), 'utf8');
+var templateOrderStatusChanged = fs.readFileSync(path.join(__dirname, '/orderStatus_template.html'), 'utf8');
 
 var mandrill = require('mandrill-api/mandrill');
 var mandrill_client = new mandrill.Mandrill(mandrillKey);
  
-function sendConfirmationEmail(order, email, address, customizedTemplate){ 
+function sendConfirmationEmail(order, email, address, customizedTemplate, type){ 
           var orderItems = [];
           // var orderItemTitles = [];
           // var orderCost;
-
+          switch (type) {
+            case 'orderPlaced':
+              var copyTemplate = templateOrderPlaced;
+              break;
+            case 'orderStatusChanged':
+              var copyTemplate = templateOrderStatusChanged;
+              break;
+          }
           order.storedItems.forEach(function(el){
             orderItems.push(el)
           })
 
 
 
-          var copyTemplate = emailTemplate;
           var customizedTemplate = ejs.render(
             copyTemplate,  {
             firstName: order.owner, 
             email: email,
             address: address,
-            orderItems: orderItems
+            orderItems: orderItems,
+            orderStatus: orderStatus
            });
 
           sendEmail(order.owner, email, "McFly's", "mcflys@ninetiesstore.com", "Order Confirmed", customizedTemplate);          

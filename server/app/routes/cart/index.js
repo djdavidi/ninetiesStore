@@ -86,7 +86,7 @@ router.post('/checkout', function(req,res,next){
 			}
 			req.session.cart = []
 			req.session.cart.promoCode = null
-			MandrillApp(order, req.body.email, req.body.address)
+			MandrillApp(order, req.body.email, req.body.address, 'orderPlaced')
 			res.send(order)
 		})
 		.then(null, next)
@@ -106,7 +106,7 @@ router.post('/checkout', function(req,res,next){
 		// 	}
 		// })
 		.then(function(order){
-			MandrillApp(order, req.body.email, req.body.address)
+			MandrillApp(order, req.body.email, req.body.address, 'orderPlaced')
 			res.send(order)
 		})
 		.then(null, next)
@@ -152,7 +152,7 @@ router.put('/updateQuantity', function (res, req, next) {
 })
 
 //Add a new item to cart
-router.put('/:itemId', function(req,res,next){
+router.put('/:itemId', function(req,res,next){	
 	Product.findById(req.params.itemId).exec()
 	.then(function(product) {
 		if(!req.user){
@@ -162,7 +162,7 @@ router.put('/:itemId', function(req,res,next){
 			var foundItemWithin;
 			req.session.cart.forEach(function(item) {
 				if (item.product === req.params.itemId) {
-					item.quantity ++
+					item.quantity++
 					foundItemWithin = true
 				}
 			})
@@ -186,6 +186,20 @@ router.put('/:itemId', function(req,res,next){
 				next(err);
 			});
 		}
+	})
+})
+
+//Edit an Order (Status)
+router.put('/edit/:Id', function(req,res,next){
+	Order.findById(req.params.Id)
+	.then(function(order){
+		order.set(req.body)
+		return order.save()
+	})
+	.then(function(updatedOrder){
+		MandrillApp(order, req.order.email, req.order.address, 'orderStatusChanged')
+		console.log("updatedOrder", updatedOrder)
+		res.status(200).send(updatedOrder)
 	})
 })
 
