@@ -2,7 +2,21 @@ app.config(function ($stateProvider) {
 	$stateProvider.state('admin', {
 		url: '/admin',
 		templateUrl: 'js/admin/admin.html',
-		controller: 'AdminCtrl'
+		controller: 'AdminCtrl',
+		resolve:{
+			allUsers:function(AdminFactory){
+				return AdminFactory.getAllUser()
+			},
+			allProducts: function (ProductFactory) {                
+                return ProductFactory.getAllProducts();
+            },
+            allOrders:function(AdminFactory){
+            	return AdminFactory.getAllOrders();
+            },
+            allPromos:function(AdminFactory){
+            	return AdminFactory.getAllPromos();
+            }
+		}
 	})
 })
 .config(function ($stateProvider) {

@@ -1,12 +1,34 @@
 <div>
+<div class="col-sm-6">
+<h2> Current products</h2>
+<div ng-repeat="product in allProducts">
+	 <label class="labelly">Title:</label> <input type="text" ng-model="product.title" class="inputty" /><br>
+    <label class="labelly">Price:</label> <input type="number" ng-model="product.price"class="inputty" /><br>
+    <label class="labelly">Description:</label> <input type="text" ng-model="product.description" class="inputty"/><br>
+    <label class="labelly">Category:</label> <input type="text" ng-model="product.category" class="inputty"/><br>
+    <label class="labelly">Picture: </label><input type="text" ng-model="product.picture" class="inputty"/><br>
+    <label class="labelly">Quantity:</label> <input type="text" ng-model="product.quantity" class="inputty"/><br>
+    <label class="labelly">Update Product</label><button ng-click="editProduct(product._id,product)" class="inputty">Button</button>
+	<br>
+	<br>
+</div>
+</div>
 
+<div class="col-sm-6">
+<h2> Create Product</h2>
+<div>Create a product
+  <form novalidate class="simple-form">
+    Title: <input type="text" ng-model="newProduct.title" /><br>
+    Price: <input type="number" ng-model="newProduct.price" /><br>
+    Description: <input type="text" ng-model="newProduct.description" /><br>
+    Category: <input type="text" ng-model="newProduct.category" /><br>
+    Picture: <input type="text" ng-model="newProduct.picture" /><br>
+    Quantity: <input type="text" ng-model="newProduct.quantity" /><br>
+    <input type="submit" ng-click="createProduct(newProduct)"/>
+  </form>
 
-admin product
-
-
-
-
-
+</div>
+</div>
 
 
 	

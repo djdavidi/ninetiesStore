@@ -4,6 +4,7 @@ var Order = mongoose.model('Order')
 var Product = mongoose.model('Product')
 var MandrillApp = require('../../mandrill.js') 
 
+
 router.use('/', function (req, res, next) {
 	console.log("eeeeeeeeeee",req.user)
 	Order.findOne({ owner: req.user , status: 'Created'})
@@ -28,46 +29,6 @@ router.use('/', function (req, res, next) {
 //Get current order
 router.get('/', function(req, res, next){
 	res.send(req.order || req.session.cart)
-})
-
-//Add a new item to cart
-
-router.put('/:itemId', function(req,res,next){
-	Product.findById(req.params.itemId).exec()
-	.then(function(product) {
-		if(!req.user){
-			if(!req.session.cart){
-				req.session.cart=[];
-			}
-			var foundItemWithin;
-			req.session.cart.forEach(function(item) {
-				if (item.product === req.params.itemId) {
-					item.quantity ++
-					foundItemWithin = true
-				}
-			})
-			if (!foundItemWithin) {
-				req.session.cart.push({
-					title: product.title,
-					price: product.price,
-					product: req.params.itemId,
-					quantity: req.body.quantity || 1
-				});
-			}
-			res.send(req.session.cart)
-		}
-		else{
-			req.order.add(req.params.itemId,req.body.quantity)
-			.then(function(updatedItem){
-				console.log("updatedItem", updatedItem)
-				res.status(200).send(updatedItem)
-			})
-			.then(null, function(err) {
-				// console.error(err.stack)
-				next(err);
-			});
-		}
-	})
 })
 
 //Remove an item from cart
@@ -111,7 +72,6 @@ router.put('/withPromo', function(req,res,next){
 
 //Checkout(buy) order and send Email
 router.post('/checkout', function(req,res,next){
-	console.log("req.user", req.user)
 	if (!req.user) {
 		Order.create({
 			storedItems : req.session.cart,
@@ -174,12 +134,60 @@ router.put('/updateQuantity', function (res, req, next) {
 	console.log("coming from the router")
 	var itemId = req.body.itemId;
 	var quantity = req.body.quantity;
-	console.log("req.body", req.body)
 
+	if (req.user){
+		req.order.add(itemId, quantity)
+		.then(function(updatedItem){
+			res.status(200).send(updatedItem)
+		})
+		.then(null, next);
+	} else {
+	     req.session.cart.forEach(function(elem, index){
+	        if (elem.product == itemId) {
+	            req.session.cart[index].quantity = quantity; 
+	        }
+    	})
+		res.status(200).send(req.session.cart)
+    }		
 })
 
-
-
+//Add a new item to cart
+router.put('/:itemId', function(req,res,next){
+	Product.findById(req.params.itemId).exec()
+	.then(function(product) {
+		if(!req.user){
+			if(!req.session.cart){
+				req.session.cart=[];
+			}
+			var foundItemWithin;
+			req.session.cart.forEach(function(item) {
+				if (item.product === req.params.itemId) {
+					item.quantity ++
+					foundItemWithin = true
+				}
+			})
+			if (!foundItemWithin) {
+				req.session.cart.push({
+					title: product.title,
+					price: product.price,
+					product: req.params.itemId,
+					quantity: req.body.quantity || 1
+				});
+			}
+			res.send(req.session.cart)
+		}
+		else{
+			req.order.add(req.params.itemId,req.body.quantity)
+			.then(function(updatedItem){
+				res.status(200).send(updatedItem)
+			})
+			.then(null, function(err) {
+				// console.error(err.stack)
+				next(err);
+			});
+		}
+	})
+})
 
 
 module.exports = router;
