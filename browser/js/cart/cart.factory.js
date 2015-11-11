@@ -48,7 +48,7 @@ app.factory("CartFactory",function($http){
 			})
 		},
 		updateQuantity: function(itemId, quantity) {
-			return $http.put("/api/cart/updateQuantity", {itemId: itemId, quantity: quantity})
+			return $http.put("/api/cart/" + itemId + "/updateQuantity", {quantity: quantity})
 			.then(function(response){
 				if (response.data.storedItems) {
 					angular.copy(response.data.storedItems, cachedCart);

@@ -3,11 +3,39 @@
 <h4>Name: {{user.name}}</h4>
 <h4>Email: {{user.email}}</h4>
 <h4>My Reviews</h4>
-<ul ng-repeat="review in reviews">
-	<li>{{review}}</li>
-</ul>
+<p ng-show="reviews.length === 0">You have not written any reviews.</p>
+<table ng-hide="reviews.length === 0">
+	<thead>
+		<td><b>Date</b></td>
+		<td><b>Title</b></td>
+		<td><b>Product</b></td>
+		<td><b>Review</b></td>
+	</thead>
+	<tbody>
+		<tr ng-repeat="review in reviews">
+			<td>{{convertDate(review.date)}}</td>
+			<td>{{review.title}}</td>
+			<td>{{review.product.title}}</td>
+			<td>{{review.content}}</td>
+		</tr>
+	</tbody>
+</table>
 <h4>My Orders</h4>
-<ul ng-repeat="order in orders">
-	<p ng-show="orders.length === 0">You have not placed any orders.</p>
-	<li ng-show="order.status!=='Created'">{{order}}</li>
-</ul>
+<p ng-show="orders.length === 0">You have not placed any orders.</p>
+<table ng-hide="orders.length === 0">
+	<p ng-show="reviews.length === 0">You have not written any reviews.</p>
+	<thead ng-hide="reviews.length === 0">
+		<td><b>Date</b></td>
+		<td><b>Products</b></td>
+		<td><b>Order Status</b></td>
+		<td><b>Cost</b></td>
+	</thead>
+	<tbody>
+		<tr ng-repeat="order in orders" ng-show="order.status!=='Created'">
+			<td>{{convertDate(order.date)}}</td>
+			<td><ul ng-repeat="item in order.storedItems"><li><a ui-sref="productDetail({productId: item.product})">{{item.title}}</a></li></ul</td>
+			<td>{{order.status}}</td>
+			<td>{{order.finalCost}}</td>
+		</tr>
+	</tbody>
+</table>

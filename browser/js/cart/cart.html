@@ -49,9 +49,9 @@
 			            		<option value="4">4</option>
 			            		<option value="5">5</option>
 			            	</select>
-			            	<button ng-click="updateProdQuantity(item.product, quantity)" class="btn btn-default">update</button>
+<!-- 			            	<button ng-click="updateProdQuantity(item.product, quantity)" class="btn btn-default">update</button> -->
 
-							<p>Qty: {{ quantity }}</p><p>Price: ${{item.price | number: 2}}</p>
+							<p>Qty: {{ item.quantity }}</p><p>Price: ${{item.price | number: 2}}</p>
 							<!-- <p>Qty: {{ item.quantity }}</p><p>Price: ${{item.price | number: 2}}</p> -->
 							<button ng-click="removeItem(item.product, $index)" class="btn btn-default">Remove From Cart</button>
 							
