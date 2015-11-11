@@ -3,9 +3,6 @@ app.controller('orderCtrl', function ($scope, $state, CartFactory, retrievedOrde
 	$scope.currentUser = loggedInUser;
 	$scope.cartProducts = cartProducts;
 	$scope.promoDiscount = 1;
-
-	// $scope.orderAddress = $scope.order.address.street + ", " + $scope.order.address.city + ", " + $scope.order.address.state + ", " + $scope.order.address.zip
-
 	$scope.currentCost = $scope.currentOrder.reduce(function(total, curVal){
 		return total + curVal.price * curVal.quantity
 	}, 0)
@@ -39,7 +36,7 @@ app.controller('orderCtrl', function ($scope, $state, CartFactory, retrievedOrde
 	}
 
 	$scope.checkout = function(){
-		CartFactory.checkout($scope.order.email, $scope.orderAddress, $scope.currentCost)
+		CartFactory.checkout($scope.orderEmail, $scope.orderAddress, $scope.currentCost)
 		.then(function () {
 			$state.go('transactionComplete');
 		})
