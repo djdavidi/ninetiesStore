@@ -36,7 +36,8 @@ app.controller('orderCtrl', function ($scope, $state, CartFactory, retrievedOrde
 	}
 
 	$scope.checkout = function(){
-		CartFactory.checkout($scope.orderEmail, $scope.orderAddress, $scope.currentCost)
+		console.log("scopes", $scope.order.email, $scope.order.address, $scope.currentCost)
+		CartFactory.checkout($scope.order.email, $scope.order.address, $scope.currentCost)
 		.then(function () {
 			$state.go('transactionComplete');
 		})

@@ -11,10 +11,12 @@ var templateOrderStatusChanged = fs.readFileSync(path.join(__dirname, '/orderSta
 var mandrill = require('mandrill-api/mandrill');
 var mandrill_client = new mandrill.Mandrill(mandrillKey);
  
-function sendConfirmationEmail(order, email, address, customizedTemplate, type){ 
+function sendConfirmationEmail(order, email, address, type){ 
           var orderItems = [];
           // var orderItemTitles = [];
           // var orderCost;
+
+          // var copyTemplate = templateOrderPlaced;
           switch (type) {
             case 'orderPlaced':
               var copyTemplate = templateOrderPlaced;
@@ -23,11 +25,10 @@ function sendConfirmationEmail(order, email, address, customizedTemplate, type){
               var copyTemplate = templateOrderStatusChanged;
               break;
           }
+
           order.storedItems.forEach(function(el){
             orderItems.push(el)
           })
-
-
 
           var customizedTemplate = ejs.render(
             copyTemplate,  {
@@ -37,7 +38,7 @@ function sendConfirmationEmail(order, email, address, customizedTemplate, type){
             orderItems: orderItems,
             orderStatus: type
            });
-
+          console.log("about to send email to:", email)
           sendEmail(order.owner, email, "McFly's", "mcflys@ninetiesstore.com", "Order Confirmed", customizedTemplate);          
   };
 

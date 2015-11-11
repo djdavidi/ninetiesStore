@@ -6,7 +6,6 @@ var MandrillApp = require('../../mandrill.js')
 
 
 router.use('/', function (req, res, next) {
-	console.log("eeeeeeeeeee",req.user)
 	Order.findOne({ owner: req.user , status: 'Created'})
 	.then(function(order){
 		if(order===null && req.user){
@@ -87,6 +86,7 @@ router.post('/checkout', function(req,res,next){
 			}
 			req.session.cart = []
 			req.session.cart.promoCode = null
+			console.log("req.body.email", req.body.email)
 			MandrillApp(order, req.body.email, req.body.address, 'orderPlaced')
 			res.send(order)
 		})
@@ -108,6 +108,7 @@ router.post('/checkout', function(req,res,next){
 		// 	}
 		// })
 		.then(function(order){
+			console.log("req.body.email", req.body.email)
 			MandrillApp(order, req.body.email, req.body.address, 'orderPlaced')
 			res.send(order)
 		})
@@ -194,11 +195,16 @@ router.put('/edit/:Id', function(req,res,next){
 	Order.findById(req.params.Id)
 	.then(function(order){
 		order.set(req.body)
+		console.log("ORDER", order)
+		MandrillApp(order, order.email, order.address, 'orderStatusChanged')
 		return order.save()
 	})
 	.then(function(updatedOrder){
-		MandrillApp(updatedOrder, req.order.email, req.order.address, 'orderStatusChanged')
-		console.log("updatedOrder", updatedOrder)
+		// console.log("updatedOrder", updatedOrder)
+		// console.log("updatedOrderEmail", updatedOrder.email)
+		// console.log("updatedOrderAddress", updatedOrder.address)
+		// MandrillApp(updatedOrder, updatedOrder.email, updatedOrder.address, 'orderStatusChanged')
+		// console.log("updatedOrder", updatedOrder)
 		res.status(200).send(updatedOrder)
 	})
 })
