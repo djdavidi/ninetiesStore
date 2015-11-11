@@ -1,20 +1,21 @@
 <div>
-admin user	
 <div class="col-md-6">
+<h2>USERS</h2>
 <div ng-repeat="user in allUsers">
-	 Name:<input type="text" ng-model="user.name" value="{{user.name}}" /></input>
-	 Email:<input type="text" ng-model="user.email" value="{{user.email}}" /></input>
-	 isAdmin:<input type="text" ng-model="user.isAdmin" value="{{user.isAdmin}}" /></input>
-	<button ng-click="deleteAnyUser(user._id)">Delete this User</button>
-	<button ng-click="updateAnyUser(user._id,user)">Update this User</button>
+	 <label class="labelly">Name:</label><input type="text" ng-model="user.name" class="inputty"value="{{user.name}}" /></input>
+	 <label class="labelly">Email:</label><input type="text" ng-model="user.email" class="inputty"value="{{user.email}}" /></input>
+	 <label class="labelly">isAdmin:</label><input type="text" ng-model="user.isAdmin"class="inputty" value="{{user.isAdmin}}" /></input>
+	<label class="labelly">Delete:</label><button class="inputty" ng-click="deleteAnyUser(user._id)">Delete</button>
+	<label class="labelly">Update:</label><button class="inputty"ng-click="updateAnyUser(user._id,user)">Update</button>
 	<br>
 </div>
 </div>
 
 <div class="col-md-6">
+<h2>ORDERS</h2>
 <div ng-repeat="order in allOrders">
-	 Owner:<input type="text" ng-model="order.owner.name" value="{{order.owner}}" /></input>
-	  Status:<input type="text" ng-model="order.status" value="{{order.status}}" /></input>
+	 <label class="labelly">Owner:</label><input type="text" class="inputty" ng-model="order.owner.name" value="{{order.owner}}" /></input>
+	  <label class="labelly">Status:</label><input type="text" class="inputty"ng-model="order.status" value="{{order.status}}" /></input>
 	<button ng-click="editOrder(order_id,order)">Update this Order</button>
 </div>
 </div>
